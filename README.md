@@ -78,15 +78,9 @@
   - Non-killer roles receive an additional 25 income after completing tasks
 
 
-## Config Seeting
-
-- Starting cooldown is configurable in config
-
-
 ## Requires
 
 - [HarpyModLoader](https://modrinth.com/mod/harpymodloader)
-- [YetAnotherConfigLib](https://modrinth.com/mod/yacl)
 
 
 ## Special Thanks
