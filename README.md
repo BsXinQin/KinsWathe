@@ -59,7 +59,7 @@
   - Use ability to clear field drops
 
 
-## New NEUTRALS
+## New Neutrals
 
 - Licensed Villain
   - Only generates when 8 or more players are present
