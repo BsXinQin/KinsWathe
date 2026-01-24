@@ -89,6 +89,8 @@ public class KinsWatheClient implements ClientModInitializer {
                 CooldownText(ModItems.FAKE_REVOLVER, list, itemStack);
             }
             //添加物品提示
+            CooldownText(KinsWatheItems.MEDICAL_KIT, list, itemStack);
+            ToolTip(KinsWatheItems.MEDICAL_KIT, itemStack, list);
             CooldownText(KinsWatheItems.SULFURIC_ACID_BARREL, list, itemStack);
             ToolTip(KinsWatheItems.SULFURIC_ACID_BARREL, itemStack, list);
         }));
@@ -103,9 +105,9 @@ public class KinsWatheClient implements ClientModInitializer {
     /// 添加物品冷却提示
     private static void CooldownText(Item item, List<Text> list, @NotNull ItemStack itemStack) {
         if (!itemStack.isOf(item)) return;
-        ItemCooldownManager vanillaManager = MinecraftClient.getInstance().player.getItemCooldownManager();
-        if (vanillaManager.isCoolingDown(item)) {
-            float progress = vanillaManager.getCooldownProgress(item, 0);
+        ItemCooldownManager itemCooldown = MinecraftClient.getInstance().player.getItemCooldownManager();
+        if (itemCooldown.isCoolingDown(item)) {
+            float progress = itemCooldown.getCooldownProgress(item, 0);
             int totalTicks = ItemCooldownComponent.getItemCooldownTicks(item);
             if (totalTicks > 0) {
                 int remainingTicks = (int)(totalTicks * progress);

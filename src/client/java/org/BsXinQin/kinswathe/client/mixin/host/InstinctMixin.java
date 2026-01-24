@@ -3,6 +3,7 @@ package org.BsXinQin.kinswathe.client.mixin.host;
 import dev.doctor4t.wathe.api.Role;
 import dev.doctor4t.wathe.api.WatheRoles;
 import dev.doctor4t.wathe.cca.GameWorldComponent;
+import dev.doctor4t.wathe.cca.PlayerPoisonComponent;
 import dev.doctor4t.wathe.client.WatheClient;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
@@ -16,6 +17,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.awt.*;
 
 import static org.BsXinQin.kinswathe.KinsWathe.NOELLESROLES_LOADED;
 
@@ -41,10 +44,17 @@ public abstract class InstinctMixin {
         if (target instanceof PlayerEntity) {
             //厨师透视
             if (!target.isSpectator()) {
-                CookPlayerEatComponent playerEat = CookPlayerEatComponent.KEY.get(target);
-                if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWathe.COOK) && playerEat.hasEaten()) {
+                CookPlayerEatComponent targetEat = CookPlayerEatComponent.KEY.get(target);
+                if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWathe.COOK) && targetEat.hasEaten()) {
                     ci.setReturnValue(WatheRoles.CIVILIAN.color());
                     ci.cancel();
+                }
+            }
+            //医师透视
+            if (!target.isSpectator()) {
+                PlayerPoisonComponent targetPoison =  PlayerPoisonComponent.KEY.get(target);
+                if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWathe.PHYSICIAN) && targetPoison.poisonTicks > 0) {
+                    ci.setReturnValue(WatheRoles.KILLER.color());
                 }
             }
             //执照恶棍透视

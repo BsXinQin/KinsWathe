@@ -17,6 +17,10 @@
   "tip.kinswathe.detective.notinnocent": "%s is not innocent",
   "hud.kinswathe.detective.target": "Use %s to investigate",
 
+  "announcement.role.kinswathe.physician": "Physician",
+  "announcement.goals.kinswathe.physician": "Treat every patient.",
+  "tip.kinswathe.physician.medical_kit": "You feel much better now.",
+
   "announcement.role.kinswathe.robot": "Robot",
   "announcement.goals.kinswathe.robot": "A machine devoid of any emotion.",
 
@@ -36,6 +40,9 @@
 
   "item.kinswathe.sulfuric_acid_barrel": "Sulfuric Acid Barrel",
   "item.kinswathe.sulfuric_acid_barrel.tooltip": "Use on a dead body to dissolve it\n1 minute cooldown",
+
+  "item.kinswathe.medical_kit": "Medical Kit",
+  "item.kinswathe.medical_kit.tooltip": "Use on a player to remove poison\n1 minute cooldown",
 
   "shop.purchase_failed": "Purchase Failed"
 }

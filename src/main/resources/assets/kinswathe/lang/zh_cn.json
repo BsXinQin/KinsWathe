@@ -17,6 +17,10 @@
   "tip.kinswathe.detective.notinnocent": "%s 不是平民",
   "hud.kinswathe.detective.target": "按下 %s 键调查该目标身份",
 
+  "announcement.role.kinswathe.physician": "医师",
+  "announcement.goals.kinswathe.physician": "治疗每一位患者。",
+  "tip.kinswathe.physician.medical_kit": "你感觉好多了。",
+
   "announcement.role.kinswathe.robot": "机器人",
   "announcement.goals.kinswathe.robot": "毫无感情可言的机器。",
 
@@ -36,6 +40,9 @@
 
   "item.kinswathe.sulfuric_acid_barrel": "硫酸桶",
   "item.kinswathe.sulfuric_acid_barrel.tooltip": "用于尸体，可将其溶解移除\n冷却 1 分钟",
+
+  "item.kinswathe.medical_kit": "医疗箱",
+  "item.kinswathe.medical_kit.tooltip": "用于玩家，可移除其中毒效果\n冷却 1 分钟",
 
   "shop.purchase_failed": "购买失败"
 }

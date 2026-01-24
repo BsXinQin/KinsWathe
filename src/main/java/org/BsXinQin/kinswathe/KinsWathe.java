@@ -56,6 +56,7 @@ public class KinsWathe implements ModInitializer {
     public static Identifier BELLRINGER_ID = Identifier.of(MOD_ID, "bellringer");
     public static Identifier COOK_ID = Identifier.of(MOD_ID, "cook");
     public static Identifier DETECTIVE_ID = Identifier.of(MOD_ID, "detective");
+    public static Identifier PHYSICIAN_ID = Identifier.of(MOD_ID, "physician");
     public static Identifier ROBOT_ID = Identifier.of(MOD_ID, "robot");
     //杀手
     public static Identifier CLEANER_ID = Identifier.of(MOD_ID, "cleaner");
@@ -97,6 +98,16 @@ public class KinsWathe implements ModInitializer {
             WatheRoles.CIVILIAN.getMaxSprintTime(),
             false
     ));
+    //医师
+    public static Role PHYSICIAN = WatheRoles.registerRole(new Role(
+            PHYSICIAN_ID,
+            0xFFE5CC,
+            true,
+            false,
+            Role.MoodType.REAL,
+            WatheRoles.CIVILIAN.getMaxSprintTime(),
+            false
+    ));
     //机器人
     public static Role ROBOT = WatheRoles.registerRole(new Role(
             ROBOT_ID,
@@ -118,6 +129,7 @@ public class KinsWathe implements ModInitializer {
             -1,
             true
     ));
+    //制毒师
     public static Role DRUGMAKER = WatheRoles.registerRole(new Role(
             DRUGMAKER_ID,
             0x4C0099,
@@ -203,6 +215,10 @@ public class KinsWathe implements ModInitializer {
         ModdedRoleAssigned.EVENT.register((player,role)->{
             AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(player);
             ability.cooldown = KinsWatheConfig.HANDLER.instance().StartingCooldown * 20;
+            //医师初始物品
+            if (role.equals(PHYSICIAN)) {
+                player.giveItemStack(KinsWatheItems.MEDICAL_KIT.getDefaultStack());
+            }
             //黑警初始物品
             if (role.equals(LICENSED_VILLAIN)) {
                 player.giveItemStack(WatheItems.LOCKPICK.getDefaultStack());

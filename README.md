@@ -40,12 +40,6 @@
   - Can check time
   - Use ability to reduce remaining time by 1 minute
 
-- Robot
-  - Has no mood
-  - Immune poison
-  - Infinite stamina
-  - Use ability to see the darkness clearly
-
 - Cook
   - Can purchase food in shop
   - See people who eat through walls temporarily
@@ -53,13 +47,22 @@
 - Detective
   - Use ability to check whether someone is innocent
 
+- Physician
+  - Initially equip with Medical Kit
+  - Medical Kit can use on a player to remove poison (1 minute cooldown)
+
+- Robot
+  - Has no mood
+  - Immune poison
+  - Infinite stamina
+  - Use ability to see the darkness clearly
 
 ## New Killers
 
 - Cleaner
   - Only generate when 12 or more players are present
-  - Initially equip with sulfuric acid can
-  - Sulfuric acid can can dissolve a body (cooldown 1 minute)
+  - Initially equip with Sulfuric Acid Barrel
+  - Sulfuric Acid Barrel can dissolve a body (1 minute cooldown)
   - Use ability to clear field drops
 
 - Drugmaker
@@ -75,7 +78,7 @@
   - Requires killing all players to win (has own victory screen)
   - Game does not end when all civilians or killers are dead
   - Has 15 seconds of sprint time
-  - Initially equip with lockpick
+  - Initially equip with Lockpick
   - Can purchase revolver in shop and have no backfire effect
 
 
