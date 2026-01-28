@@ -1,4 +1,4 @@
-package org.BsXinQin.kinswathe.mixin.noellesroles.roles.bartender;
+package org.BsXinQin.kinswathe.mixin.noellesroles.roles.trapper;
 
 import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.cca.PlayerShopComponent;
@@ -20,22 +20,22 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerShopComponent.class)
-public abstract class BartenderPlayerShopComponentMixin {
+public abstract class TrapperPlayerShopComponentMixin {
 
     @Shadow public int balance;
     @Shadow @Final private PlayerEntity player;
     @Shadow public abstract void sync();
 
     @Inject(method = "tryBuy", at = @At("HEAD"), cancellable = true)
-    void BartenderBuy(int index, CallbackInfo ci) {
+    void TrapperBuy(int index, CallbackInfo ci) {
         if (!KinsWathe.NOELLESROLES_LOADED || !KinsWathe.EnableNoellesRolesModify()) return;
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
-        if (gameWorld.isRole(player, Noellesroles.BARTENDER)) {
+        if (gameWorld.isRole(player,Noellesroles.TRAPPER)) {
             if (index == 0) {
-                if (balance >= KinsWathe.BartenderPriceModify()) {
-                    this.balance -= KinsWathe.BartenderPriceModify();
+                if (balance >= KinsWathe.TrapperPriceModify()) {
+                    this.balance -= KinsWathe.TrapperPriceModify();
                     sync();
-                    player.giveItemStack(ModItems.DEFENSE_VIAL.getDefaultStack());
+                    player.giveItemStack(ModItems.ROLE_MINE.getDefaultStack());
                     if (player instanceof ServerPlayerEntity serverPlayer) serverPlayer.networkHandler.sendPacket(new PlaySoundS2CPacket(Registries.SOUND_EVENT.getEntry(WatheSounds.UI_SHOP_BUY), SoundCategory.PLAYERS, serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), 1.0F, 0.9F + player.getRandom().nextFloat() * 0.2F, player.getRandom().nextLong()));
                 } else {
                     this.player.sendMessage(Text.translatable("shop.purchase_failed").withColor(0xAA0000), true);

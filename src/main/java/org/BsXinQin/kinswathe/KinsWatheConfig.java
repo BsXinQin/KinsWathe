@@ -42,4 +42,7 @@ public class KinsWatheConfig {
 
     @SerialEntry(comment = "Recaller: whether to enable the special effects of ability.")
     public boolean RecallerAbilityModify = true;
+
+    @SerialEntry(comment = "Trapper: modify the price of Role Mine in shop.")
+    public int TrapperPriceModify = 200;
 }

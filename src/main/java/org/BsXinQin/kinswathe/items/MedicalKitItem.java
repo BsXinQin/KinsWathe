@@ -21,7 +21,7 @@ public class MedicalKitItem extends Item {
         if (player.getItemCooldownManager().isCoolingDown(this)) return ActionResult.FAIL;
         if (!(entity instanceof PlayerEntity targetPlayer)) return ActionResult.PASS;
         PlayerPoisonComponent targetPoison = PlayerPoisonComponent.KEY.get(targetPlayer);
-        if (targetPoison.poisonTicks > -1) {
+        if (targetPoison.poisonTicks > 0) {
             targetPoison.reset();
             targetPlayer.sendMessage(Text.translatable("tip.kinswathe.physician.medical_kit").withColor(0x00AA00), true);
             entity.getWorld().playSound(null, targetPlayer.getX(), targetPlayer.getY(), targetPlayer.getZ(), SoundEvents.ENTITY_HORSE_ARMOR, SoundCategory.PLAYERS, 1.0f, 1.0f);

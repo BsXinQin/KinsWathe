@@ -35,7 +35,7 @@ public abstract class LicensedVillainShopMixin extends LimitedHandledScreen<Play
             entries.add(new ShopEntry(WatheItems.REVOLVER.getDefaultStack(), KinsWathe.LicensedVillainPrice(), ShopEntry.Type.WEAPON));
             int apart = 36;
             int x = width / 2 - (entries.size()) * apart / 2 + 9;
-            int shouldBeY = (((LimitedInventoryScreen)(Object)this).height - 32) / 2;
+            int shouldBeY = (height - 32) / 2;
             int y = shouldBeY - 46;
             for(int i = 0; i < entries.size(); ++i) {
                 addDrawableChild(new LimitedInventoryScreen.StoreItemWidget((LimitedInventoryScreen) (Object)this, x + apart * i, y, (ShopEntry)entries.get(i), i));

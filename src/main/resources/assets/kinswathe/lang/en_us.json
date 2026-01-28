@@ -19,7 +19,7 @@
 
   "announcement.role.kinswathe.physician": "Physician",
   "announcement.goals.kinswathe.physician": "See poisoned players through walls and treat them.",
-  "tip.kinswathe.physician.medical_kit": "You feel much better now.",
+  "tip.kinswathe.physician.medical_kit": "You feel much better now",
 
   "announcement.role.kinswathe.robot": "Robot",
   "announcement.goals.kinswathe.robot": "A machine devoid of any emotion.",
@@ -30,6 +30,8 @@
 
   "announcement.role.kinswathe.drugmaker": "Drugmaker",
   "announcement.goals.kinswathe.drugmaker": "Conquer everyone with poison!",
+  "tip.kinswathe.drugmaker.posion_failed": "It seems to be immune to poisoning...",
+  "tip.kinswathe.drugmaker.posioned": "Someone was poisoned",
 
   "announcement.role.kinswathe.licensed_villain": "Licensed Villain",
   "announcement.goals.kinswathe.licensed_villain": "You might still retain a shred of conscience...",
@@ -38,11 +40,17 @@
 
   "announcement.modifier.kinswathe.taskmaster": "Taskmaster",
 
-  "item.kinswathe.sulfuric_acid_barrel": "Sulfuric Acid Barrel",
-  "item.kinswathe.sulfuric_acid_barrel.tooltip": "Use on a dead body to dissolve it\n1 minute cooldown",
+  "item.kinswathe.blowgun": "Blowgun",
+  "item.kinswathe.blowgun.tooltip": "Point, right-click and shoot\nTarget that be shooted will be poisoned\n90 seconds cooldown",
 
   "item.kinswathe.medical_kit": "Medical Kit",
   "item.kinswathe.medical_kit.tooltip": "Use on a player to remove poison\n1 minute cooldown",
+
+  "item.kinswathe.poison_injector": "Poison Injector",
+  "item.kinswathe.poison_injector.tooltip": "Use on a player to poison it\nIf target have been poisoned, directly cause death\n90 seconds cooldown",
+
+  "item.kinswathe.sulfuric_acid_barrel": "Sulfuric Acid Barrel",
+  "item.kinswathe.sulfuric_acid_barrel.tooltip": "Use on a dead body to dissolve it\n1 minute cooldown",
 
   "shop.purchase_failed": "Purchase Failed"
 }

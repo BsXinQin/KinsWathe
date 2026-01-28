@@ -13,6 +13,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.player.ItemCooldownManager;
@@ -22,6 +23,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.BsXinQin.kinswathe.KinsWathe;
 import org.BsXinQin.kinswathe.KinsWatheItems;
 import org.BsXinQin.kinswathe.client.host.ItemCooldownComponent;
@@ -48,7 +50,9 @@ public class KinsWatheClient implements ClientModInitializer {
         if (!KinsWathe.NOELLESROLES_LOADED) {
             abilityBind = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + KinsWathe.MOD_ID + ".ability", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_G, "category.wathe.keybinds"));
         } else {
-            ClientTickEvents.START_CLIENT_TICK.register(client -> {abilityBind = NoellesrolesClient.abilityBind;});
+            ClientTickEvents.START_CLIENT_TICK.register(client -> {
+                abilityBind = NoellesrolesClient.abilityBind;
+            });
         }
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (abilityBind.isPressed()) {
@@ -87,6 +91,16 @@ public class KinsWatheClient implements ClientModInitializer {
         /// 初始化物品冷却提示
         ItemCooldownComponent.initItemCooldown();
 
+        /// 添加额外材质
+        ModelPredicateProviderRegistry.register(
+                KinsWatheItems.POISON_INJECTOR,
+                Identifier.of(KinsWathe.MOD_ID, "cooling"),
+                (stack, world, entity, seed) -> {
+                    if (entity instanceof PlayerEntity player) return player.getItemCooldownManager().isCoolingDown(KinsWatheItems.POISON_INJECTOR) ? 1.0F : 0.0F;
+                    return 0.0F;
+                }
+        );
+
         /// 添加物品描述和冷却提示
         ItemTooltipCallback.EVENT.register(((itemStack, tooltipContext, tooltipType, list) -> {
             //添加NoellreRoles物品冷却提示
@@ -94,8 +108,12 @@ public class KinsWatheClient implements ClientModInitializer {
                 CooldownText(ModItems.FAKE_REVOLVER, list, itemStack);
             }
             //添加物品提示
+            CooldownText(KinsWatheItems.BLOWGUN, list, itemStack);
+            ToolTip(KinsWatheItems.BLOWGUN, itemStack, list);
             CooldownText(KinsWatheItems.MEDICAL_KIT, list, itemStack);
             ToolTip(KinsWatheItems.MEDICAL_KIT, itemStack, list);
+            CooldownText(KinsWatheItems.POISON_INJECTOR, list, itemStack);
+            ToolTip(KinsWatheItems.POISON_INJECTOR, itemStack, list);
             CooldownText(KinsWatheItems.SULFURIC_ACID_BARREL, list, itemStack);
             ToolTip(KinsWatheItems.SULFURIC_ACID_BARREL, itemStack, list);
         }));

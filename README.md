@@ -21,6 +21,7 @@
 
 - Balance Modifications
   - Adjust Bartender's Defense Vial price (configurable in config)
+  - Adjust Trapper's Role Mine price (configurable in config)
 
 
 ## Wathe Plus Function
@@ -50,6 +51,7 @@
   - Use ability to check whether someone is innocent
 
 - Physician
+  - Can see poisoned players through walls
   - Initially equip with Medical Kit
   - Medical Kit can use on a player to remove poison (1 minute cooldown)
 
@@ -68,9 +70,13 @@
   - Use ability to clear field drops
 
 - Drugmaker
+  - Can see poisoned players through walls
+  - Get coins if someone was poisoned
+  - Can not purchase Grenade and Psycho Mode in shop
   - Price of Poison Vial and Scorpion reduced by half
-  - Price of Knife doubles
-  - Can not purchase Psycho Mode
+  - Can purchase Poison Injector and Blowgun in shop
+  - Poison Injector can poison target (90 seconds cooldown)
+  - Blowgun can shoot and poison target (90 seconds cooldown)
 
 
 ## New Neutrals

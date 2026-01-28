@@ -11,6 +11,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import org.BsXinQin.kinswathe.KinsWathe;
+import org.BsXinQin.kinswathe.KinsWatheItems;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,10 +31,10 @@ public abstract class DrugmakerShopMixin {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
         if (gameWorld.isRole(player, KinsWathe.DRUGMAKER)) {
             if (index == 0) {
-                if (balance >= 200 && !this.player.getItemCooldownManager().isCoolingDown(WatheItems.KNIFE)) {
-                    this.balance -= 200;
+                if (balance >= 125 && !this.player.getItemCooldownManager().isCoolingDown(KinsWatheItems.POISON_INJECTOR)) {
+                    this.balance -= 125;
                     sync();
-                    player.giveItemStack(WatheItems.KNIFE.getDefaultStack());
+                    player.giveItemStack(KinsWatheItems.POISON_INJECTOR.getDefaultStack());
                     PlayerEntity var6 = this.player;
                     if (var6 instanceof ServerPlayerEntity) {
                         ServerPlayerEntity player = (ServerPlayerEntity) var6;
@@ -50,10 +51,10 @@ public abstract class DrugmakerShopMixin {
                 ci.cancel();
             }
             if (index == 1) {
-                if (balance >= 300 && !this.player.getItemCooldownManager().isCoolingDown(WatheItems.REVOLVER)) {
-                    this.balance -= 300;
+                if (balance >= 175 && !this.player.getItemCooldownManager().isCoolingDown(KinsWatheItems.BLOWGUN)) {
+                    this.balance -= 175;
                     sync();
-                    player.giveItemStack(WatheItems.REVOLVER.getDefaultStack());
+                    player.giveItemStack(KinsWatheItems.BLOWGUN.getDefaultStack());
                     PlayerEntity var6 = this.player;
                     if (var6 instanceof ServerPlayerEntity) {
                         ServerPlayerEntity player = (ServerPlayerEntity) var6;
@@ -70,10 +71,10 @@ public abstract class DrugmakerShopMixin {
                 ci.cancel();
             }
             if (index == 2) {
-                if (balance >= 350) {
-                    this.balance -= 350;
+                if (balance >= 200 && !this.player.getItemCooldownManager().isCoolingDown(WatheItems.KNIFE)) {
+                    this.balance -= 200;
                     sync();
-                    player.giveItemStack(WatheItems.GRENADE.getDefaultStack());
+                    player.giveItemStack(WatheItems.KNIFE.getDefaultStack());
                     PlayerEntity var6 = this.player;
                     if (var6 instanceof ServerPlayerEntity) {
                         ServerPlayerEntity player = (ServerPlayerEntity) var6;

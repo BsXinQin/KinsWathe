@@ -226,6 +226,7 @@ public class KinsWathe implements ModInitializer {
     public static final String EnableNoellesRolesModify = "EnableNoellesRolesModify";
     public static final String BartenderPriceModify = "BartenderPriceModify";
     public static final String RecallerAbilityModify = "RecallerAbilityModify";
+    public static final String TrapperPriceModify = "BartenderPriceModify";
     //设置客户端默认配置
     private static void setClientConfig() {
         CLIENT_INT_CONFIGS.put(StartingCooldown, 30);
@@ -238,6 +239,7 @@ public class KinsWathe implements ModInitializer {
         CLIENT_BOOL_CONFIGS.put(EnableNoellesRolesModify, true);
         CLIENT_INT_CONFIGS.put(BartenderPriceModify, 150);
         CLIENT_BOOL_CONFIGS.put(RecallerAbilityModify, true);
+        CLIENT_INT_CONFIGS.put(TrapperPriceModify, 200);
     }
     //发送配置给客户端
     private void sendConfigToClient(ServerPlayerEntity player) {
@@ -254,6 +256,7 @@ public class KinsWathe implements ModInitializer {
         boolConfigs.put(EnableNoellesRolesModify, config.EnableNoellesRolesModify);
         intConfigs.put(BartenderPriceModify, config.BartenderPriceModify);
         boolConfigs.put(RecallerAbilityModify, config.RecallerAbilityModify);
+        intConfigs.put(TrapperPriceModify, config.TrapperPriceModify);
         ServerPlayNetworking.send(player, new ConfigSyncS2CPacket(intConfigs, boolConfigs));
     }
     //设置配置接口
@@ -267,6 +270,7 @@ public class KinsWathe implements ModInitializer {
     public static boolean EnableNoellesRolesModify() {if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) return KinsWatheConfig.HANDLER.instance().EnableNoellesRolesModify; else return CLIENT_BOOL_CONFIGS.getOrDefault(EnableNoellesRolesModify, true);}
     public static int BartenderPriceModify() {if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) return KinsWatheConfig.HANDLER.instance().BartenderPriceModify; else return CLIENT_INT_CONFIGS.getOrDefault(BartenderPriceModify, 150);}
     public static boolean RecallerAbilityModify() {if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) return KinsWatheConfig.HANDLER.instance().RecallerAbilityModify; else return CLIENT_BOOL_CONFIGS.getOrDefault(RecallerAbilityModify, true);}
+    public static int TrapperPriceModify() {if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) return KinsWatheConfig.HANDLER.instance().TrapperPriceModify; else return CLIENT_INT_CONFIGS.getOrDefault(TrapperPriceModify, 200);}
 
     /// 注册身份id
     public static Identifier id(String path) {return Identifier.of(MOD_ID, path);}
@@ -333,8 +337,11 @@ public class KinsWathe implements ModInitializer {
             ServerPlayerEntity player = context.player();
             ServerWorld world = player.getServerWorld();
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
-            AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(player);
             PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(player);
+            AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(player);
+            org.agmas.noellesroles.AbilityPlayerComponent noellesrolesAbility = null;
+            if (KinsWathe.NOELLESROLES_LOADED) noellesrolesAbility = org.agmas.noellesroles.AbilityPlayerComponent.KEY.get(player);
+            /// KinsWathe技能
             if (GameFunctions.isPlayerAliveAndSurvival(player) && ability.cooldown <= 0) {
                 //敲钟人技能
                 if (gameWorld.isRole(player, BELLRINGER)) {
@@ -348,13 +355,21 @@ public class KinsWathe implements ModInitializer {
                     world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_BELL_USE, SoundCategory.PLAYERS, 1.0f, 1.0f);
                     ability.cooldown = GameConstants.getInTicks(2, 0);
                     ability.sync();
+                    if (KinsWathe.NOELLESROLES_LOADED) {
+                        noellesrolesAbility.cooldown = GameConstants.getInTicks(2, 0);
+                        noellesrolesAbility.sync();
+                    }
                 }
                 //机器人技能
                 if (gameWorld.isRole(player, ROBOT)) {
                     player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 200, 0, true, true, false));
-                    world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_TOTEM_USE, SoundCategory.PLAYERS, 0.5f, 0.5f);
+                    world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_IRON_GOLEM_HURT, SoundCategory.PLAYERS, 1.0f, 1.0f);
                     ability.cooldown = GameConstants.getInTicks(2, 0);
                     ability.sync();
+                    if (KinsWathe.NOELLESROLES_LOADED) {
+                        noellesrolesAbility.cooldown = GameConstants.getInTicks(2, 0);
+                        noellesrolesAbility.sync();
+                    }
                 }
                 //侦探技能
                 if (gameWorld.isRole(player, DETECTIVE)) {
@@ -380,6 +395,10 @@ public class KinsWathe implements ModInitializer {
                     }
                     ability.cooldown = GameConstants.getInTicks(1, 30);
                     ability.sync();
+                    if (KinsWathe.NOELLESROLES_LOADED) {
+                        noellesrolesAbility.cooldown = GameConstants.getInTicks(1, 30);
+                        noellesrolesAbility.sync();
+                    }
                 }
                 //清道夫技能
                 if (gameWorld.isRole(player, CLEANER)) {
@@ -394,12 +413,15 @@ public class KinsWathe implements ModInitializer {
                     player.playSoundToPlayer(SoundEvents.ENTITY_ENDER_DRAGON_FLAP, SoundCategory.PLAYERS, 1.0f, 1.0f);
                     ability.cooldown = GameConstants.getInTicks(2, 30);
                     ability.sync();
+                    if (KinsWathe.NOELLESROLES_LOADED) {
+                        noellesrolesAbility.cooldown = GameConstants.getInTicks(2, 30);
+                        noellesrolesAbility.sync();
+                    }
                 }
             }
             /// 修改NoellesRoles技能
             if (KinsWathe.NOELLESROLES_LOADED && KinsWathe.EnableNoellesRolesModify()) {
-                org.agmas.noellesroles.AbilityPlayerComponent noellesrolesAbility = org.agmas.noellesroles.AbilityPlayerComponent.KEY.get(player);
-                if (GameFunctions.isPlayerAliveAndSurvival(player) && ability.cooldown <= 0) {
+                if (GameFunctions.isPlayerAliveAndSurvival(player) && noellesrolesAbility.cooldown <= 0) {
                     //修改回溯者技能
                     if (gameWorld.isRole(player, Noellesroles.RECALLER)) {
                         if (!KinsWathe.RecallerAbilityModify()) return;
