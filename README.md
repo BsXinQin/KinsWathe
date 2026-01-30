@@ -95,6 +95,10 @@
 
 ## New Modifiers
 
+- Magnate
+  - Only generates on roles with passive income
+  - Double passive income
+
 - Taskmaster
   - Only generates on roles with income
   - Killer roles receive a 50 income after completing tasks
