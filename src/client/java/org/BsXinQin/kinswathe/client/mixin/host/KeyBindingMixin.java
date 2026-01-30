@@ -12,47 +12,39 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-@Mixin(value = KeyBinding.class, priority = 5000)
+//高一点的优先级，以免后手注入
+@Mixin(value = KeyBinding.class, priority = 999)
 public abstract class KeyBindingMixin {
-
+    //新建类，方便后续可能的键覆盖，如果有要覆盖的键配置项就启用
+    @Unique
+    private boolean Enable() {
+        return KinsWathe.EnableJumpNotInGame();
+    }
     @Unique
     private void UnLockKeys(CallbackInfoReturnable<Boolean> ci) {
-        if (!KinsWathe.EnableJumpNotInGame()) return;
+        if (!Enable()) return;
         if (WatheClient.isPlayerAliveAndInSurvival()) {
             MinecraftClient client = MinecraftClient.getInstance();
             KeyBinding key = (KeyBinding) (Object) this;
-            boolean jumpKey = key.equals(client.options.jumpKey);
-            if (jumpKey) {
+            PlayerEntity player = client.player;
+            if (player == null) return;
+            GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
+            if (gameWorld.isRunning()) return;
+            if (KinsWathe.EnableJumpNotInGame() || key.equals(client.options.jumpKey)) {
                 ci.setReturnValue(UnLockKeyBinding());
+                ci.cancel();
             }
         }
     }
 
     @Inject(method = "wasPressed", at = @At("RETURN"), cancellable = true)
     private void wasPressed(CallbackInfoReturnable<Boolean> ci) {
-        if (!KinsWathe.EnableJumpNotInGame()) return;
-        if (WatheClient.isPlayerAliveAndInSurvival()) {
-            MinecraftClient client = MinecraftClient.getInstance();
-            PlayerEntity player = client.player;
-            GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
-            if (!gameWorld.isRunning() && !ci.getReturnValue()) {
-                UnLockKeys(ci);
-            }
-        }
+        UnLockKeys(ci);
     }
 
     @Inject(method = "isPressed", at = @At("RETURN"), cancellable = true)
     private void isPressed(CallbackInfoReturnable<Boolean> ci) {
-        if (!KinsWathe.EnableJumpNotInGame()) return;
-        if (WatheClient.isPlayerAliveAndInSurvival()) {
-            MinecraftClient client = MinecraftClient.getInstance();
-            PlayerEntity player = client.player;
-            GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
-            if (!gameWorld.isRunning() && !ci.getReturnValue()) {
-                UnLockKeys(ci);
-            }
-        }
+        UnLockKeys(ci);
     }
 
     @Accessor("pressed")

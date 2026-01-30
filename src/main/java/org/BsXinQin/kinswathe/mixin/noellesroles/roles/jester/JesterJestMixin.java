@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
+//这里不需要肘赢，所以不加优先级
 @Mixin(GameFunctions.class)
 public abstract class JesterJestMixin {
 

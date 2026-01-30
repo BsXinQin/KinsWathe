@@ -26,8 +26,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-@Mixin(LimitedInventoryScreen.class)
+//更高的优先级，确保能肘赢noell的酒保逻辑
+@Mixin(value = LimitedInventoryScreen.class , priority = 999)
 public abstract class BartenderShopMixin extends LimitedHandledScreen<PlayerScreenHandler> {
 
     @Shadow @Final public ClientPlayerEntity player;
