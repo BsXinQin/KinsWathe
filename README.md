@@ -6,6 +6,8 @@
 
 - You can check out how to play with addon mods in [agmas' video](https://www.youtube-nocookie.com/embed/h_c-dpjlONY).
 
+- Download Kin's Wathe on Modrinth: [Kin's Wathe](https://modrinth.com/mod/kinswathe).
+
 - My video about Kin's Wathe (Chinese version): [Bsxin's video](https://www.bilibili.com/video/BV1sqkpByEq8).
 
 
