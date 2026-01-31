@@ -100,7 +100,7 @@
 
 - Taskmaster
   - Only generates on roles with income
-  - Killer roles receive a 50 income after completing tasks
+  - Killer roles receive 50 coins after completing tasks
   - Non-killer roles receive an additional 25 income after completing tasks
 
 
