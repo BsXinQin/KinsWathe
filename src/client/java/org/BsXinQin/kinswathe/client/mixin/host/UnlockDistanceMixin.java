@@ -12,8 +12,10 @@ public class UnlockDistanceMixin {
     @Inject(method = "overrideOption", at = @At("HEAD"), cancellable = true)
     private static void UnlockDistance(String option, Object value, CallbackInfo ci) {
         if ("renderDistance".equals(option) && value instanceof Integer) {
-            int intValue = (Integer) value;
-            if (intValue > 2) ci.cancel();
+            int distanceValue = (Integer) value;
+            if (distanceValue > 2) {
+                ci.cancel();
+            }
         }
     }
 }

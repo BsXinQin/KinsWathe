@@ -5,44 +5,31 @@ import dev.doctor4t.wathe.client.gui.screen.ingame.LimitedHandledScreen;
 import dev.doctor4t.wathe.client.gui.screen.ingame.LimitedInventoryScreen;
 import dev.doctor4t.wathe.index.WatheItems;
 import dev.doctor4t.wathe.util.ShopEntry;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.text.Text;
 import org.BsXinQin.kinswathe.KinsWathe;
 import org.BsXinQin.kinswathe.KinsWatheItems;
-import org.agmas.harpymodloader.component.WorldModifierComponent;
-import org.agmas.noellesroles.Noellesroles;
-import org.agmas.noellesroles.client.ui.guesser.GuesserPlayerWidget;
-import org.agmas.noellesroles.client.ui.guesser.GuesserRoleWidget;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Mixin(LimitedInventoryScreen.class)
 public abstract class DrugmakerShopMixin extends LimitedHandledScreen<PlayerScreenHandler> {
 
+    public DrugmakerShopMixin(PlayerScreenHandler handler, PlayerInventory inventory, Text title) {super(handler, inventory, title);}
     @Shadow @Final public ClientPlayerEntity player;
 
-    public DrugmakerShopMixin(PlayerScreenHandler handler, PlayerInventory inventory, Text title) {super(handler, inventory, title);}
-
-    @Inject(method = "init", at = @At("HEAD"), cancellable = true)
-    void DrugmakerShop(CallbackInfo ci) {
+    @ModifyVariable(method = "init", at = @At(value = "STORE"), name = "entries")
+    private List<ShopEntry> DrugmakerShop(List<ShopEntry> entries) {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
         if (gameWorld.isRole(player, KinsWathe.DRUGMAKER)) {
-            ci.cancel();
-            super.init();
-
-            List<ShopEntry> entries = new ArrayList<>();
+            entries.clear();
             entries.add(new ShopEntry(KinsWatheItems.POISON_INJECTOR.getDefaultStack(), 125, ShopEntry.Type.WEAPON));
             entries.add(new ShopEntry(KinsWatheItems.BLOWGUN.getDefaultStack(), 175, ShopEntry.Type.WEAPON));
             entries.add(new ShopEntry(WatheItems.KNIFE.getDefaultStack(), 200, ShopEntry.Type.WEAPON));
@@ -54,39 +41,7 @@ public abstract class DrugmakerShopMixin extends LimitedHandledScreen<PlayerScre
             entries.add(new ShopEntry(WatheItems.BODY_BAG.getDefaultStack(), 200, ShopEntry.Type.TOOL));
             entries.add(new ShopEntry(WatheItems.BLACKOUT.getDefaultStack(), 200, ShopEntry.Type.TOOL));
             entries.add(new ShopEntry(WatheItems.NOTE.getDefaultStack(), 10, ShopEntry.Type.TOOL));
-            int apart = 36;
-            int x = width / 2 - (entries.size()) * apart / 2 + 9;
-            int shouldBeY = (height - 32) / 2;
-            int y = shouldBeY - 46;
-            for(int i = 0; i < entries.size(); ++i) {
-                addDrawableChild(new LimitedInventoryScreen.StoreItemWidget((LimitedInventoryScreen) (Object)this, x + apart * i, y, (ShopEntry)entries.get(i), i));
             }
-
-            //兼容猜测者
-            if (KinsWathe.NOELLESROLES_LOADED) {
-                WorldModifierComponent modifier = WorldModifierComponent.KEY.get(player.getWorld());
-                GuesserPlayerWidget.selectedPlayer = null;
-                if (modifier.isRole(player, Noellesroles.GUESSER)) {
-                    GuesserRoleWidget.stopClosing = false;
-                    List<UUID> entriesGuesser = new ArrayList<>(MinecraftClient.getInstance().player.networkHandler.getPlayerUuids());
-                    if (!gameWorld.isInnocent(player)) {
-                        entriesGuesser.clear();
-                        for (AbstractClientPlayerEntity worldPlayer : MinecraftClient.getInstance().world.getPlayers()) {
-                            if (gameWorld.isInnocent(worldPlayer) && !gameWorld.isRole(player, Noellesroles.MIMIC)) entriesGuesser.add(worldPlayer.getUuid());
-                        }
-                    }
-                    int xGuesser = width / 2 - (entriesGuesser.size()) * apart / 2 + 9;
-                    int yGuesser = shouldBeY + 105;
-                    for (int i = 0; i < entriesGuesser.size(); ++i) {
-                        GuesserPlayerWidget child = new GuesserPlayerWidget(((LimitedInventoryScreen) (Object) this), xGuesser + apart * i, yGuesser, entriesGuesser.get(i), player.networkHandler.getPlayerListEntry(entriesGuesser.get(i)));
-                        addDrawableChild(child);
-                        child.visible = false;
-                    }
-                    GuesserRoleWidget child = new GuesserRoleWidget(((LimitedInventoryScreen) (Object) this), textRenderer, (width / 2) - 100, y);
-                    addDrawableChild(child);
-                    child.setVisible(false);
-                }
-            }
-        }
+        return entries;
     }
 }

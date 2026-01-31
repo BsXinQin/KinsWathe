@@ -12,18 +12,14 @@
 ## Modifications to Noelle's Roles
 
 - Issues Fix
-  - Civilians cannot die from poison effects
-  - Killers infinite stamina ability not working
+  - Killers infinite stamina not working
 
 - New Additions
   - Add item cooldown display text
   - Add new visual effects for some roles (configurable in config)
+  - Clear Trapper's Role Mine entity when game ends
   - Conductor can see dropped items (disabled by default)
   - Coroner can see bodies when mood is higher than mid (disabled by default)
-
-- Balance Modifications
-  - Adjust Bartender's Defense Vial price (configurable in config)
-  - Adjust Trapper's Role Mine price (configurable in config)
 
 
 ## Wathe Plus Function
@@ -63,6 +59,7 @@
   - Immune poison
   - Infinite stamina
   - Use ability to see the darkness clearly
+
 
 ## New Killers
 

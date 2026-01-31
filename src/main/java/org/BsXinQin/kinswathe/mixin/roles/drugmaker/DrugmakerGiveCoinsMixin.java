@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import org.BsXinQin.kinswathe.KinsWathe;
+import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
 import org.agmas.noellesroles.Noellesroles;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,7 +42,7 @@ public abstract class DrugmakerGiveCoinsMixin {
             if (gameWorld.isRole(onlinePlayer, KinsWathe.DRUGMAKER)) {
                 PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(onlinePlayer);
                 onlinePlayer.sendMessage(Text.translatable("tip.kinswathe.drugmaker.posioned").withColor(KinsWathe.DRUGMAKER.color()), true);
-                playerShop.addToBalance(KinsWathe.DrugmakerGetCoins());
+                playerShop.addToBalance(ConfigWorldComponent.KEY.get(player.getWorld()).DrugmakerGetCoins);
                 playerShop.sync();
             }
         }

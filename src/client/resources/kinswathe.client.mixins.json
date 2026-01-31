@@ -9,8 +9,6 @@
     "host.CustomWinnerTextMixin",
     "host.InstinctMixin",
     "host.KeyBindingMixin",
-    "noellesroles.roles.bartender.BartenderShopMixin",
-    "noellesroles.roles.trapper.TrapperShopMixin",
     "roles.bellringer.BellringerHudMixin",
     "roles.cleaner.CleanerHudMixin",
     "roles.cook.CookShopMixin",

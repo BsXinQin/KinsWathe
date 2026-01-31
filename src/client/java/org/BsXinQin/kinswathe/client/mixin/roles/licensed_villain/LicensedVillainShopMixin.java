@@ -10,9 +10,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.text.Text;
 import org.BsXinQin.kinswathe.KinsWathe;
+import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -23,16 +25,15 @@ import java.util.List;
 @Mixin(LimitedInventoryScreen.class)
 public abstract class LicensedVillainShopMixin extends LimitedHandledScreen<PlayerScreenHandler> {
 
-    @Shadow @Final public ClientPlayerEntity player;
-
     public LicensedVillainShopMixin(PlayerScreenHandler handler, PlayerInventory inventory, Text title) {super(handler, inventory, title);}
+    @Shadow @Final public ClientPlayerEntity player;
 
     @Inject(method = "init", at = @At("HEAD"))
     void LicensedVillainShop(CallbackInfo ci) {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
         if (gameWorld.isRole(player, KinsWathe.LICENSED_VILLAIN)) {
             List<ShopEntry> entries = new ArrayList<>();
-            entries.add(new ShopEntry(WatheItems.REVOLVER.getDefaultStack(), KinsWathe.LicensedVillainPrice(), ShopEntry.Type.WEAPON));
+            entries.add(new ShopEntry(WatheItems.REVOLVER.getDefaultStack(), ConfigWorldComponent.KEY.get(player.getWorld()).LicensedVillainPrice, ShopEntry.Type.WEAPON));
             int apart = 36;
             int x = width / 2 - (entries.size()) * apart / 2 + 9;
             int shouldBeY = (height - 32) / 2;

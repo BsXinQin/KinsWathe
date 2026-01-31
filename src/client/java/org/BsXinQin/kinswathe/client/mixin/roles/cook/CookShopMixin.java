@@ -23,9 +23,8 @@ import java.util.List;
 @Mixin(LimitedInventoryScreen.class)
 public abstract class CookShopMixin extends LimitedHandledScreen<PlayerScreenHandler> {
 
-    @Shadow @Final public ClientPlayerEntity player;
-
     public CookShopMixin(PlayerScreenHandler handler, PlayerInventory inventory, Text title) {super(handler, inventory, title);}
+    @Shadow @Final public ClientPlayerEntity player;
 
     @Inject(method = "init", at = @At("HEAD"))
     void CookShop(CallbackInfo ci) {

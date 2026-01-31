@@ -24,10 +24,11 @@ public abstract class RobotHudMixin {
 
     @Inject(method = "render", at = @At("TAIL"))
     public void RobotHud(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
-        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
-        AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(MinecraftClient.getInstance().player);
         if (WatheClient.isPlayerAliveAndInSurvival()) {
-            if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWathe.ROBOT)) {
+            MinecraftClient client = MinecraftClient.getInstance();
+            GameWorldComponent gameWorld = GameWorldComponent.KEY.get(client.player.getWorld());
+            AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(client.player);
+            if (gameWorld.isRole(client.player, KinsWathe.ROBOT)) {
                 int drawY = context.getScaledWindowHeight();
 
                 Text line = Text.translatable("tip.kinswathe.ability_can_use", KinsWatheClient.abilityBind.getBoundKeyLocalizedText());

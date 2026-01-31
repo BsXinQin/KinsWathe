@@ -78,15 +78,6 @@ public class KinsWatheClient implements ClientModInitializer {
                 }
             }
         });
-        /// 同步客户端Config
-        ClientPlayNetworking.registerGlobalReceiver(KinsWathe.CONFIG_SYNC_PACKET,
-                (payload, context) -> {
-                    KinsWathe.CLIENT_INT_CONFIGS.clear();
-                    KinsWathe.CLIENT_BOOL_CONFIGS.clear();
-                    KinsWathe.CLIENT_INT_CONFIGS.putAll(payload.intConfigs());
-                    KinsWathe.CLIENT_BOOL_CONFIGS.putAll(payload.boolConfigs());
-                }
-        );
 
         /// 初始化物品冷却提示
         ItemCooldownComponent.initItemCooldown();
@@ -123,24 +114,26 @@ public class KinsWatheClient implements ClientModInitializer {
 
     /// 添加物品描述
     public void ToolTip(Item item, ItemStack itemStack, List<Text> list) {
-        if (!itemStack.isOf(item)) return;
-        list.addAll(TextUtils.getTooltipForItem(item, Style.EMPTY.withColor(WatheItemTooltips.REGULAR_TOOLTIP_COLOR)));
+        if (itemStack.isOf(item)) {
+            list.addAll(TextUtils.getTooltipForItem(item, Style.EMPTY.withColor(WatheItemTooltips.REGULAR_TOOLTIP_COLOR)));
+        }
     }
 
     /// 添加物品冷却提示
     private static void CooldownText(Item item, List<Text> list, @NotNull ItemStack itemStack) {
-        if (!itemStack.isOf(item)) return;
-        ItemCooldownManager itemCooldown = MinecraftClient.getInstance().player.getItemCooldownManager();
-        if (itemCooldown.isCoolingDown(item)) {
-            float progress = itemCooldown.getCooldownProgress(item, 0);
-            int totalTicks = ItemCooldownComponent.getItemCooldownTicks(item);
-            if (totalTicks > 0) {
-                int remainingTicks = (int)(totalTicks * progress);
-                int totalSeconds = (remainingTicks + 19) / 20;
-                int minutes = totalSeconds / 60;
-                int seconds = totalSeconds % 60;
-                String countdown = (minutes > 0 ? minutes + "m" : "") + (seconds > 0 ? seconds + "s" : "");
-                list.add(Text.translatable("tip.cooldown", countdown).withColor(WatheItemTooltips.COOLDOWN_COLOR));
+        if (itemStack.isOf(item)) {
+            ItemCooldownManager itemCooldown = MinecraftClient.getInstance().player.getItemCooldownManager();
+            if (itemCooldown.isCoolingDown(item)) {
+                float progress = itemCooldown.getCooldownProgress(item, 0);
+                int totalTicks = ItemCooldownComponent.getItemCooldownTicks(item);
+                if (totalTicks > 0) {
+                    int remainingTicks = (int) (totalTicks * progress);
+                    int totalSeconds = (remainingTicks + 19) / 20;
+                    int minutes = totalSeconds / 60;
+                    int seconds = totalSeconds % 60;
+                    String countdown = (minutes > 0 ? minutes + "m" : "") + (seconds > 0 ? seconds + "s" : "");
+                    list.add(Text.translatable("tip.cooldown", countdown).withColor(WatheItemTooltips.COOLDOWN_COLOR));
+                }
             }
         }
     }

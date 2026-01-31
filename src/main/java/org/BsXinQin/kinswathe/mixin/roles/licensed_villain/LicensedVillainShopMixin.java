@@ -11,6 +11,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import org.BsXinQin.kinswathe.KinsWathe;
+import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,8 +31,8 @@ public abstract class LicensedVillainShopMixin {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
         if (gameWorld.isRole(player, KinsWathe.LICENSED_VILLAIN)) {
             if (index == 0) {
-                if (balance >= KinsWathe.LicensedVillainPrice() && !this.player.getItemCooldownManager().isCoolingDown(WatheItems.REVOLVER)) {
-                    this.balance -= KinsWathe.LicensedVillainPrice();
+                if (balance >= ConfigWorldComponent.KEY.get(player.getWorld()).LicensedVillainPrice && !this.player.getItemCooldownManager().isCoolingDown(WatheItems.REVOLVER)) {
+                    this.balance -= ConfigWorldComponent.KEY.get(player.getWorld()).LicensedVillainPrice;
                     sync();
                     player.giveItemStack(WatheItems.REVOLVER.getDefaultStack());
                     PlayerEntity var6 = this.player;
