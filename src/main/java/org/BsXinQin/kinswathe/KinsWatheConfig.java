@@ -11,7 +11,7 @@ public class KinsWatheConfig {
     /// 配置文件设置
     public static ConfigClassHandler<KinsWatheConfig> HANDLER = ConfigClassHandler.createBuilder(KinsWatheConfig.class).id(Identifier.of(KinsWathe.MOD_ID, "config")).serializer(config -> GsonConfigSerializerBuilder.create(config).setPath(FabricLoader.getInstance().getConfigDir().resolve(KinsWathe.MOD_ID + ".json5")).setJson5(true).build()).build();
 
-    @SerialEntry(comment = "Starting cooldown.")
+    @SerialEntry(comment = "Starting cooldown (in seconds).")
     public int StartingCooldown = GameConstants.getInTicks(0,30) / 20;
 
     @SerialEntry(comment = "Whether to enable staminabar.")
@@ -21,20 +21,36 @@ public class KinsWatheConfig {
     public boolean EnableJumpNotInGame = true;
 
     /// 关于KinsWathe修改
-    @SerialEntry(comment = "\n\n[Kin's Wathe] Modify:\nBellringer: modify the price of ability.")
+    @SerialEntry(comment = "\n\n[Kin's Wathe] Modify:\nBellringer: modify price and cooldown of ability.")
     public int BellringerAbilityPrice = 200;
+    @SerialEntry
+    public int BellringerAbilityCooldown = GameConstants.getInTicks(2,0) / 20;
 
-    @SerialEntry(comment = "Detective: modify the price of ability.")
+    @SerialEntry(comment = "Detective: modify price and cooldown of ability.")
     public int DetectiveAbilityPrice = 200;
+    @SerialEntry
+    public int DetectiveAbilityCooldown = GameConstants.getInTicks(1,30) / 20;
 
-    @SerialEntry(comment = "Cleaner: modify the price of ability.")
+    @SerialEntry(comment = "Robot: modify cooldown of ability.")
+    public int RobotAbilityCooldown = GameConstants.getInTicks(1,30) / 20;
+
+    @SerialEntry(comment = "Cleaner: modify generation player limit, price and cooldown of ability.")
+    public int CleanerPlayerLimit = 12;
+    @SerialEntry
     public int CleanerAbilityPrice = 200;
+    @SerialEntry
+    public int CleanerAbilityCooldown = GameConstants.getInTicks(2,30) / 20;
 
     @SerialEntry(comment = "Drugmaker: modify get coins when someone was poisoned.")
     public int DrugmakerGetCoins = 50;
 
-    @SerialEntry(comment = "Licensed Villain: modify the price of Revolver in shop.")
-    public int LicensedVillainPrice = 300;
+    @SerialEntry(comment = "Licensed Villain: modify generation player limit and price of Revolver in shop.")
+    public int LicensedVillainPlayerLimit = 10;
+    @SerialEntry
+    public int LicensedVillainRevolverPrice = 300;
+
+    @SerialEntry(comment = "Violator: whether to allow Violator to retain disable/enable state after a server restart.")
+    public boolean EnableViolator = false;
 
     /// 关于NoellesRoles修改
     @SerialEntry(comment = "\n\n[Noelle's Roles] Modify:\nWhether to enable Noelle's Roles modify.")

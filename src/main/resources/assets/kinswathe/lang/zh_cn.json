@@ -36,10 +36,12 @@
   "announcement.role.kinswathe.licensed_villain": "执照恶棍",
   "announcement.goals.kinswathe.licensed_villain": "你或许还尚存有一丝良知...",
   "announcement.win.kinswathe.licensed_villain": "执照恶棍胜利！",
+  "tip.kinswathe.licensed_villain.weapon": "执照恶棍已经获取了武器！",
   "game.win.kinswathe.licensed_villain": "执照恶棍终结了所有人的生命！",
 
   "announcement.modifier.kinswathe.magnate": "富豪",
   "announcement.modifier.kinswathe.taskmaster": "任务大师",
+  "announcement.modifier.kinswathe.violator": "违禁者",
 
   "item.kinswathe.blowgun": "吹矢",
   "item.kinswathe.blowgun.tooltip": "瞄准、右键点击并射击\n被射中的目标将会中毒\n冷却 90 秒",

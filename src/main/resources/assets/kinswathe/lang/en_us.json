@@ -36,10 +36,12 @@
   "announcement.role.kinswathe.licensed_villain": "Licensed Villain",
   "announcement.goals.kinswathe.licensed_villain": "You might still retain a shred of conscience...",
   "announcement.win.kinswathe.licensed_villain": "Licensed Villain Win!",
+  "tip.kinswathe.licensed_villain.weapon": "Licensed Villain has obtained weapon!",
   "game.win.kinswathe.licensed_villain": "The licensed villain ended everyone's life!",
 
   "announcement.modifier.kinswathe.magnate": "Magnate",
   "announcement.modifier.kinswathe.taskmaster": "Taskmaster",
+  "announcement.modifier.kinswathe.violator": "Violator",
 
   "item.kinswathe.blowgun": "Blowgun",
   "item.kinswathe.blowgun.tooltip": "Point, right-click and shoot\nTarget that be shooted will be poisoned\n90 seconds cooldown",

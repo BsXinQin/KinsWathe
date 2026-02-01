@@ -9,6 +9,7 @@
     "host.CustomWinnerTextMixin",
     "host.InstinctMixin",
     "host.KeyBindingMixin",
+    "modifiers.violator.ViolatorKeyBindingMixin",
     "roles.bellringer.BellringerHudMixin",
     "roles.cleaner.CleanerHudMixin",
     "roles.cook.CookShopMixin",

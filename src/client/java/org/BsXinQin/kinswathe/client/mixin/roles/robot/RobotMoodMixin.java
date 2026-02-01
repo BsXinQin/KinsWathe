@@ -26,7 +26,7 @@ public class RobotMoodMixin {
     @Shadow public static float moodRender;
     @Shadow public static float moodAlpha;
     @Shadow public static Random random;
-    @Unique private static final Identifier ROBOT_MOOD = Identifier.of(KinsWathe.MOD_ID, "hud/mood_happy");
+    @Unique private static final Identifier ROBOT_MOOD = Identifier.of("wathe", "hud/mood_happy");
 
     @Inject(method = "renderKiller", at = @At("HEAD"), cancellable = true)
     private static void RobotMood(TextRenderer textRenderer, DrawContext context, CallbackInfo ci) {

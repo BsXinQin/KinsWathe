@@ -1,14 +1,12 @@
 package org.BsXinQin.kinswathe.component;
 
 import dev.doctor4t.wathe.game.GameConstants;
-import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.BsXinQin.kinswathe.KinsWathe;
 import org.BsXinQin.kinswathe.KinsWatheConfig;
-import org.agmas.noellesroles.config.NoellesRolesConfig;
 import org.jetbrains.annotations.NotNull;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistry;
@@ -26,10 +24,15 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
     public boolean EnableJumpNotInGame = true;
     //关于KinsWathe修改
     public int BellringerAbilityPrice = 200;
+    public int BellringerAbilityCooldown = GameConstants.getInTicks(2,0) / 20;
     public int DetectiveAbilityPrice = 200;
+    public int DetectiveAbilityCooldown = GameConstants.getInTicks(1,30) / 20;
+    public int RobotAbilityCooldown = GameConstants.getInTicks(1,30) / 20;
     public int CleanerAbilityPrice = 200;
+    public int CleanerAbilityCooldown = GameConstants.getInTicks(2,30) / 20;
     public int DrugmakerGetCoins = 50;
-    public int LicensedVillainPrice = 300;
+    public int LicensedVillainPlayerLimit = 10;
+    public int LicensedVillainRevolverPrice = 300;
     //关于NoellesRoles修改
     public boolean EnableNoellesRolesModify = true;
     public boolean ConductorInstinctModify = false;
@@ -44,10 +47,15 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         EnableJumpNotInGame = KinsWatheConfig.HANDLER.instance().EnableJumpNotInGame; tag.putBoolean("EnableJumpNotInGame", this.EnableJumpNotInGame);
         //关于KinsWathe修改
         BellringerAbilityPrice = KinsWatheConfig.HANDLER.instance().BellringerAbilityPrice; tag.putInt("BellringerAbilityPrice", this.BellringerAbilityPrice);
+        BellringerAbilityCooldown = KinsWatheConfig.HANDLER.instance().BellringerAbilityCooldown; tag.putInt("BellringerAbilityCooldown", this.BellringerAbilityCooldown);
         DetectiveAbilityPrice = KinsWatheConfig.HANDLER.instance().DetectiveAbilityPrice; tag.putInt("DetectiveAbilityPrice", this.DetectiveAbilityPrice);
+        DetectiveAbilityCooldown = KinsWatheConfig.HANDLER.instance().DetectiveAbilityCooldown; tag.putInt("DetectiveAbilityCooldown", this.DetectiveAbilityCooldown);
+        RobotAbilityCooldown = KinsWatheConfig.HANDLER.instance().RobotAbilityCooldown; tag.putInt("RobotAbilityCooldown", this.RobotAbilityCooldown);
         CleanerAbilityPrice = KinsWatheConfig.HANDLER.instance().CleanerAbilityPrice; tag.putInt("CleanerAbilityPrice", this.CleanerAbilityPrice);
+        CleanerAbilityCooldown = KinsWatheConfig.HANDLER.instance().CleanerAbilityCooldown; tag.putInt("CleanerAbilityCooldown", this.CleanerAbilityCooldown);
         DrugmakerGetCoins = KinsWatheConfig.HANDLER.instance().DrugmakerGetCoins; tag.putInt("DrugmakerGetCoins", this.DrugmakerGetCoins);
-        LicensedVillainPrice = KinsWatheConfig.HANDLER.instance().LicensedVillainPrice; tag.putInt("LicensedVillainPrice", this.LicensedVillainPrice);
+        LicensedVillainPlayerLimit = KinsWatheConfig.HANDLER.instance().LicensedVillainPlayerLimit; tag.putInt("LicensedVillainPlayerLimit", this.LicensedVillainPlayerLimit);
+        LicensedVillainRevolverPrice = KinsWatheConfig.HANDLER.instance().LicensedVillainRevolverPrice; tag.putInt("LicensedVillainRevolverPrice", this.LicensedVillainRevolverPrice);
         //关于NoellesRoles修改
         EnableNoellesRolesModify = KinsWatheConfig.HANDLER.instance().EnableNoellesRolesModify; tag.putBoolean("EnableNoellesRolesModify", this.EnableNoellesRolesModify);
         ConductorInstinctModify = KinsWatheConfig.HANDLER.instance().ConductorInstinctModify; tag.putBoolean("ConductorInstinctModify", this.ConductorInstinctModify);
@@ -61,10 +69,15 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         if (tag.contains("EnableJumpNotInGame"))   this.EnableJumpNotInGame = tag.getBoolean("EnableJumpNotInGame");
         //关于KinsWathe修改
         if (tag.contains("BellringerAbilityPrice"))   this.BellringerAbilityPrice = tag.getInt("BellringerAbilityPrice");
+        if (tag.contains("BellringerAbilityCooldown"))   this.BellringerAbilityCooldown = tag.getInt("BellringerAbilityCooldown");
         if (tag.contains("DetectiveAbilityPrice"))   this.DetectiveAbilityPrice = tag.getInt("DetectiveAbilityPrice");
+        if (tag.contains("DetectiveAbilityCooldown"))   this.DetectiveAbilityCooldown = tag.getInt("DetectiveAbilityCooldown");
+        if (tag.contains("RobotAbilityCooldown"))   this.RobotAbilityCooldown = tag.getInt("RobotAbilityCooldown");
         if (tag.contains("CleanerAbilityPrice"))   this.CleanerAbilityPrice = tag.getInt("CleanerAbilityPrice");
+        if (tag.contains("CleanerAbilityCooldown"))   this.CleanerAbilityCooldown = tag.getInt("CleanerAbilityCooldown");
         if (tag.contains("DrugmakerGetCoins"))   this.DrugmakerGetCoins = tag.getInt("DrugmakerGetCoins");
-        if (tag.contains("LicensedVillainPrice"))   this.LicensedVillainPrice = tag.getInt("LicensedVillainPrice");
+        if (tag.contains("LicensedVillainPlayerLimit"))   this.LicensedVillainPlayerLimit = tag.getInt("LicensedVillainPlayerLimit");
+        if (tag.contains("LicensedVillainRevolverPrice"))   this.LicensedVillainRevolverPrice = tag.getInt("LicensedVillainRevolverPrice");
         //关于NoellesRoles修改
         if (tag.contains("EnableNoellesRolesModify"))   this.EnableNoellesRolesModify = tag.getBoolean("EnableNoellesRolesModify");
         if (tag.contains("ConductorInstinctModify"))   this.ConductorInstinctModify = tag.getBoolean("ConductorInstinctModify");

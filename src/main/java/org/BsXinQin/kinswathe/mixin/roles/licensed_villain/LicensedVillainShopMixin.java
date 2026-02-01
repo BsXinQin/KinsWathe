@@ -31,8 +31,8 @@ public abstract class LicensedVillainShopMixin {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
         if (gameWorld.isRole(player, KinsWathe.LICENSED_VILLAIN)) {
             if (index == 0) {
-                if (balance >= ConfigWorldComponent.KEY.get(player.getWorld()).LicensedVillainPrice && !this.player.getItemCooldownManager().isCoolingDown(WatheItems.REVOLVER)) {
-                    this.balance -= ConfigWorldComponent.KEY.get(player.getWorld()).LicensedVillainPrice;
+                if (balance >= ConfigWorldComponent.KEY.get(player.getWorld()).LicensedVillainRevolverPrice && !this.player.getItemCooldownManager().isCoolingDown(WatheItems.REVOLVER)) {
+                    this.balance -= ConfigWorldComponent.KEY.get(player.getWorld()).LicensedVillainRevolverPrice;
                     sync();
                     player.giveItemStack(WatheItems.REVOLVER.getDefaultStack());
                     PlayerEntity var6 = this.player;
@@ -48,8 +48,8 @@ public abstract class LicensedVillainShopMixin {
                         player.networkHandler.sendPacket(new PlaySoundS2CPacket(Registries.SOUND_EVENT.getEntry(WatheSounds.UI_SHOP_BUY_FAIL), SoundCategory.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 0.9F + this.player.getRandom().nextFloat() * 0.2F, player.getRandom().nextLong()));
                     }
                 }
+                ci.cancel();
             }
-            ci.cancel();
         }
     }
 }

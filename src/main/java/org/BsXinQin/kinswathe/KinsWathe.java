@@ -4,7 +4,6 @@ import dev.doctor4t.wathe.api.Role;
 import dev.doctor4t.wathe.api.WatheRoles;
 import dev.doctor4t.wathe.api.event.GameEvents;
 import dev.doctor4t.wathe.cca.*;
-import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.game.GameFunctions;
 import dev.doctor4t.wathe.index.WatheItems;
 import net.fabricmc.api.ModInitializer;
@@ -32,6 +31,7 @@ import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
 import org.BsXinQin.kinswathe.component.RolesHaveIncomeComponent;
 import org.BsXinQin.kinswathe.component.RolesPassiveIncomeComponent;
 import org.agmas.harpymodloader.Harpymodloader;
+import org.agmas.harpymodloader.config.HarpyModLoaderConfig;
 import org.agmas.harpymodloader.events.ModdedRoleAssigned;
 import org.BsXinQin.kinswathe.packet.*;
 import org.agmas.harpymodloader.modifiers.HMLModifiers;
@@ -68,6 +68,7 @@ public class KinsWathe implements ModInitializer {
     //定义词条
     public static Identifier MAGNATE_ID = Identifier.of(MOD_ID, "magnate");
     public static Identifier TASKMASTER_ID = Identifier.of(MOD_ID, "taskmaster");
+    public static Identifier VIOLATOR_ID = Identifier.of(MOD_ID, "violator");
 
     /// 新增身份词条
     //平民
@@ -172,6 +173,15 @@ public class KinsWathe implements ModInitializer {
             false,
             false
     ));
+    //违禁者
+    public static Modifier VIOLATOR = HMLModifiers.registerModifier(new Modifier(
+            VIOLATOR_ID,
+            0x660000,
+            null,
+            null,
+            false,
+            false
+    ));
 
     /// 设置身份
     public static final ArrayList<Role> VANNILA_ROLES = new ArrayList<>();
@@ -242,15 +252,23 @@ public class KinsWathe implements ModInitializer {
         });
         //限制身份生成人数
         ServerTickEvents.END_SERVER_TICK.register(((server) -> {
-            if (server.getPlayerManager().getCurrentPlayerCount() >= 12) {
+            if (server.getPlayerManager().getCurrentPlayerCount() >= KinsWatheConfig.HANDLER.instance().CleanerPlayerLimit) {
                 Harpymodloader.setRoleMaximum(CLEANER,1);} else {
                 Harpymodloader.setRoleMaximum(CLEANER,0);
             }
-            if (server.getPlayerManager().getCurrentPlayerCount() >= 10) {
+            if (server.getPlayerManager().getCurrentPlayerCount() >= KinsWatheConfig.HANDLER.instance().LicensedVillainPlayerLimit) {
                 Harpymodloader.setRoleMaximum(LICENSED_VILLAIN,1);} else {
                 Harpymodloader.setRoleMaximum(LICENSED_VILLAIN,0);
             }
         }));
+        //限制自动开启身份
+        if (!KinsWatheConfig.HANDLER.instance().EnableViolator) {
+            HarpyModLoaderConfig.HANDLER.load();
+            if (!HarpyModLoaderConfig.HANDLER.instance().disabledModifiers.contains(VIOLATOR_ID.toString())) {
+                HarpyModLoaderConfig.HANDLER.instance().disabledModifiers.add(VIOLATOR_ID.toString());
+            }
+            HarpyModLoaderConfig.HANDLER.save();
+        }
         //注册游戏开始时事件
         GameEvents.ON_GAME_START.register((gameMode) -> {ResetPlayerSlots = true;});
         ServerTickEvents.START_SERVER_TICK.register(server -> {
@@ -266,6 +284,7 @@ public class KinsWathe implements ModInitializer {
         ServerTickEvents.START_SERVER_TICK.register(server -> {
             if (ClearItems) {
                 try {
+                    server.getCommandManager().executeWithPrefix(server.getCommandSource(), "effect clear @a");
                     server.getCommandManager().executeWithPrefix(server.getCommandSource(), "kill @e[type=item]");
                     if (KinsWathe.NOELLESROLES_LOADED) {
                         server.getCommandManager().executeWithPrefix(server.getCommandSource(), "kill @e[type=noellesroles:cube]");
@@ -299,21 +318,10 @@ public class KinsWathe implements ModInitializer {
                     int newTime = Math.max(0, currentTime - 1200);
                     time.setTime(newTime);
                     world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_BELL_USE, SoundCategory.PLAYERS, 1.0f, 1.0f);
-                    ability.cooldown = GameConstants.getInTicks(2, 0);
+                    ability.cooldown = ConfigWorldComponent.KEY.get(player.getWorld()).BellringerAbilityCooldown * 20;
                     ability.sync();
                     if (KinsWathe.NOELLESROLES_LOADED) {
-                        noellesrolesAbility.cooldown = GameConstants.getInTicks(2, 0);
-                        noellesrolesAbility.sync();
-                    }
-                }
-                //机器人技能
-                if (gameWorld.isRole(player, ROBOT)) {
-                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 200, 0, true, true, false));
-                    world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_IRON_GOLEM_HURT, SoundCategory.PLAYERS, 1.0f, 1.0f);
-                    ability.cooldown = GameConstants.getInTicks(2, 0);
-                    ability.sync();
-                    if (KinsWathe.NOELLESROLES_LOADED) {
-                        noellesrolesAbility.cooldown = GameConstants.getInTicks(2, 0);
+                        noellesrolesAbility.cooldown = ConfigWorldComponent.KEY.get(player.getWorld()).BellringerAbilityCooldown * 20;
                         noellesrolesAbility.sync();
                     }
                 }
@@ -339,10 +347,21 @@ public class KinsWathe implements ModInitializer {
                         player.sendMessage(Text.translatable("tip.kinswathe.detective.notinnocent", targetPlayer.getName().getString()).withColor(WatheRoles.KILLER.color()), true);
                         player.playSoundToPlayer(SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.PLAYERS, 1.0f, 1.0f);
                     }
-                    ability.cooldown = GameConstants.getInTicks(1, 30);
+                    ability.cooldown = ConfigWorldComponent.KEY.get(player.getWorld()).DetectiveAbilityCooldown * 20;
                     ability.sync();
                     if (KinsWathe.NOELLESROLES_LOADED) {
-                        noellesrolesAbility.cooldown = GameConstants.getInTicks(1, 30);
+                        noellesrolesAbility.cooldown = ConfigWorldComponent.KEY.get(player.getWorld()).DetectiveAbilityCooldown * 20;
+                        noellesrolesAbility.sync();
+                    }
+                }
+                //机器人技能
+                if (gameWorld.isRole(player, ROBOT)) {
+                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 200, 0, true, true, false));
+                    world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_IRON_GOLEM_HURT, SoundCategory.PLAYERS, 1.0f, 1.0f);
+                    ability.cooldown = ConfigWorldComponent.KEY.get(player.getWorld()).RobotAbilityCooldown * 20;
+                    ability.sync();
+                    if (KinsWathe.NOELLESROLES_LOADED) {
+                        noellesrolesAbility.cooldown = ConfigWorldComponent.KEY.get(player.getWorld()).RobotAbilityCooldown * 20;
                         noellesrolesAbility.sync();
                     }
                 }
@@ -357,10 +376,10 @@ public class KinsWathe implements ModInitializer {
                     } catch (Exception ignored) {
                     }
                     player.playSoundToPlayer(SoundEvents.ENTITY_ENDER_DRAGON_FLAP, SoundCategory.PLAYERS, 1.0f, 1.0f);
-                    ability.cooldown = GameConstants.getInTicks(2, 30);
+                    ability.cooldown = ConfigWorldComponent.KEY.get(player.getWorld()).CleanerAbilityCooldown * 20;
                     ability.sync();
                     if (KinsWathe.NOELLESROLES_LOADED) {
-                        noellesrolesAbility.cooldown = GameConstants.getInTicks(2, 30);
+                        noellesrolesAbility.cooldown = ConfigWorldComponent.KEY.get(player.getWorld()).CleanerAbilityCooldown * 20;
                         noellesrolesAbility.sync();
                     }
                 }

@@ -18,7 +18,7 @@
 
 - New Additions
   - Add item cooldown display text
-  - Add new visual effects for some roles (configurable in config)
+  - Add new visual effects for some roles (configurable)
   - Clear Trapper's Role Mine entity when game ends
   - Conductor can see dropped items (disabled by default)
   - Coroner can see bodies when mood is higher than mid (disabled by default)
@@ -26,15 +26,15 @@
 
 ## Wathe Plus Function
 
-- Add visual stamina bar display (configurable in config)
+- Add visual stamina bar display (configurable)
 
-- Jump can be allowed when not in game (configurable in config)
+- Jump can be allowed when not in game (configurable)
 
 - Unlock 32 render distance limit when ultraPerfMode is disabled 
 
 - Switch player inventory to the last slot when game starts
 
-- Clear field drops when game ends
+- Clear field drops and player effects when game ends
 
 
 ## New Civillians
@@ -66,14 +66,14 @@
 ## New Killers
 
 - Cleaner
-  - Only generate when 12 or more players are present
+  - Only generate when 12 or more players are present (configurable)
   - Initially equip with Sulfuric Acid Barrel
   - Sulfuric Acid Barrel can dissolve a body (1 minute cooldown)
   - Use ability to clear field drops
 
 - Drugmaker
   - Can see poisoned players through walls
-  - Get coins if someone was poisoned (configurable in config)
+  - Get coins if someone was poisoned
   - Can not purchase Grenade and Psycho Mode in shop
   - Price of Poison Vial and Scorpion reduced by half
   - Can purchase Poison Injector and Blowgun in shop
@@ -84,7 +84,7 @@
 ## New Neutrals
 
 - Licensed Villain
-  - Only generates when 10 or more players are present
+  - Only generates when 10 or more players are present (configurable)
   - Requires killing all players to win (has own victory screen)
   - Game does not end when all civilians or killers are dead
   - Has 15 seconds of sprint time
@@ -102,6 +102,13 @@
   - Only generates on roles with income
   - Killer roles receive 50 coins after completing tasks
   - Non-killer roles receive an additional 25 income after completing tasks
+
+
+## Config Settings
+
+- Generation conditions of roles are configurable
+
+- All roles' ability cost and cooldown are configurable
 
 
 ## Requires
