@@ -3,8 +3,8 @@ package org.BsXinQin.kinswathe.client.host;
 import dev.doctor4t.wathe.game.GameConstants;
 import net.minecraft.item.Item;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ItemCooldownComponent {
 

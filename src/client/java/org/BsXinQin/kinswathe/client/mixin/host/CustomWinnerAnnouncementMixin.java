@@ -5,12 +5,12 @@ import dev.doctor4t.wathe.game.GameFunctions;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import org.BsXinQin.kinswathe.component.CustomWinnerComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.BsXinQin.kinswathe.component.CustomWinnerComponent;
 
 @Mixin(value = RoleAnnouncementTexts.RoleAnnouncementText.class, priority = 500)
 public class CustomWinnerAnnouncementMixin {

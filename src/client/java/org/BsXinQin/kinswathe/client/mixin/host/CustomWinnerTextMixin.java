@@ -4,11 +4,11 @@ import dev.doctor4t.wathe.client.gui.RoundTextRenderer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import org.BsXinQin.kinswathe.component.CustomWinnerComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.BsXinQin.kinswathe.component.CustomWinnerComponent;
 
 @Mixin(RoundTextRenderer.class)
 public class CustomWinnerTextMixin {

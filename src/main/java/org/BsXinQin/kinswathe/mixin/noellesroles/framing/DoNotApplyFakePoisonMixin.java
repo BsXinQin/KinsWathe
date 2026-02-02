@@ -1,8 +1,8 @@
 package org.BsXinQin.kinswathe.mixin.noellesroles.framing;
 
 import dev.doctor4t.wathe.cca.PlayerPoisonComponent;
-import dev.doctor4t.wathe.game.GameFunctions;
 import dev.doctor4t.wathe.game.GameConstants;
+import dev.doctor4t.wathe.game.GameFunctions;
 import net.minecraft.entity.player.PlayerEntity;
 import org.BsXinQin.kinswathe.KinsWathe;
 import org.spongepowered.asm.mixin.Final;
