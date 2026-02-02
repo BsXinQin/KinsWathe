@@ -31,7 +31,6 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
     public int CleanerAbilityPrice = 200;
     public int CleanerAbilityCooldown = GameConstants.getInTicks(2,30) / 20;
     public int DrugmakerGetCoins = 50;
-    public int LicensedVillainPlayerLimit = 10;
     public int LicensedVillainRevolverPrice = 300;
     //关于NoellesRoles修改
     public boolean EnableNoellesRolesModify = true;
@@ -54,7 +53,6 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         CleanerAbilityPrice = KinsWatheConfig.HANDLER.instance().CleanerAbilityPrice; tag.putInt("CleanerAbilityPrice", this.CleanerAbilityPrice);
         CleanerAbilityCooldown = KinsWatheConfig.HANDLER.instance().CleanerAbilityCooldown; tag.putInt("CleanerAbilityCooldown", this.CleanerAbilityCooldown);
         DrugmakerGetCoins = KinsWatheConfig.HANDLER.instance().DrugmakerGetCoins; tag.putInt("DrugmakerGetCoins", this.DrugmakerGetCoins);
-        LicensedVillainPlayerLimit = KinsWatheConfig.HANDLER.instance().LicensedVillainPlayerLimit; tag.putInt("LicensedVillainPlayerLimit", this.LicensedVillainPlayerLimit);
         LicensedVillainRevolverPrice = KinsWatheConfig.HANDLER.instance().LicensedVillainRevolverPrice; tag.putInt("LicensedVillainRevolverPrice", this.LicensedVillainRevolverPrice);
         //关于NoellesRoles修改
         EnableNoellesRolesModify = KinsWatheConfig.HANDLER.instance().EnableNoellesRolesModify; tag.putBoolean("EnableNoellesRolesModify", this.EnableNoellesRolesModify);
@@ -76,7 +74,6 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         if (tag.contains("CleanerAbilityPrice"))   this.CleanerAbilityPrice = tag.getInt("CleanerAbilityPrice");
         if (tag.contains("CleanerAbilityCooldown"))   this.CleanerAbilityCooldown = tag.getInt("CleanerAbilityCooldown");
         if (tag.contains("DrugmakerGetCoins"))   this.DrugmakerGetCoins = tag.getInt("DrugmakerGetCoins");
-        if (tag.contains("LicensedVillainPlayerLimit"))   this.LicensedVillainPlayerLimit = tag.getInt("LicensedVillainPlayerLimit");
         if (tag.contains("LicensedVillainRevolverPrice"))   this.LicensedVillainRevolverPrice = tag.getInt("LicensedVillainRevolverPrice");
         //关于NoellesRoles修改
         if (tag.contains("EnableNoellesRolesModify"))   this.EnableNoellesRolesModify = tag.getBoolean("EnableNoellesRolesModify");

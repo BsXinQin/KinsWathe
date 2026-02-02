@@ -103,6 +103,10 @@
   - Killer roles receive 50 coins after completing tasks
   - Non-killer roles receive an additional 25 income after completing tasks
 
+- Violator
+  - Disabled by default (configurable)
+  - Can jump when in game
+
 
 ## Config Settings
 
