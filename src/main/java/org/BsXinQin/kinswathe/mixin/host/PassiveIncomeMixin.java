@@ -12,9 +12,11 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(MurderGameMode.class)
 public abstract class PassiveIncomeMixin {
 
+    /// 设置被动收入
     @WrapOperation(method = "tickServerGameLoop", at = @At(value = "INVOKE", target = "Ldev/doctor4t/wathe/cca/GameWorldComponent;canUseKillerFeatures(Lnet/minecraft/entity/player/PlayerEntity;)Z"))
     public boolean PassiveIncome(GameWorldComponent gameWorld, PlayerEntity player, Operation<Boolean> original) {
-        if (gameWorld.isRole(player, KinsWathe.COOK)) return true;
+        if (gameWorld.isRole(player, KinsWathe.COOK) ||
+            gameWorld.isRole(player, KinsWathe.JUDGE)) return true;
         return original.call(gameWorld,player);
     }
 }

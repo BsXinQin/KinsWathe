@@ -15,6 +15,7 @@ public class RolesPassiveIncomeComponent {
         //添加基础身份
         roles.add(WatheRoles.KILLER);
         roles.add(KinsWathe.COOK);
+        roles.add(KinsWathe.JUDGE);
         roles.add(KinsWathe.CLEANER);
         roles.add(KinsWathe.DRUGMAKER);
         //添加NoellesRoles身份

@@ -26,18 +26,19 @@ public abstract class BellringerHudMixin {
 
     @Inject(method = "render", at = @At("TAIL"))
     public void BellringerHud(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.player == null) return;
         if (WatheClient.isPlayerAliveAndInSurvival()) {
-            MinecraftClient client = MinecraftClient.getInstance();
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(client.player.getWorld());
             AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(client.player);
             PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(client.player);
             if (gameWorld.isRole(client.player, KinsWathe.BELLRINGER)) {
                 int drawY = context.getScaledWindowHeight();
 
-                Text line = Text.translatable("tip.kinswathe.ability_can_use", KinsWatheClient.abilityBind.getBoundKeyLocalizedText());
+                Text line = Text.translatable("tip.kinswathe.ability.can_use", KinsWatheClient.abilityBind.getBoundKeyLocalizedText());
 
                 if (playerShop.balance < ConfigWorldComponent.KEY.get(client.player.getWorld()).BellringerAbilityPrice) {
-                    line = Text.translatable("tip.kinswathe.bellringer.not_enough_money", ConfigWorldComponent.KEY.get(client.player.getWorld()).BellringerAbilityPrice);
+                    line = Text.translatable("tip.kinswathe.ability.not_enough_money", ConfigWorldComponent.KEY.get(client.player.getWorld()).BellringerAbilityPrice);
                 }
                 if (ability.cooldown > 0) {
                     line = Text.translatable("tip.kinswathe.cooldown", ability.cooldown / 20);

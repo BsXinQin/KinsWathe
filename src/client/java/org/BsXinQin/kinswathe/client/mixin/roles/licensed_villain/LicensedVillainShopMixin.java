@@ -29,10 +29,10 @@ public abstract class LicensedVillainShopMixin extends LimitedHandledScreen<Play
 
     @Inject(method = "init", at = @At("HEAD"))
     void LicensedVillainShop(CallbackInfo ci) {
-        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
-        if (gameWorld.isRole(player, KinsWathe.LICENSED_VILLAIN)) {
+        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
+        if (gameWorld.isRole(this.player, KinsWathe.LICENSED_VILLAIN)) {
             List<ShopEntry> entries = new ArrayList<>();
-            entries.add(new ShopEntry(WatheItems.REVOLVER.getDefaultStack(), ConfigWorldComponent.KEY.get(player.getWorld()).LicensedVillainRevolverPrice, ShopEntry.Type.WEAPON));
+            entries.add(new ShopEntry(WatheItems.REVOLVER.getDefaultStack(), ConfigWorldComponent.KEY.get(this.player.getWorld()).LicensedVillainRevolverPrice, ShopEntry.Type.WEAPON));
             int apart = 36;
             int x = width / 2 - (entries.size()) * apart / 2 + 9;
             int shouldBeY = (height - 32) / 2;

@@ -26,8 +26,8 @@ public abstract class DrugmakerShopMixin extends LimitedHandledScreen<PlayerScre
 
     @ModifyVariable(method = "init", at = @At(value = "STORE"), name = "entries")
     private List<ShopEntry> DrugmakerShop(List<ShopEntry> entries) {
-        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
-        if (gameWorld.isRole(player, KinsWathe.DRUGMAKER)) {
+        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
+        if (gameWorld.isRole(this.player, KinsWathe.DRUGMAKER)) {
             entries = KinsWatheConstants.DrugmakerShop;
         }
         return entries;

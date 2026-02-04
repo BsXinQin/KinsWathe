@@ -28,8 +28,8 @@ public abstract class CookShopMixin extends LimitedHandledScreen<PlayerScreenHan
 
     @Inject(method = "init", at = @At("HEAD"))
     void CookShop(CallbackInfo ci) {
-        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
-        if (gameWorld.isRole(player, KinsWathe.COOK)) {
+        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
+        if (gameWorld.isRole(this.player, KinsWathe.COOK)) {
             List<ShopEntry> entries = new ArrayList<>();
             entries.add(new ShopEntry(Items.COOKED_PORKCHOP.getDefaultStack(), 75, ShopEntry.Type.POISON));
             entries.add(new ShopEntry(Items.COOKED_BEEF.getDefaultStack(), 75, ShopEntry.Type.POISON));

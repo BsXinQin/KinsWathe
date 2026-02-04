@@ -27,6 +27,9 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
     public int BellringerAbilityCooldown = GameConstants.getInTicks(2,0) / 20;
     public int DetectiveAbilityPrice = 200;
     public int DetectiveAbilityCooldown = GameConstants.getInTicks(1,30) / 20;
+    public int JudgeAbilityPrice = 300;
+    public int JudgeAbilityGlowing = GameConstants.getInTicks(1,30) / 20;
+    public int JudgeAbilityCooldown = GameConstants.getInTicks(3,0) / 20;
     public int RobotAbilityCooldown = GameConstants.getInTicks(1,30) / 20;
     public int CleanerAbilityPrice = 200;
     public int CleanerAbilityCooldown = GameConstants.getInTicks(2,30) / 20;
@@ -49,6 +52,9 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         BellringerAbilityCooldown = KinsWatheConfig.HANDLER.instance().BellringerAbilityCooldown; tag.putInt("BellringerAbilityCooldown", this.BellringerAbilityCooldown);
         DetectiveAbilityPrice = KinsWatheConfig.HANDLER.instance().DetectiveAbilityPrice; tag.putInt("DetectiveAbilityPrice", this.DetectiveAbilityPrice);
         DetectiveAbilityCooldown = KinsWatheConfig.HANDLER.instance().DetectiveAbilityCooldown; tag.putInt("DetectiveAbilityCooldown", this.DetectiveAbilityCooldown);
+        JudgeAbilityPrice = KinsWatheConfig.HANDLER.instance().JudgeAbilityPrice; tag.putInt("JudgeAbilityPrice", this.JudgeAbilityPrice);
+        JudgeAbilityGlowing = KinsWatheConfig.HANDLER.instance().JudgeAbilityGlowing; tag.putInt("JudgeAbilityGlowing", this.JudgeAbilityGlowing);
+        JudgeAbilityCooldown = KinsWatheConfig.HANDLER.instance().JudgeAbilityCooldown; tag.putInt("JudgeAbilityCooldown", this.JudgeAbilityCooldown);
         RobotAbilityCooldown = KinsWatheConfig.HANDLER.instance().RobotAbilityCooldown; tag.putInt("RobotAbilityCooldown", this.RobotAbilityCooldown);
         CleanerAbilityPrice = KinsWatheConfig.HANDLER.instance().CleanerAbilityPrice; tag.putInt("CleanerAbilityPrice", this.CleanerAbilityPrice);
         CleanerAbilityCooldown = KinsWatheConfig.HANDLER.instance().CleanerAbilityCooldown; tag.putInt("CleanerAbilityCooldown", this.CleanerAbilityCooldown);
@@ -70,6 +76,9 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         if (tag.contains("BellringerAbilityCooldown"))   this.BellringerAbilityCooldown = tag.getInt("BellringerAbilityCooldown");
         if (tag.contains("DetectiveAbilityPrice"))   this.DetectiveAbilityPrice = tag.getInt("DetectiveAbilityPrice");
         if (tag.contains("DetectiveAbilityCooldown"))   this.DetectiveAbilityCooldown = tag.getInt("DetectiveAbilityCooldown");
+        if (tag.contains("JudgeAbilityPrice"))   this.JudgeAbilityPrice = tag.getInt("JudgeAbilityPrice");
+        if (tag.contains("JudgeAbilityGlowing"))   this.JudgeAbilityGlowing = tag.getInt("JudgeAbilityGlowing");
+        if (tag.contains("JudgeAbilityCooldown"))   this.JudgeAbilityCooldown = tag.getInt("JudgeAbilityCooldown");
         if (tag.contains("RobotAbilityCooldown"))   this.RobotAbilityCooldown = tag.getInt("RobotAbilityCooldown");
         if (tag.contains("CleanerAbilityPrice"))   this.CleanerAbilityPrice = tag.getInt("CleanerAbilityPrice");
         if (tag.contains("CleanerAbilityCooldown"))   this.CleanerAbilityCooldown = tag.getInt("CleanerAbilityCooldown");

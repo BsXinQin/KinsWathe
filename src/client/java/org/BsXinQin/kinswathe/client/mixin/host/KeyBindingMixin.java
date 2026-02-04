@@ -17,8 +17,9 @@ public abstract class KeyBindingMixin {
 
     @Unique
     private void UnLockKeys(CallbackInfoReturnable<Boolean> ci) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.player == null) return;
         if (WatheClient.isPlayerAliveAndInSurvival()) {
-            MinecraftClient client = MinecraftClient.getInstance();
             if (ConfigWorldComponent.KEY.get(client.player.getWorld()).EnableJumpNotInGame) {
                 KeyBinding key = (KeyBinding) (Object) this;
                 boolean jumpKey = key.equals(client.options.jumpKey);
@@ -31,8 +32,9 @@ public abstract class KeyBindingMixin {
 
     @Inject(method = "wasPressed", at = @At("RETURN"), cancellable = true)
     private void wasPressed(CallbackInfoReturnable<Boolean> ci) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.player == null) return;
         if (WatheClient.isPlayerAliveAndInSurvival()) {
-            MinecraftClient client = MinecraftClient.getInstance();
             if (ConfigWorldComponent.KEY.get(client.player.getWorld()).EnableJumpNotInGame) {
                 GameWorldComponent gameWorld = GameWorldComponent.KEY.get(client.player.getWorld());
                 if (!gameWorld.isRunning() && !ci.getReturnValue()) {
@@ -44,8 +46,9 @@ public abstract class KeyBindingMixin {
 
     @Inject(method = "isPressed", at = @At("RETURN"), cancellable = true)
     private void isPressed(CallbackInfoReturnable<Boolean> ci) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.player == null) return;
         if (WatheClient.isPlayerAliveAndInSurvival()) {
-            MinecraftClient client = MinecraftClient.getInstance();
             if (ConfigWorldComponent.KEY.get(client.player.getWorld()).EnableJumpNotInGame) {
                 GameWorldComponent gameWorld = GameWorldComponent.KEY.get(client.player.getWorld());
                 if (!gameWorld.isRunning() && !ci.getReturnValue()) {

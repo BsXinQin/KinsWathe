@@ -26,18 +26,19 @@ public abstract class CleanerHudMixin {
 
     @Inject(method = "render", at = @At("TAIL"))
     public void CleanerHud(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.player == null) return;
         if (WatheClient.isPlayerAliveAndInSurvival()) {
-            MinecraftClient client = MinecraftClient.getInstance();
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(client.player.getWorld());
             AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(client.player);
             PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(client.player);
             if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWathe.CLEANER)) {
                 int drawY = context.getScaledWindowHeight();
 
-                Text line = Text.translatable("tip.kinswathe.ability_can_use", KinsWatheClient.abilityBind.getBoundKeyLocalizedText());
+                Text line = Text.translatable("tip.kinswathe.ability.can_use", KinsWatheClient.abilityBind.getBoundKeyLocalizedText());
 
                 if (playerShop.balance < ConfigWorldComponent.KEY.get(client.player.getWorld()).CleanerAbilityPrice) {
-                    line = Text.translatable("tip.kinswathe.cleaner.not_enough_money", ConfigWorldComponent.KEY.get(client.player.getWorld()).CleanerAbilityPrice);
+                    line = Text.translatable("tip.kinswathe.ability.not_enough_money", ConfigWorldComponent.KEY.get(client.player.getWorld()).CleanerAbilityPrice);
                 }
                 if (ability.cooldown > 0) {
                     line = Text.translatable("tip.kinswathe.cooldown", ability.cooldown / 20);

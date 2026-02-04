@@ -31,6 +31,13 @@ public class KinsWatheConfig {
     @SerialEntry
     public int DetectiveAbilityCooldown = GameConstants.getInTicks(1,30) / 20;
 
+    @SerialEntry(comment = "Judge: modify price and cooldown of ability.")
+    public int JudgeAbilityPrice = 300;
+    @SerialEntry
+    public int JudgeAbilityGlowing = GameConstants.getInTicks(1,30) / 20;
+    @SerialEntry
+    public int JudgeAbilityCooldown = GameConstants.getInTicks(3,0) / 20;
+
     @SerialEntry(comment = "Robot: modify cooldown of ability.")
     public int RobotAbilityCooldown = GameConstants.getInTicks(1,30) / 20;
 

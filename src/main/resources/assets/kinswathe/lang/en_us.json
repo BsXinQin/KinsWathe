@@ -1,21 +1,25 @@
 {
   "key.kinswathe.ability": "Ability",
   "tip.kinswathe.cooldown": "Ability usable in %ss",
-  "tip.kinswathe.ability_can_use": "Use %s to activate ability",
+  "tip.kinswathe.ability.can_use": "Use %s to activate ability",
+  "tip.kinswathe.ability.not_enough_money": "%s§f\uE781§r required to activate ability",
 
   "announcement.role.kinswathe.bellringer": "Bellringer",
   "announcement.goals.kinswathe.bellringer": "Check time, and modify time.",
-  "tip.kinswathe.bellringer.not_enough_money": "%s§f\uE781§r required to activate ability",
 
   "announcement.role.kinswathe.cook": "Cook",
   "announcement.goals.kinswathe.cook": "See players that eat through walls!",
 
   "announcement.role.kinswathe.detective": "Detective",
   "announcement.goals.kinswathe.detective": "Investigate everything!",
-  "tip.kinswathe.detective.not_enough_money": "%s§f\uE781§r required to activate ability",
   "tip.kinswathe.detective.innocent": "%s is innocent",
   "tip.kinswathe.detective.notinnocent": "%s is not innocent",
   "hud.kinswathe.detective.target": "Use %s to investigate",
+
+  "announcement.role.kinswathe.judge": "Judge",
+  "announcement.goals.kinswathe.judge": "Fair and just!",
+  "tip.kinswathe.judge.notification": "You are undergoing justice",
+  "hud.kinswathe.judge.target": "Use %s to judge",
 
   "announcement.role.kinswathe.physician": "Physician",
   "announcement.goals.kinswathe.physician": "See poisoned players through walls and treat them.",
@@ -26,7 +30,6 @@
 
   "announcement.role.kinswathe.cleaner": "Cleaner",
   "announcement.goals.kinswathe.cleaner": "Remove all obstacles!",
-  "tip.kinswathe.cleaner.not_enough_money": "%s§f\uE781§r required to activate ability",
 
   "announcement.role.kinswathe.drugmaker": "Drugmaker",
   "announcement.goals.kinswathe.drugmaker": "Conquer everyone with poison!",

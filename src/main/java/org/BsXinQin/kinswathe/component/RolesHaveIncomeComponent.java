@@ -17,6 +17,7 @@ public class RolesHaveIncomeComponent {
         roles.add(KinsWathe.BELLRINGER);
         roles.add(KinsWathe.COOK);
         roles.add(KinsWathe.DETECTIVE);
+        roles.add(KinsWathe.JUDGE);
         roles.add(KinsWathe.CLEANER);
         roles.add(KinsWathe.DRUGMAKER);
         roles.add(KinsWathe.LICENSED_VILLAIN);

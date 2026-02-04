@@ -24,8 +24,9 @@ public abstract class StaminaBarMixin {
 
     @Inject(method = "render", at = @At("TAIL"))
     public void StaminaBar(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.player == null) return;
         if (WatheClient.isPlayerAliveAndInSurvival()) {
-            MinecraftClient client = MinecraftClient.getInstance();
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(client.player.getWorld());
             Role role = gameWorld.getRole(client.player);
             if (ConfigWorldComponent.KEY.get(client.player.getWorld()).EnableStaminaBar && !client.options.hudHidden && role != null) {

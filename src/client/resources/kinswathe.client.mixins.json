@@ -15,6 +15,7 @@
     "roles.cook.CookShopMixin",
     "roles.detective.DetectiveHudMixin",
     "roles.drugmaker.DrugmakerShopMixin",
+    "roles.judge.JudgeHudMixin",
     "roles.licensed_villain.LicensedVillainShopMixin",
     "roles.robot.RobotHudMixin"
   ],
@@ -28,6 +29,7 @@
     "gui.IncomeIconMixin",
     "host.UnlockDistanceMixin",
     "roles.detective.DetectiveTargetHudMixin",
+    "roles.judge.JudgeTargetHudMixin",
     "roles.licensed_villain.LicensedVillainMoodMixin",
     "roles.robot.RobotMoodMixin"
   ]

@@ -21,13 +21,15 @@ public abstract class IncomeIconMixin {
     @Shadow public static float offsetDelta;
     @Shadow public static StoreRenderer.MoneyNumberRenderer view;
 
-    /// 添加非杀手收入图标
+    /// 添加收入图标
     @Inject(method = "renderHud", at = @At("HEAD"))
     private static void IncomeIcon(TextRenderer renderer, ClientPlayerEntity player, DrawContext context, float delta, CallbackInfo ci) {
+        if (player == null) return;
         if (WatheClient.isPlayerAliveAndInSurvival()) {
             if (GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWathe.BELLRINGER) ||
                 GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWathe.COOK) ||
                 GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWathe.DETECTIVE) ||
+                GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWathe.JUDGE) ||
                 GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWathe.LICENSED_VILLAIN)) {
                 int balance = PlayerShopComponent.KEY.get(player).balance;
                 if (view.getTarget() != (float) balance) {

@@ -1,21 +1,25 @@
 {
   "key.kinswathe.ability": "能力",
   "tip.kinswathe.cooldown": "能力在 %s 秒后可用",
-  "tip.kinswathe.ability_can_use": "按下 %s 键发动能力",
+  "tip.kinswathe.ability.can_use": "按下 %s 键发动能力",
+  "tip.kinswathe.ability.not_enough_money": "需要 %s§f\uE781§r 发动能力",
 
   "announcement.role.kinswathe.bellringer": "敲钟人",
   "announcement.goals.kinswathe.bellringer": "查看时间，并修改时间。",
-  "tip.kinswathe.bellringer.not_enough_money": "需要 %s§f\uE781§r 发动能力",
 
   "announcement.role.kinswathe.cook": "厨师",
   "announcement.goals.kinswathe.cook": "透过墙壁看见吃过东西的玩家！",
 
   "announcement.role.kinswathe.detective": "侦探",
   "announcement.goals.kinswathe.detective": "调查出一切！",
-  "tip.kinswathe.detective.not_enough_money": "需要 %s§f\uE781§r 发动能力",
   "tip.kinswathe.detective.innocent": "%s 是平民",
   "tip.kinswathe.detective.notinnocent": "%s 不是平民",
   "hud.kinswathe.detective.target": "按下 %s 键调查该目标身份",
+
+  "announcement.role.kinswathe.judge": "大法官",
+  "announcement.goals.kinswathe.judge": "公平公正!",
+  "tip.kinswathe.judge.notification": "你正在接受审判",
+  "hud.kinswathe.judge.target": "按下 %s 键审判该目标",
 
   "announcement.role.kinswathe.physician": "医师",
   "announcement.goals.kinswathe.physician": "透过墙壁看见中毒的玩家，然后治疗他们",
@@ -26,7 +30,6 @@
 
   "announcement.role.kinswathe.cleaner": "清道夫",
   "announcement.goals.kinswathe.cleaner": "扫除一切障碍！",
-  "tip.kinswathe.cleaner.not_enough_money": "需要 %s§f\uE781§r 发动能力",
 
   "announcement.role.kinswathe.drugmaker": "制毒师",
   "announcement.goals.kinswathe.drugmaker": "用毒药征服所有人！",

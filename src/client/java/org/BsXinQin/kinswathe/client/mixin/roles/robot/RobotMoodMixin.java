@@ -30,8 +30,10 @@ public class RobotMoodMixin {
 
     @Inject(method = "renderKiller", at = @At("HEAD"), cancellable = true)
     private static void RobotMood(TextRenderer textRenderer, DrawContext context, CallbackInfo ci) {
-        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
-        if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWathe.ROBOT)) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.player == null) return;
+        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(client.player.getWorld());
+        if (gameWorld.isRole(client.player, KinsWathe.ROBOT)) {
             context.getMatrices().push();
             context.getMatrices().translate(0.0F, 3.0F * moodOffset, 0.0F);
             context.drawGuiTexture(ROBOT_MOOD, 5, 6, 14, 17);

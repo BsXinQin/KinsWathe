@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface KinsWatheConstants {
-    /// 自定义杀手角色商店
+    /// 自定义杀手商店
     List<ShopEntry> DrugmakerShop = Util.make(new ArrayList<>(), (entries) -> {
         entries.add(new ShopEntry(KinsWatheItems.POISON_INJECTOR.getDefaultStack(), 125, ShopEntry.Type.WEAPON));
         entries.add(new ShopEntry(KinsWatheItems.BLOWGUN.getDefaultStack(), 175, ShopEntry.Type.WEAPON));

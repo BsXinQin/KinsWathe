@@ -58,8 +58,8 @@ public class KinsWatheClient implements ClientModInitializer {
             if (abilityBind.isPressed()) {
                 PacketByteBuf data = PacketByteBufs.create();
                 client.execute(() -> {
-                    if (MinecraftClient.getInstance().player == null) return;
-                    GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
+                    if (client.player == null) return;
+                    GameWorldComponent gameWorld = GameWorldComponent.KEY.get(client.player.getWorld());
                     ClientPlayNetworking.send(new AbilityC2SPacket());
                 });
             }
@@ -71,8 +71,8 @@ public class KinsWatheClient implements ClientModInitializer {
                     List<UUID> originalkeys = new ArrayList<UUID>(WatheClient.PLAYER_ENTRIES_CACHE.keySet());
                     Collections.shuffle(keys);
                     int i = 0;
-                    for (UUID o : originalkeys) {
-                        SHUFFLED_PLAYER_ENTRIES_CACHE.put(o, keys.get(i));
+                    for (UUID original : originalkeys) {
+                        SHUFFLED_PLAYER_ENTRIES_CACHE.put(original, keys.get(i));
                         i++;
                     }
                 }
@@ -122,17 +122,20 @@ public class KinsWatheClient implements ClientModInitializer {
     /// 添加物品冷却提示
     private static void CooldownText(Item item, List<Text> list, @NotNull ItemStack itemStack) {
         if (itemStack.isOf(item)) {
-            ItemCooldownManager itemCooldown = MinecraftClient.getInstance().player.getItemCooldownManager();
-            if (itemCooldown.isCoolingDown(item)) {
-                float progress = itemCooldown.getCooldownProgress(item, 0);
-                int totalTicks = ItemCooldownComponent.getItemCooldownTicks(item);
-                if (totalTicks > 0) {
-                    int remainingTicks = (int) (totalTicks * progress);
-                    int totalSeconds = (remainingTicks + 19) / 20;
-                    int minutes = totalSeconds / 60;
-                    int seconds = totalSeconds % 60;
-                    String countdown = (minutes > 0 ? minutes + "m" : "") + (seconds > 0 ? seconds + "s" : "");
-                    list.add(Text.translatable("tip.cooldown", countdown).withColor(WatheItemTooltips.COOLDOWN_COLOR));
+            MinecraftClient client = MinecraftClient.getInstance();
+            if (client.player != null) {
+                ItemCooldownManager itemCooldown = client.player.getItemCooldownManager();
+                if (itemCooldown.isCoolingDown(item)) {
+                    float progress = itemCooldown.getCooldownProgress(item, 0);
+                    int totalTicks = ItemCooldownComponent.getItemCooldownTicks(item);
+                    if (totalTicks > 0) {
+                        int remainingTicks = (int) (totalTicks * progress);
+                        int totalSeconds = (remainingTicks + 19) / 20;
+                        int minutes = totalSeconds / 60;
+                        int seconds = totalSeconds % 60;
+                        String countdown = (minutes > 0 ? minutes + "m" : "") + (seconds > 0 ? seconds + "s" : "");
+                        list.add(Text.translatable("tip.cooldown", countdown).withColor(WatheItemTooltips.COOLDOWN_COLOR));
+                    }
                 }
             }
         }

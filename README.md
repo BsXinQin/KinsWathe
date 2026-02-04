@@ -44,11 +44,16 @@
   - Use ability to reduce remaining time by 1 minute
 
 - Cook
+  - Has passive income
   - Can purchase food in shop
   - See people who eat through walls temporarily
 
 - Detective
-  - Use ability to check whether someone is innocent
+  - Use ability to check whether target is innocent
+
+- Judge
+  - Has passive income
+  - Use ability to make target glow
 
 - Physician
   - Can see poisoned players through walls

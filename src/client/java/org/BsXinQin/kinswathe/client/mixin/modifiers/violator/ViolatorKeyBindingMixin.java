@@ -18,8 +18,9 @@ public abstract class ViolatorKeyBindingMixin {
 
     @Unique
     private void ViolatorUnLockKeys(CallbackInfoReturnable<Boolean> ci) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.player == null) return;
         if (WatheClient.isPlayerAliveAndInSurvival()) {
-            MinecraftClient client = MinecraftClient.getInstance();
             WorldModifierComponent modifier = WorldModifierComponent.KEY.get(client.player.getWorld());
             if (modifier.isModifier(client.player, KinsWathe.VIOLATOR)) {
                 KeyBinding key = (KeyBinding) (Object) this;
@@ -33,8 +34,9 @@ public abstract class ViolatorKeyBindingMixin {
 
     @Inject(method = "wasPressed", at = @At("RETURN"), cancellable = true)
     private void wasPressed(CallbackInfoReturnable<Boolean> ci) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.player == null) return;
         if (WatheClient.isPlayerAliveAndInSurvival()) {
-            MinecraftClient client = MinecraftClient.getInstance();
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(client.player.getWorld());
             WorldModifierComponent modifier = WorldModifierComponent.KEY.get(client.player.getWorld());
             if (modifier.isModifier(client.player, KinsWathe.VIOLATOR)) {
@@ -47,8 +49,9 @@ public abstract class ViolatorKeyBindingMixin {
 
     @Inject(method = "isPressed", at = @At("RETURN"), cancellable = true)
     private void isPressed(CallbackInfoReturnable<Boolean> ci) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.player == null) return;
         if (WatheClient.isPlayerAliveAndInSurvival()) {
-            MinecraftClient client = MinecraftClient.getInstance();
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(client.player.getWorld());
             WorldModifierComponent modifier = WorldModifierComponent.KEY.get(client.player.getWorld());
             if (modifier.isModifier(client.player, KinsWathe.VIOLATOR)) {
