@@ -27,7 +27,7 @@ public abstract class LicensedVillainShopMixin {
     @Shadow public abstract void sync();
 
     @Inject(method = "tryBuy", at = @At("HEAD"), cancellable = true)
-    void LicensedVillainShop(int index, CallbackInfo ci) {
+    void tryBuyLicensedVillainShop(int index, CallbackInfo ci) {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
         if (gameWorld.isRole(player, KinsWathe.LICENSED_VILLAIN)) {
             if (index == 0) {

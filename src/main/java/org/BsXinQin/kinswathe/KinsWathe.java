@@ -68,6 +68,7 @@ public class KinsWathe implements ModInitializer {
     //杀手
     public static Identifier CLEANER_ID = Identifier.of(MOD_ID, "cleaner");
     public static Identifier DRUGMAKER_ID = Identifier.of(MOD_ID, "drugmaker");
+    public static Identifier KIDNAPPER_ID = Identifier.of(MOD_ID, "kidnapper");
     //中立
     public static Identifier LICENSED_VILLAIN_ID = Identifier.of(MOD_ID, "licensed_villain");
     //定义词条
@@ -152,6 +153,16 @@ public class KinsWathe implements ModInitializer {
     public static Role DRUGMAKER = WatheRoles.registerRole(new Role(
             DRUGMAKER_ID,
             0x4C0099,
+            false,
+            true,
+            Role.MoodType.FAKE,
+            -1,
+            true
+    ));
+    //绑匪
+    public static Role KIDNAPPER = WatheRoles.registerRole(new Role(
+            KIDNAPPER_ID,
+            0xCC0066,
             false,
             true,
             Role.MoodType.FAKE,
@@ -243,9 +254,6 @@ public class KinsWathe implements ModInitializer {
         registerPackets();
     }
 
-    /// 注册身份id
-    public static Identifier id(String path) {return Identifier.of(MOD_ID, path);}
-
     /// 注册事件
     public void registerEvents() {
         //初始化身份(给予初始物品等)
@@ -301,6 +309,7 @@ public class KinsWathe implements ModInitializer {
                 try {
                     server.getCommandManager().executeWithPrefix(server.getCommandSource(), "effect clear @a");
                     server.getCommandManager().executeWithPrefix(server.getCommandSource(), "kill @e[type=item]");
+                    server.getCommandManager().executeWithPrefix(server.getCommandSource(), "kill @e[type=wathe:player_body]");
                     if (KinsWathe.NOELLESROLES_LOADED) {
                         server.getCommandManager().executeWithPrefix(server.getCommandSource(), "kill @e[type=noellesroles:cube]");
                     }
@@ -390,7 +399,6 @@ public class KinsWathe implements ModInitializer {
                     lightning.refreshPositionAfterTeleport(targetPlayer.getX(), targetPlayer.getY(), targetPlayer.getZ());
                     lightning.setCosmetic(true);
                     targetWorld.spawnEntity(lightning);
-                    targetWorld.playSound(null, targetPlayer.getX(), targetPlayer.getY(), targetPlayer.getZ(), SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.PLAYERS, 1.0f, 1.0f);
                     ability.cooldown = ConfigWorldComponent.KEY.get(player.getWorld()).JudgeAbilityCooldown * 20;
                     ability.sync();
                     if (KinsWathe.NOELLESROLES_LOADED) {
@@ -438,7 +446,7 @@ public class KinsWathe implements ModInitializer {
                             if (!RecallerPlayer.placed) {
                                 player.playSoundToPlayer(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.0f);
                             } else if (playerShop.balance >= 100) {
-                                world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f);
+                                player.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
                                 world.spawnParticles(ParticleTypes.PORTAL, player.getX(), player.getY(), player.getZ(), 75, 0.5, 1.5, 0.5, 0.1);
                             }
                         }

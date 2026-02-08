@@ -28,7 +28,7 @@
     "overrides": [
         {
             "predicate": {
-                "kinswathe:cooling": 1.0
+                "kinswathe:item_cooldown": 1.0
             },
             "model": "kinswathe:item/poison_injector_empty"
         }

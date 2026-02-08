@@ -10,13 +10,14 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import org.jetbrains.annotations.NotNull;
 
 public class SulfuricAcidBarrelItem extends Item {
 
     public SulfuricAcidBarrelItem(Settings settings) {super(settings);}
 
     @Override
-    public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand) {
+    public ActionResult useOnEntity(ItemStack stack, @NotNull PlayerEntity player, @NotNull LivingEntity entity, Hand hand) {
         if (player.getItemCooldownManager().isCoolingDown(this)) return ActionResult.FAIL;
         if (entity instanceof PlayerBodyEntity body) {
             body.discard();

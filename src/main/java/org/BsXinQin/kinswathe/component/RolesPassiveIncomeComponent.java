@@ -18,6 +18,7 @@ public class RolesPassiveIncomeComponent {
         roles.add(KinsWathe.JUDGE);
         roles.add(KinsWathe.CLEANER);
         roles.add(KinsWathe.DRUGMAKER);
+        roles.add(KinsWathe.KIDNAPPER);
         //添加NoellesRoles身份
         if (KinsWathe.NOELLESROLES_LOADED) {
             roles.add(Noellesroles.MIMIC);

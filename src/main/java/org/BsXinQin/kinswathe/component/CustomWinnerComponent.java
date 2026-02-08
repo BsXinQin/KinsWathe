@@ -9,11 +9,12 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.BsXinQin.kinswathe.KinsWathe;
 import org.jetbrains.annotations.NotNull;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
-import org.ladysnake.cca.api.v3.component.ComponentRegistryV3;
+import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.UUID;
 
 public class CustomWinnerComponent implements AutoSyncedComponent {
 
-    public static final ComponentKey<CustomWinnerComponent> KEY = ComponentRegistryV3.INSTANCE.getOrCreate(KinsWathe.id("custom"), CustomWinnerComponent.class);
+    public static final ComponentKey<CustomWinnerComponent> KEY = ComponentRegistry.getOrCreate(Identifier.of(KinsWathe.MOD_ID, "winner"), CustomWinnerComponent.class);
     private final World world;
 
     @Getter @Setter private String winningTextId = null;

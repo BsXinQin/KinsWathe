@@ -34,7 +34,7 @@
 
 - Switch player inventory to the last slot when game starts
 
-- Clear field drops and player effects when game ends
+- Clear field drops and player effects and bodies when game ends
 
 
 ## New Civillians
@@ -45,7 +45,8 @@
 
 - Cook
   - Has passive income
-  - Can purchase food in shop
+  - Can purchase Pan and food in shop
+  - Pan can stun target for 5 seconds
   - See people who eat through walls temporarily
 
 - Detective
@@ -77,13 +78,19 @@
   - Use ability to clear field drops
 
 - Drugmaker
-  - Can see poisoned players through walls
+  - Can see really poisoned players through walls
   - Get coins if someone was poisoned
   - Can not purchase Grenade and Psycho Mode in shop
   - Price of Poison Vial and Scorpion reduced by half
   - Can purchase Poison Injector and Blowgun in shop
   - Poison Injector can poison target (90 seconds cooldown)
   - Blowgun can shoot and poison target (90 seconds cooldown)
+
+- Kidnapper
+  - Can not purchase Revolver in shop
+  - Can buy Knockout Drug in shop
+  - Knockout Drug can daze target and let it foolow you for 15 seconds
+  - Players that be dazed can not see or voice chat
 
 
 ## New Neutrals

@@ -36,6 +36,12 @@
   "tip.kinswathe.drugmaker.posion_failed": "It seems to be immune to poisoning...",
   "tip.kinswathe.drugmaker.posioned": "Someone was poisoned",
 
+  "announcement.role.kinswathe.kidnapper": "Kidnapper",
+  "announcement.goals.kinswathe.kidnapper": "Kidnap passenger to a concealed corner.",
+  "tip.kinswathe.kidnapper.warning": "You are being kidnapping!",
+  "tip.kinswathe.kidnapper.timeleft": "Remaining kidnap time: %ss",
+  "tip.kinswathe.kidnapper.release": "Kidnap has ended",
+
   "announcement.role.kinswathe.licensed_villain": "Licensed Villain",
   "announcement.goals.kinswathe.licensed_villain": "You might still retain a shred of conscience...",
   "announcement.win.kinswathe.licensed_villain": "Licensed Villain Win!",
@@ -49,11 +55,14 @@
   "item.kinswathe.blowgun": "Blowgun",
   "item.kinswathe.blowgun.tooltip": "Point, right-click and shoot\nTarget that be shooted will be poisoned\n90 seconds cooldown",
 
+  "item.kinswathe.knockout_drug": "Knockout Drug",
+  "item.kinswathe.knockout_drug.tooltip": "Use on a player to daze it for 20 seconds\nThe affected player will follow you\nUse sneaking key to release it\nSingle use, 1 minute cooldown",
+
   "item.kinswathe.medical_kit": "Medical Kit",
   "item.kinswathe.medical_kit.tooltip": "Use on a player to remove poison\n1 minute cooldown",
 
   "item.kinswathe.pan": "Pan",
-  "item.kinswathe.pan.tooltip": "Attack to knock back / push a player\n15 seconds cooldown",
+  "item.kinswathe.pan.tooltip": "Right-click, hold for a second and stun target for 5 seconds\n45 seconds cooldown",
 
   "item.kinswathe.poison_injector": "Poison Injector",
   "item.kinswathe.poison_injector.tooltip": "Use on a player to poison it\nIf target have been poisoned, directly cause death\n90 seconds cooldown",

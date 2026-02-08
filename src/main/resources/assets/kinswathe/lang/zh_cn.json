@@ -36,6 +36,12 @@
   "tip.kinswathe.drugmaker.posion_failed": "它似乎无法被中毒...",
   "tip.kinswathe.drugmaker.posioned": "有人中毒了",
 
+  "announcement.role.kinswathe.kidnapper": "绑匪",
+  "announcement.goals.kinswathe.kidnapper": "将乘客绑架到隐蔽的角落。",
+  "tip.kinswathe.kidnapper.warning": "你正在被绑匪劫持！",
+  "tip.kinswathe.kidnapper.timeleft": "劫持剩余时间：%s 秒",
+  "tip.kinswathe.kidnapper.release": "劫持已结束",
+
   "announcement.role.kinswathe.licensed_villain": "执照恶棍",
   "announcement.goals.kinswathe.licensed_villain": "你或许还尚存有一丝良知...",
   "announcement.win.kinswathe.licensed_villain": "执照恶棍胜利！",
@@ -49,11 +55,14 @@
   "item.kinswathe.blowgun": "吹矢",
   "item.kinswathe.blowgun.tooltip": "瞄准、右键点击并射击\n被射中的目标将会中毒\n冷却 90 秒",
 
+  "item.kinswathe.knockout_drug": "迷药",
+  "item.kinswathe.knockout_drug.tooltip": "用于玩家，可迷晕其 20 秒\n被作用的玩家将会一直跟随你\n按下潜行键可以释放玩家\n一次性物品，冷却 60 秒",
+
   "item.kinswathe.medical_kit": "医疗箱",
   "item.kinswathe.medical_kit.tooltip": "用于玩家，可移除其中毒效果\n冷却 1 分钟",
 
   "item.kinswathe.pan": "平底锅",
-  "item.kinswathe.pan.tooltip": "攻击可击退玩家\n冷却 15 秒",
+  "item.kinswathe.pan.tooltip": "右键蓄力一秒，靠近目标即可击晕 5 秒\n冷却 45 秒",
 
   "item.kinswathe.poison_injector": "毒液注射器",
   "item.kinswathe.poison_injector.tooltip": "用于玩家，使其中毒\n如果目标已经中毒，则直接致死\n冷却 90 秒",

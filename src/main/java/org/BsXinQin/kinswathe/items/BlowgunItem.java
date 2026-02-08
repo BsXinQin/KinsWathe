@@ -10,7 +10,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
@@ -19,6 +18,7 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 import org.BsXinQin.kinswathe.KinsWathe;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
@@ -28,10 +28,10 @@ public class BlowgunItem extends Item {
     private static final Random random = new Random();
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+    public TypedActionResult<ItemStack> use(@NotNull World world, @NotNull PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
         if (player.getItemCooldownManager().isCoolingDown(this)) return TypedActionResult.fail(stack);
-        world.playSound(null, player.getX(), player.getEyeY(), player.getZ(), SoundEvents.ENTITY_PUFFER_FISH_BLOW_OUT, SoundCategory.PLAYERS, 0.5f, 1.5f);
+        player.playSound(SoundEvents.ENTITY_PUFFER_FISH_BLOW_OUT, 0.5f, 1.5f);
         HitResult targetHitResult = ProjectileUtil.getCollision(player, entity -> entity instanceof PlayerEntity target && target != player && GameFunctions.isPlayerAliveAndSurvival(target), 15f);
         PlayerEntity targetPlayer = null;
         if (targetHitResult instanceof EntityHitResult entityHitResult) {

@@ -5,18 +5,16 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import org.BsXinQin.kinswathe.items.BlowgunItem;
-import org.BsXinQin.kinswathe.items.MedicalKitItem;
-import org.BsXinQin.kinswathe.items.PoisonInjectorItem;
-import org.BsXinQin.kinswathe.items.SulfuricAcidBarrelItem;
+import org.BsXinQin.kinswathe.items.*;
 
 public class KinsWatheItems {
 
     /// 设置物品冷却
     public static void setItemCooldown() {
         GameConstants.ITEM_COOLDOWNS.put(BLOWGUN, GameConstants.getInTicks(1,30));
+        GameConstants.ITEM_COOLDOWNS.put(KNOCKOUT_DRUG, GameConstants.getInTicks(0,60));
         GameConstants.ITEM_COOLDOWNS.put(MEDICAL_KIT, GameConstants.getInTicks(1,0));
-        GameConstants.ITEM_COOLDOWNS.put(PAN, GameConstants.getInTicks(0,15));
+        GameConstants.ITEM_COOLDOWNS.put(PAN, GameConstants.getInTicks(0,45));
         GameConstants.ITEM_COOLDOWNS.put(POISON_INJECTOR, GameConstants.getInTicks(1,30));
         GameConstants.ITEM_COOLDOWNS.put(SULFURIC_ACID_BARREL, GameConstants.getInTicks(1,0));
     }
@@ -27,6 +25,11 @@ public class KinsWatheItems {
             new BlowgunItem(new Item.Settings().maxCount(1)),
             "blowgun"
     );
+    //迷药
+    public static final Item KNOCKOUT_DRUG = registerItem(
+            new KnockoutDrugItem(new Item.Settings().maxCount(1)),
+            "knockout_drug"
+    );
     //医疗箱
     public static final Item MEDICAL_KIT = registerItem(
             new MedicalKitItem(new Item.Settings().maxCount(1)),
@@ -34,7 +37,7 @@ public class KinsWatheItems {
     );
     //平底锅
     public static final Item PAN = registerItem(
-            new MedicalKitItem(new Item.Settings().maxCount(1)),
+            new PanItem(new Item.Settings().maxCount(1)),
             "pan"
     );
     //毒液注射器

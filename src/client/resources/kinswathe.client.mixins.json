@@ -7,7 +7,7 @@
     "gui.StaminaBarMixin",
     "host.CustomWinnerAnnouncementMixin",
     "host.CustomWinnerTextMixin",
-    "host.InstinctMixin",
+    "host.InstinctMainMixin",
     "host.KeyBindingMixin",
     "modifiers.violator.ViolatorKeyBindingMixin",
     "roles.bellringer.BellringerHudMixin",
@@ -16,6 +16,8 @@
     "roles.detective.DetectiveHudMixin",
     "roles.drugmaker.DrugmakerShopMixin",
     "roles.judge.JudgeHudMixin",
+    "roles.kidnapper.KidnapperControlledMixin",
+    "roles.kidnapper.KidnapperShopMixin",
     "roles.licensed_villain.LicensedVillainShopMixin",
     "roles.robot.RobotHudMixin"
   ],
@@ -28,9 +30,15 @@
   "mixins": [
     "gui.IncomeIconMixin",
     "host.UnlockDistanceMixin",
+    "noellesroles.roles.conductor.ConductorInstinctMixin",
+    "noellesroles.roles.coroner.CoronerInstinctMixin",
+    "roles.cook.CookInstinctMixin",
     "roles.detective.DetectiveTargetHudMixin",
+    "roles.drugmaker.DrugmakerInstinctMixin",
     "roles.judge.JudgeTargetHudMixin",
+    "roles.licensed_villain.LicensedVillainInstinctMixin",
     "roles.licensed_villain.LicensedVillainMoodMixin",
+    "roles.physician.PhysicianInstinctMixin",
     "roles.robot.RobotMoodMixin"
   ]
 }

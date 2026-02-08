@@ -25,28 +25,26 @@ public abstract class BellringerHudMixin {
     @Shadow public abstract TextRenderer getTextRenderer();
 
     @Inject(method = "render", at = @At("TAIL"))
-    public void BellringerHud(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player == null) return;
-        if (WatheClient.isPlayerAliveAndInSurvival()) {
-            GameWorldComponent gameWorld = GameWorldComponent.KEY.get(client.player.getWorld());
-            AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(client.player);
-            PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(client.player);
-            if (gameWorld.isRole(client.player, KinsWathe.BELLRINGER)) {
-                int drawY = context.getScaledWindowHeight();
+    public void getBellringerAbilityHud(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+        if (MinecraftClient.getInstance().player == null) return;
 
-                Text line = Text.translatable("tip.kinswathe.ability.can_use", KinsWatheClient.abilityBind.getBoundKeyLocalizedText());
+        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
+        AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(MinecraftClient.getInstance().player);
+        PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(MinecraftClient.getInstance().player);
+        if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWathe.BELLRINGER) && WatheClient.isPlayerAliveAndInSurvival()) {
+            int drawY = context.getScaledWindowHeight();
 
-                if (playerShop.balance < ConfigWorldComponent.KEY.get(client.player.getWorld()).BellringerAbilityPrice) {
-                    line = Text.translatable("tip.kinswathe.ability.not_enough_money", ConfigWorldComponent.KEY.get(client.player.getWorld()).BellringerAbilityPrice);
-                }
-                if (ability.cooldown > 0) {
-                    line = Text.translatable("tip.kinswathe.cooldown", ability.cooldown / 20);
-                }
+            Text line = Text.translatable("tip.kinswathe.ability.can_use", KinsWatheClient.abilityBind.getBoundKeyLocalizedText());
 
-                drawY -= getTextRenderer().getWrappedLinesHeight(line, 999999);
-                context.drawTextWithShadow(getTextRenderer(), line, context.getScaledWindowWidth() - getTextRenderer().getWidth(line), drawY, KinsWathe.BELLRINGER.color());
+            if (playerShop.balance < ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).BellringerAbilityPrice) {
+                line = Text.translatable("tip.kinswathe.ability.not_enough_money", ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).BellringerAbilityPrice);
             }
+            if (ability.cooldown > 0) {
+                line = Text.translatable("tip.kinswathe.cooldown", ability.cooldown / 20);
+            }
+
+            drawY -= getTextRenderer().getWrappedLinesHeight(line, 999999);
+            context.drawTextWithShadow(getTextRenderer(), line, context.getScaledWindowWidth() - getTextRenderer().getWidth(line), drawY, KinsWathe.BELLRINGER.color());
         }
     }
 }

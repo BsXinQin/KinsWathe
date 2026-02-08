@@ -21,14 +21,18 @@
     ],
     "cardinal-components": [
       "org.BsXinQin.kinswathe.KinsWatheComponents"
+    ],
+    "voicechat": [
+      "org.BsXinQin.kinswathe.KinsWatheVoiceChatPlugin"
     ]
   },
   "custom": {
     "cardinal-components": [
       "kinswathe:ability",
       "kinswathe:config",
-      "kinswathe:custom",
-      "kinswathe:cook"
+      "kinswathe:winner",
+      "kinswathe:cook",
+      "kinswathe:kidnapper"
     ]
   },
   "mixins": [
