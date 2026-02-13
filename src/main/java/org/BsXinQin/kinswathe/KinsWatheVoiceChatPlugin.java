@@ -20,14 +20,12 @@ public class KinsWatheVoiceChatPlugin implements VoicechatPlugin {
 
     public void onMicrophonePacket(MicrophonePacketEvent ci) {
         if (ci.getSenderConnection() == null) return;
-        try {
-            Object playerObject = ci.getSenderConnection().getPlayer().getPlayer();
-            if (playerObject instanceof ServerPlayerEntity serverPlayer) {
-                KidnapperComponent targetControlled = KidnapperComponent.KEY.get(serverPlayer);
-                if (targetControlled.controlTicks > 0) {
-                    ci.cancel();
-                }
+        Object playerObject = ci.getSenderConnection().getPlayer().getPlayer();
+        if (playerObject instanceof ServerPlayerEntity serverPlayer) {
+            KidnapperComponent targetControlled = KidnapperComponent.KEY.get(serverPlayer);
+            if (targetControlled.controlTicks > 0) {
+                ci.cancel();
             }
-        } catch (Exception ignored) {}
+        }
     }
 }

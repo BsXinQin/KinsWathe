@@ -1,5 +1,5 @@
 {
-	"parent": "wathe:item/knife",
+	"parent": "item/generated",
 	"textures": {
 		"layer0": "kinswathe:item/pan"
 	},

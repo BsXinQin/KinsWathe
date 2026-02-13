@@ -13,6 +13,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.BsXinQin.kinswathe.KinsWathe;
 import org.BsXinQin.kinswathe.KinsWatheItems;
+import org.BsXinQin.kinswathe.KinsWatheRoles;
 import org.BsXinQin.kinswathe.client.component.ExtraModelComponent;
 import org.BsXinQin.kinswathe.client.component.ItemTipComponent;
 import org.BsXinQin.kinswathe.packet.AbilityC2SPacket;
@@ -43,11 +44,12 @@ public class KinsWatheClient implements ClientModInitializer {
                     GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
                     boolean sendAbilityPacket = false;
                     Role[] rolesWithAbility = new Role[] {
-                            KinsWathe.BELLRINGER,
-                            KinsWathe.DETECTIVE,
-                            KinsWathe.JUDGE,
-                            KinsWathe.ROBOT,
-                            KinsWathe.CLEANER
+                            KinsWatheRoles.BELLRINGER,
+                            KinsWatheRoles.DETECTIVE,
+                            KinsWatheRoles.HUNTER,
+                            KinsWatheRoles.JUDGE,
+                            KinsWatheRoles.ROBOT,
+                            KinsWatheRoles.CLEANER
                     };
                     for (Role role : rolesWithAbility) {
                         if (gameWorld.isRole(MinecraftClient.getInstance().player, role)) sendAbilityPacket = true;
@@ -62,9 +64,11 @@ public class KinsWatheClient implements ClientModInitializer {
         ItemTooltipCallback.EVENT.register(((itemStack, tooltipContext, tooltipType, list) -> {
             //添加KinsWathe物品提示
             ItemTipComponent.addItemtip(KinsWatheItems.BLOWGUN, itemStack, list);
+            ItemTipComponent.addItemtip(KinsWatheItems.HUNTING_KNIFE, itemStack, list);
             ItemTipComponent.addItemtip(KinsWatheItems.KNOCKOUT_DRUG, itemStack, list);
             ItemTipComponent.addItemtip(KinsWatheItems.MEDICAL_KIT, itemStack, list);
             ItemTipComponent.addItemtip(KinsWatheItems.PAN, itemStack, list);
+            ItemTipComponent.addItemtip(KinsWatheItems.PILL, itemStack, list);
             ItemTipComponent.addItemtip(KinsWatheItems.POISON_INJECTOR, itemStack, list);
             ItemTipComponent.addItemtip(KinsWatheItems.SULFURIC_ACID_BARREL, itemStack, list);
             //添加NoellreRoles物品冷却提示

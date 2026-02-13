@@ -5,9 +5,9 @@ import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.cca.PlayerMoodComponent;
 import dev.doctor4t.wathe.cca.PlayerShopComponent;
 import net.minecraft.entity.player.PlayerEntity;
-import org.BsXinQin.kinswathe.KinsWathe;
+import org.BsXinQin.kinswathe.KinsWatheRoles;
 import org.agmas.harpymodloader.component.WorldModifierComponent;
-import org.agmas.noellesroles.Noellesroles;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,23 +19,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class TaskmasterGiveCoinsMixin {
 
     @Shadow public abstract float getMood();
-    @Shadow @Final private PlayerEntity player;
+    @Shadow @Final @NotNull private PlayerEntity player;
 
     @Inject(method = "setMood", at = @At("HEAD"))
-    void TaskmasterGiveCoins(float mood, CallbackInfo ci) {
-        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
-        PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(player);
-        Role role = gameWorld.getRole((PlayerEntity) player);
-        if (mood > getMood()) {
-            if (gameWorld.getRole(player) != null) {
-                WorldModifierComponent modifier = WorldModifierComponent.KEY.get(player.getWorld());
-                if (modifier.isModifier(player, KinsWathe.TASKMASTER)) {
-                    if (!gameWorld.isInnocent(player) &&
-                        !KinsWathe.NEUTRAL_ROLES.contains(role) &&
-                        !(KinsWathe.NOELLESROLES_LOADED && Noellesroles.KILLER_SIDED_NEUTRALS.contains(role))) {
-                        playerShop.addToBalance(50);} else{
-                        playerShop.addToBalance(25);
-                    }
+    void giveTaskmasterCoins(float mood, CallbackInfo ci) {
+        WorldModifierComponent modifier = WorldModifierComponent.KEY.get(this.player.getWorld());
+        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
+        PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(this.player);
+        Role role = gameWorld.getRole(this.player);
+        if (role != null && mood > getMood()) {
+            if (modifier.isModifier(this.player, KinsWatheRoles.TASKMASTER)) {
+                if (role.canUseKiller()) {
+                    playerShop.balance += 50;
+                    playerShop.sync();
+                } else {
+                    playerShop.balance += 25;
+                    playerShop.sync();
                 }
             }
         }

@@ -6,6 +6,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import org.BsXinQin.kinswathe.component.CustomWinnerComponent;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,10 +17,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class CustomWinnerAnnouncementMixin {
 
     @Inject(method = "getEndText", at = @At("HEAD"), cancellable = true)
-    private void CustomWinnerAnnouncement(GameFunctions.WinStatus status, Text winner, CallbackInfoReturnable<Text> ci) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (client.world == null) return;
-        var customWinner = CustomWinnerComponent.KEY.get(client.world);
+    private void customWinnerAnnouncement(GameFunctions.WinStatus status, Text winner, @NotNull CallbackInfoReturnable<Text> cir) {
+        if (MinecraftClient.getInstance().world == null) return;
+        var customWinner = CustomWinnerComponent.KEY.get(MinecraftClient.getInstance().world);
         if (customWinner == null || !customWinner.hasCustomWinner()) return;
         String winningTextId = customWinner.getWinningTextId();
         int color = customWinner.getColor();
@@ -27,12 +27,12 @@ public class CustomWinnerAnnouncementMixin {
         winningTextId = cleanWinningTextId(winningTextId);
         MutableText customText = Text.translatable("announcement.win.kinswathe." + winningTextId);
         if (color != 0x000000) customText = customText.withColor(color);
-        ci.setReturnValue(customText);
-        ci.cancel();
+        cir.setReturnValue(customText);
+        cir.cancel();
     }
 
     @Unique
-    private String cleanWinningTextId(String textId) {
+    private String cleanWinningTextId(@NotNull String textId) {
         if (textId.contains(":")) {
             String[] parts = textId.split(":");
             if (parts.length >= 2) {

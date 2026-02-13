@@ -4,8 +4,14 @@
   "tip.kinswathe.ability.can_use": "按下 %s 键发动能力",
   "tip.kinswathe.ability.not_enough_money": "需要 %s§f\uE781§r 发动能力",
 
+  "tip.kinswathe.game_safe_time": "剩余安全时间：%s 秒",
+  "tip.kinswathe.game_no_safe_time": "安全时间结束！",
+
   "announcement.role.kinswathe.bellringer": "敲钟人",
   "announcement.goals.kinswathe.bellringer": "查看时间，并修改时间。",
+
+  "announcement.role.kinswathe.cleaner": "清道夫",
+  "announcement.goals.kinswathe.cleaner": "扫除一切障碍！",
 
   "announcement.role.kinswathe.cook": "厨师",
   "announcement.goals.kinswathe.cook": "透过墙壁看见吃过东西的玩家！",
@@ -16,30 +22,24 @@
   "tip.kinswathe.detective.notinnocent": "%s 不是平民",
   "hud.kinswathe.detective.target": "按下 %s 键调查该目标身份",
 
+  "announcement.role.kinswathe.drugmaker": "制毒师",
+  "announcement.goals.kinswathe.drugmaker": "用毒药征服所有人！",
+  "tip.kinswathe.drugmaker.poison_failed": "它似乎无法中毒...",
+  "tip.kinswathe.drugmaker.poisoned": "有人中毒了",
+
+  "announcement.role.kinswathe.hunter": "追猎者",
+  "announcement.goals.kinswathe.hunter": "尽情享受你的猎物！",
+
   "announcement.role.kinswathe.judge": "大法官",
   "announcement.goals.kinswathe.judge": "公平公正!",
   "tip.kinswathe.judge.notification": "你正在接受审判",
   "hud.kinswathe.judge.target": "按下 %s 键审判该目标",
 
-  "announcement.role.kinswathe.physician": "医师",
-  "announcement.goals.kinswathe.physician": "透过墙壁看见中毒的玩家，然后治疗他们",
-  "tip.kinswathe.physician.medical_kit": "你感觉好多了",
-
-  "announcement.role.kinswathe.robot": "机器人",
-  "announcement.goals.kinswathe.robot": "毫无感情可言的机器。",
-
-  "announcement.role.kinswathe.cleaner": "清道夫",
-  "announcement.goals.kinswathe.cleaner": "扫除一切障碍！",
-
-  "announcement.role.kinswathe.drugmaker": "制毒师",
-  "announcement.goals.kinswathe.drugmaker": "用毒药征服所有人！",
-  "tip.kinswathe.drugmaker.posion_failed": "它似乎无法被中毒...",
-  "tip.kinswathe.drugmaker.posioned": "有人中毒了",
-
   "announcement.role.kinswathe.kidnapper": "绑匪",
   "announcement.goals.kinswathe.kidnapper": "将乘客绑架到隐蔽的角落。",
+  "tip.kinswathe.kidnapper.daze_failed": "它似乎无法被迷晕...",
   "tip.kinswathe.kidnapper.warning": "你正在被绑匪劫持！",
-  "tip.kinswathe.kidnapper.timeleft": "劫持剩余时间：%s 秒",
+  "tip.kinswathe.kidnapper.timeleft": "剩余劫持时间：%s 秒",
   "tip.kinswathe.kidnapper.release": "劫持已结束",
 
   "announcement.role.kinswathe.licensed_villain": "执照恶棍",
@@ -48,15 +48,26 @@
   "tip.kinswathe.licensed_villain.weapon": "执照恶棍已经获取了武器！",
   "game.win.kinswathe.licensed_villain": "执照恶棍终结了所有人的生命！",
 
+  "announcement.role.kinswathe.physician": "医师",
+  "announcement.goals.kinswathe.physician": "透过墙壁看见中毒的玩家，然后治疗他们",
+  "tip.kinswathe.physician.medical_kit": "你感觉好多了",
+  "tip.kinswathe.physician.poisoned": "有人似乎中毒了",
+
+  "announcement.role.kinswathe.robot": "机器人",
+  "announcement.goals.kinswathe.robot": "毫无感情可言的机器。",
+
   "announcement.modifier.kinswathe.magnate": "富豪",
   "announcement.modifier.kinswathe.taskmaster": "任务大师",
   "announcement.modifier.kinswathe.violator": "违禁者",
 
   "item.kinswathe.blowgun": "吹矢",
-  "item.kinswathe.blowgun.tooltip": "瞄准、右键点击并射击\n被射中的目标将会中毒\n冷却 90 秒",
+  "item.kinswathe.blowgun.tooltip": "瞄准、右键点击并射击\n被射中的目标将会中毒\n冷却 1 分钟",
+
+  "item.kinswathe.hunting_knife": "猎刀",
+  "item.kinswathe.hunting_knife.tooltip": "右键蓄力一秒，靠近目标即可发动暗杀\n如果停止蓄力，冷却四倍蓄力时间\n击杀后冷却 45 秒\n攻击可击退玩家（无冷却）",
 
   "item.kinswathe.knockout_drug": "迷药",
-  "item.kinswathe.knockout_drug.tooltip": "用于玩家，可迷晕其 20 秒\n被作用的玩家将会一直跟随你\n按下潜行键可以释放玩家\n一次性物品，冷却 60 秒",
+  "item.kinswathe.knockout_drug.tooltip": "用于玩家，可迷晕其 20 秒\n被作用的玩家将会一直跟随你\n按下潜行键可以释放玩家\n一次性物品，冷却 1 分钟",
 
   "item.kinswathe.medical_kit": "医疗箱",
   "item.kinswathe.medical_kit.tooltip": "用于玩家，可移除其中毒效果\n冷却 1 分钟",
@@ -64,8 +75,11 @@
   "item.kinswathe.pan": "平底锅",
   "item.kinswathe.pan.tooltip": "右键蓄力一秒，靠近目标即可击晕 5 秒\n冷却 45 秒",
 
+  "item.kinswathe.pill": "药丸",
+  "item.kinswathe.pill.tooltip": "右键食用\n让玩家额外承受一次伤害\n一次性物品，冷却 2 分钟",
+
   "item.kinswathe.poison_injector": "毒液注射器",
-  "item.kinswathe.poison_injector.tooltip": "用于玩家，使其中毒\n如果目标已经中毒，则直接致死\n冷却 90 秒",
+  "item.kinswathe.poison_injector.tooltip": "用于玩家，使其中毒\n如果目标已经中毒，则直接致死\n冷却 1 分钟",
 
   "item.kinswathe.sulfuric_acid_barrel": "硫酸桶",
   "item.kinswathe.sulfuric_acid_barrel.tooltip": "用于尸体，可将其溶解移除\n冷却 1 分钟",

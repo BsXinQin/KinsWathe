@@ -4,8 +4,14 @@
   "tip.kinswathe.ability.can_use": "Use %s to activate ability",
   "tip.kinswathe.ability.not_enough_money": "%s§f\uE781§r required to activate ability",
 
+  "tip.kinswathe.game_safe_time": "Remaining safe time: %ss",
+  "tip.kinswathe.game_no_safe_time": "Safe time has been exhausted!",
+
   "announcement.role.kinswathe.bellringer": "Bellringer",
   "announcement.goals.kinswathe.bellringer": "Check time, and modify time.",
+
+  "announcement.role.kinswathe.cleaner": "Cleaner",
+  "announcement.goals.kinswathe.cleaner": "Remove all obstacles!",
 
   "announcement.role.kinswathe.cook": "Cook",
   "announcement.goals.kinswathe.cook": "See players that eat through walls!",
@@ -16,28 +22,22 @@
   "tip.kinswathe.detective.notinnocent": "%s is not innocent",
   "hud.kinswathe.detective.target": "Use %s to investigate",
 
+  "announcement.role.kinswathe.drugmaker": "Drugmaker",
+  "announcement.goals.kinswathe.drugmaker": "Conquer everyone with poison!",
+  "tip.kinswathe.drugmaker.poison_failed": "It seems to be immune to poisoning...",
+  "tip.kinswathe.drugmaker.poisoned": "Someone was poisoned",
+
+  "announcement.role.kinswathe.hunter": "Hunter",
+  "announcement.goals.kinswathe.hunter": "Enjoy your prey to the fullest!",
+
   "announcement.role.kinswathe.judge": "Judge",
   "announcement.goals.kinswathe.judge": "Fair and just!",
   "tip.kinswathe.judge.notification": "You are undergoing justice",
   "hud.kinswathe.judge.target": "Use %s to judge",
 
-  "announcement.role.kinswathe.physician": "Physician",
-  "announcement.goals.kinswathe.physician": "See poisoned players through walls and treat them.",
-  "tip.kinswathe.physician.medical_kit": "You feel much better now",
-
-  "announcement.role.kinswathe.robot": "Robot",
-  "announcement.goals.kinswathe.robot": "A machine devoid of any emotion.",
-
-  "announcement.role.kinswathe.cleaner": "Cleaner",
-  "announcement.goals.kinswathe.cleaner": "Remove all obstacles!",
-
-  "announcement.role.kinswathe.drugmaker": "Drugmaker",
-  "announcement.goals.kinswathe.drugmaker": "Conquer everyone with poison!",
-  "tip.kinswathe.drugmaker.posion_failed": "It seems to be immune to poisoning...",
-  "tip.kinswathe.drugmaker.posioned": "Someone was poisoned",
-
   "announcement.role.kinswathe.kidnapper": "Kidnapper",
   "announcement.goals.kinswathe.kidnapper": "Kidnap passenger to a concealed corner.",
+  "tip.kinswathe.kidnapper.daze_failed": "It seems to be immune to dazing...",
   "tip.kinswathe.kidnapper.warning": "You are being kidnapping!",
   "tip.kinswathe.kidnapper.timeleft": "Remaining kidnap time: %ss",
   "tip.kinswathe.kidnapper.release": "Kidnap has ended",
@@ -48,12 +48,23 @@
   "tip.kinswathe.licensed_villain.weapon": "Licensed Villain has obtained weapon!",
   "game.win.kinswathe.licensed_villain": "The licensed villain ended everyone's life!",
 
+  "announcement.role.kinswathe.physician": "Physician",
+  "announcement.goals.kinswathe.physician": "See poisoned players through walls and treat them.",
+  "tip.kinswathe.physician.medical_kit": "You feel much better now",
+  "tip.kinswathe.physician.poisoned": "Someone seems to be poisoned",
+
+  "announcement.role.kinswathe.robot": "Robot",
+  "announcement.goals.kinswathe.robot": "A machine devoid of any emotion.",
+
   "announcement.modifier.kinswathe.magnate": "Magnate",
   "announcement.modifier.kinswathe.taskmaster": "Taskmaster",
   "announcement.modifier.kinswathe.violator": "Violator",
 
   "item.kinswathe.blowgun": "Blowgun",
-  "item.kinswathe.blowgun.tooltip": "Point, right-click and shoot\nTarget that be shooted will be poisoned\n90 seconds cooldown",
+  "item.kinswathe.blowgun.tooltip": "Point, right-click and shoot\nTarget that be shooted will be poisoned\n1 minute cooldown",
+
+  "item.kinswathe.hunting_knife": "Hunting Knife",
+  "item.kinswathe.hunting_knife.tooltip": "Right-click, hold for a second and get close to your victim\nIf stop holding, four times holding-time cooldown\nAfter a kill, cannot be used for 45 seconds\nAttack to knock back / push a player (no cooldown)",
 
   "item.kinswathe.knockout_drug": "Knockout Drug",
   "item.kinswathe.knockout_drug.tooltip": "Use on a player to daze it for 20 seconds\nThe affected player will follow you\nUse sneaking key to release it\nSingle use, 1 minute cooldown",
@@ -64,8 +75,11 @@
   "item.kinswathe.pan": "Pan",
   "item.kinswathe.pan.tooltip": "Right-click, hold for a second and stun target for 5 seconds\n45 seconds cooldown",
 
+  "item.kinswathe.pill": "Pill",
+  "item.kinswathe.pill.tooltip": "Right-click to eat\nProtects player one extra hit of life\nSingle use, 2 minute cooldown",
+
   "item.kinswathe.poison_injector": "Poison Injector",
-  "item.kinswathe.poison_injector.tooltip": "Use on a player to poison it\nIf target have been poisoned, directly cause death\n90 seconds cooldown",
+  "item.kinswathe.poison_injector.tooltip": "Use on a player to poison it\nIf target have been poisoned, directly cause death\n1 minute cooldown",
 
   "item.kinswathe.sulfuric_acid_barrel": "Sulfuric Acid Barrel",
   "item.kinswathe.sulfuric_acid_barrel.tooltip": "Use on a dead body to dissolve it\n1 minute cooldown",

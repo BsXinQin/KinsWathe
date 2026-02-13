@@ -4,11 +4,13 @@ import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.cca.PlayerShopComponent;
 import dev.doctor4t.wathe.client.WatheClient;
 import dev.doctor4t.wathe.client.gui.StoreRenderer;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.math.MathHelper;
-import org.BsXinQin.kinswathe.KinsWathe;
+import org.BsXinQin.kinswathe.KinsWatheRoles;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,14 +25,15 @@ public abstract class IncomeIconMixin {
 
     /// 添加收入图标
     @Inject(method = "renderHud", at = @At("HEAD"))
-    private static void IncomeIcon(TextRenderer renderer, ClientPlayerEntity player, DrawContext context, float delta, CallbackInfo ci) {
-        if (player == null) return;
+    private static void incomeIcon(@NotNull TextRenderer renderer, @NotNull ClientPlayerEntity player, @NotNull DrawContext context, float delta, @NotNull CallbackInfo ci) {
+        if (MinecraftClient.getInstance().player == null) return;
         if (WatheClient.isPlayerAliveAndInSurvival()) {
-            if (GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWathe.BELLRINGER) ||
-                GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWathe.COOK) ||
-                GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWathe.DETECTIVE) ||
-                GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWathe.JUDGE) ||
-                GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWathe.LICENSED_VILLAIN)) {
+            if (GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.BELLRINGER) ||
+                GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.COOK) ||
+                GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.DETECTIVE) ||
+                GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.JUDGE) ||
+                GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.LICENSED_VILLAIN) ||
+                GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.PHYSICIAN)) {
                 int balance = PlayerShopComponent.KEY.get(player).balance;
                 if (view.getTarget() != (float) balance) {
                     offsetDelta = (float) balance > view.getTarget() ? 0.6F : -0.6F;

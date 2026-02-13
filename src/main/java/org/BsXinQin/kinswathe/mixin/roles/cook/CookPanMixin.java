@@ -7,16 +7,17 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import org.BsXinQin.kinswathe.roles.cook.CookComponent;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(value = PlayerEntity.class, priority = 5000)
 public abstract class CookPanMixin extends LivingEntity {
 
-    protected CookPanMixin(EntityType<? extends LivingEntity> entityType, World world) {super(entityType, world);}
+    protected CookPanMixin(@NotNull EntityType<? extends @NotNull LivingEntity> entityType, @NotNull World world) {super(entityType, world);}
 
     @ModifyReturnValue(method = "getMovementSpeed", at = @At("RETURN"))
-    public float PanStun(float original) {
+    public float setPanStun(float original) {
         PlayerEntity player = (PlayerEntity) (Object) this;
         CookComponent playerPanStun = CookComponent.KEY.get(player);
         if (GameFunctions.isPlayerAliveAndSurvival(player) && playerPanStun.panStunTicks > 0) {

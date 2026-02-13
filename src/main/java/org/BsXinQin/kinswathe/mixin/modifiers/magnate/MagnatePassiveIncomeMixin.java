@@ -6,8 +6,9 @@ import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.game.gamemode.MurderGameMode;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import org.BsXinQin.kinswathe.KinsWathe;
+import org.BsXinQin.kinswathe.KinsWatheRoles;
 import org.agmas.harpymodloader.component.WorldModifierComponent;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,16 +18,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MagnatePassiveIncomeMixin {
 
     @Inject(method = "tickServerGameLoop", at = @At("TAIL"))
-    public void MagnatePassiveIncome(ServerWorld serverWorld, GameWorldComponent gameWorld, CallbackInfo ci) {
-        if (gameWorld.getGameStatus() != GameWorldComponent.GameStatus.ACTIVE) {return;}
+    public void setMagnatePassiveIncome(@NotNull ServerWorld serverWorld, @NotNull GameWorldComponent gameWorld, CallbackInfo ci) {
+        if (!gameWorld.isRunning()) return;
         for (ServerPlayerEntity player : serverWorld.getPlayers()) {
             WorldModifierComponent modifier = WorldModifierComponent.KEY.get(serverWorld);
-            if (modifier.isModifier(player, KinsWathe.MAGNATE)) {
-                PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(player);
-                Integer passiveIncome = GameConstants.PASSIVE_MONEY_TICKER.apply(serverWorld.getTime());
-                if (passiveIncome > 0) {
-                    playerShop.addToBalance(passiveIncome);
-                }
+            PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(player);
+            if (modifier.isModifier(player, KinsWatheRoles.MAGNATE)) {
+                playerShop.balance += GameConstants.PASSIVE_MONEY_TICKER.apply(serverWorld.getTime());
+                playerShop.sync();
             }
         }
     }

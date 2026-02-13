@@ -9,8 +9,10 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Items;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.text.Text;
-import org.BsXinQin.kinswathe.KinsWathe;
 import org.BsXinQin.kinswathe.KinsWatheItems;
+import org.BsXinQin.kinswathe.KinsWatheRoles;
+import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -24,15 +26,15 @@ import java.util.List;
 @Mixin(LimitedInventoryScreen.class)
 public abstract class CookShopMixin extends LimitedHandledScreen<PlayerScreenHandler> {
 
-    public CookShopMixin(PlayerScreenHandler handler, PlayerInventory inventory, Text title) {super(handler, inventory, title);}
-    @Shadow @Final public ClientPlayerEntity player;
+    @Shadow @Final @NotNull public ClientPlayerEntity player;
+    public CookShopMixin(@NotNull PlayerScreenHandler handler, @NotNull PlayerInventory inventory, @NotNull Text title) {super(handler, inventory, title);}
 
     @Inject(method = "init", at = @At("HEAD"))
-    void CookShop(CallbackInfo ci) {
+    void getShop(CallbackInfo ci) {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
-        if (gameWorld.isRole(this.player, KinsWathe.COOK)) {
+        if (gameWorld.isRole(this.player, KinsWatheRoles.COOK)) {
             List<ShopEntry> entries = new ArrayList<>();
-            entries.add(new ShopEntry(KinsWatheItems.PAN.getDefaultStack(), 250, ShopEntry.Type.WEAPON));
+            entries.add(new ShopEntry(KinsWatheItems.PAN.getDefaultStack(), ConfigWorldComponent.KEY.get(this.player.getWorld()).CookPanPrice, ShopEntry.Type.WEAPON));
             entries.add(new ShopEntry(Items.COOKED_BEEF.getDefaultStack(), 75, ShopEntry.Type.POISON));
             entries.add(new ShopEntry(Items.COOKED_CHICKEN.getDefaultStack(), 75, ShopEntry.Type.POISON));
             entries.add(new ShopEntry(Items.COOKED_PORKCHOP.getDefaultStack(), 75, ShopEntry.Type.POISON));

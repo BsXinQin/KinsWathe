@@ -7,6 +7,8 @@
     "gui.StaminaBarMixin",
     "host.CustomWinnerAnnouncementMixin",
     "host.CustomWinnerTextMixin",
+    "host.GameSafeHudMixin",
+    "host.GameSafeLimitKeysMixin",
     "host.InstinctMainMixin",
     "host.KeyBindingMixin",
     "modifiers.violator.ViolatorKeyBindingMixin",
@@ -15,10 +17,14 @@
     "roles.cook.CookShopMixin",
     "roles.detective.DetectiveHudMixin",
     "roles.drugmaker.DrugmakerShopMixin",
+    "roles.hunter.HunterHudMixin",
+    "roles.hunter.HunterShopMixin",
+    "roles.judge.HunterLockSlotMixin",
     "roles.judge.JudgeHudMixin",
     "roles.kidnapper.KidnapperControlledMixin",
     "roles.kidnapper.KidnapperShopMixin",
     "roles.licensed_villain.LicensedVillainShopMixin",
+    "roles.physician.PhysicianShopMixin",
     "roles.robot.RobotHudMixin"
   ],
   "injectors": {

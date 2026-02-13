@@ -4,6 +4,8 @@ import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.cca.PlayerShopComponent;
 import dev.doctor4t.wathe.client.WatheClient;
 import dev.doctor4t.wathe.client.gui.RoleNameRenderer;
+import dev.doctor4t.wathe.game.GameFunctions;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -12,7 +14,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.EntityHitResult;
-import org.BsXinQin.kinswathe.KinsWathe;
+import net.minecraft.util.hit.HitResult;
+import org.BsXinQin.kinswathe.KinsWatheRoles;
 import org.BsXinQin.kinswathe.client.KinsWatheClient;
 import org.BsXinQin.kinswathe.component.AbilityPlayerComponent;
 import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
@@ -26,30 +29,30 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(RoleNameRenderer.class)
 public class DetectiveTargetHudMixin {
 
-    @Unique private static PlayerEntity DetectiveTarget = null;
+    @Unique private static PlayerEntity DETECTIVE_TARGET = null;
 
     @Inject(method = "renderHud", at = @At("TAIL"))
-    private static void getDetectiveTargetHud(TextRenderer renderer, @NotNull ClientPlayerEntity player, DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
-        if (DetectiveTarget == null) return;
+    private static void getTargetHud(@NotNull TextRenderer renderer, @NotNull ClientPlayerEntity player, @NotNull DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+        if (MinecraftClient.getInstance().player == null || DETECTIVE_TARGET == null) return;
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
         AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(player);
         PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(player);
-        if (gameWorld.isRole(player, KinsWathe.DETECTIVE) && WatheClient.isPlayerAliveAndInSurvival()) {
+        if (gameWorld.isRole(player, KinsWatheRoles.DETECTIVE) && WatheClient.isPlayerAliveAndInSurvival()) {
             if (ability.cooldown > 0 || playerShop.balance < ConfigWorldComponent.KEY.get(player.getWorld()).DetectiveAbilityPrice) return;
             context.getMatrices().push();
             context.getMatrices().translate((float) context.getScaledWindowWidth() / 2.0F, (float) context.getScaledWindowHeight() / 2.0F + 6.0F, 0.0F);
             context.getMatrices().scale(0.6F, 0.6F, 1.0F);
-            Text targetInfo = Text.translatable("hud.kinswathe.detective.target", KinsWatheClient.abilityBind.getBoundKeyLocalizedText()).withColor(KinsWathe.DETECTIVE.color());
-            context.drawTextWithShadow(renderer, targetInfo, -renderer.getWidth(targetInfo) / 2, 32, KinsWathe.DETECTIVE.color());
+            Text targetInfo = Text.translatable("hud.kinswathe.detective.target", KinsWatheClient.abilityBind.getBoundKeyLocalizedText()).withColor(KinsWatheRoles.DETECTIVE.color());
+            context.drawTextWithShadow(renderer, targetInfo, -renderer.getWidth(targetInfo) / 2, 32, KinsWatheRoles.DETECTIVE.color());
             context.getMatrices().pop();
         }
     }
 
     @Inject(method = "renderHud", at = @At(value = "INVOKE", target = "Ldev/doctor4t/wathe/game/GameFunctions;isPlayerSpectatingOrCreative(Lnet/minecraft/entity/player/PlayerEntity;)Z"))
-    private static void getDetectiveTarget(TextRenderer renderer, @NotNull ClientPlayerEntity player, DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+    private static void getTarget(TextRenderer renderer, @NotNull ClientPlayerEntity player, DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
-        if (!gameWorld.isRole(player, KinsWathe.DETECTIVE)) {DetectiveTarget = null;return;}
-        var hitResult = ProjectileUtil.getCollision(player, entity -> entity instanceof PlayerEntity, 2.0);
-        DetectiveTarget = (hitResult instanceof EntityHitResult entityHit && entityHit.getEntity() instanceof PlayerEntity target) ? target : null;
+        if (!gameWorld.isRole(player, KinsWatheRoles.DETECTIVE)) {DETECTIVE_TARGET = null;return;}
+        HitResult hitResult = ProjectileUtil.getCollision(player, entity -> entity instanceof @NotNull PlayerEntity target && GameFunctions.isPlayerAliveAndSurvival(target), 2.0f);
+        DETECTIVE_TARGET = (hitResult instanceof @NotNull EntityHitResult entityHitResult) ? (PlayerEntity) entityHitResult.getEntity() : null;
     }
 }

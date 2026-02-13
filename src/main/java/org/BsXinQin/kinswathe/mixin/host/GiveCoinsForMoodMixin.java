@@ -4,8 +4,9 @@ import dev.doctor4t.wathe.api.Role;
 import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.cca.PlayerMoodComponent;
 import dev.doctor4t.wathe.cca.PlayerShopComponent;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
-import org.BsXinQin.kinswathe.KinsWathe;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,18 +18,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class GiveCoinsForMoodMixin {
 
     @Shadow public abstract float getMood();
-    @Shadow @Final private PlayerEntity player;
+    @Shadow @Final @NotNull private PlayerEntity player;
 
     @Inject(method = "setMood", at = @At("HEAD"))
-    void GiveCoinsForMood(float mood, CallbackInfo ci) {
-        if (KinsWathe.NOELLESROLES_LOADED) return;
-        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
-        if (mood > getMood()) {
-            if (gameWorld.getRole(player) != null) {
-                if (gameWorld.getRole(player).getMoodType().equals(Role.MoodType.REAL)) {
-                    PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(player);
-                    playerShop.addToBalance(50);
-                }
+    void giveCoinsForMood(float mood, CallbackInfo ci) {
+        if (FabricLoader.getInstance().isModLoaded("noellesroles")) return;
+        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
+        PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(this.player);
+        Role role = gameWorld.getRole(this.player);
+        if (role != null && mood > getMood()) {
+            if (role.getMoodType().equals(Role.MoodType.REAL)) {
+                playerShop.balance += 50;
+                playerShop.sync();
             }
         }
     }

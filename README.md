@@ -18,7 +18,6 @@
 
 - New Additions
   - Add item cooldown display text
-  - Add new visual effects for some roles (configurable)
   - Clear Trapper's Role Mine entity when game ends
   - Conductor can see dropped items (disabled by default)
   - Coroner can see bodies when mood is higher than mid (disabled by default)
@@ -26,15 +25,17 @@
 
 ## Wathe Plus Function
 
-- Add visual stamina bar display (configurable)
+- Add visual stamina bar display
 
-- Jump can be allowed when not in game (configurable)
+- Jump can be allowed when not in game
 
 - Unlock 32 render distance limit when ultraPerfMode is disabled 
 
 - Switch player inventory to the last slot when game starts
 
 - Clear field drops and player effects and bodies when game ends
+
+- Add safe time when game starts, players can't use weapon or open shop gui
 
 
 ## New Civillians
@@ -46,7 +47,7 @@
 - Cook
   - Has passive income
   - Can purchase Pan and food in shop
-  - Pan can stun target for 5 seconds
+  - Pan can use like Knife and stun target
   - See people who eat through walls temporarily
 
 - Detective
@@ -60,21 +61,23 @@
   - Can see poisoned players through walls
   - Has 15 seconds of sprint time
   - Initially equip with Medical Kit
-  - Medical Kit can use on a player to remove poison (1 minute cooldown)
+  - Medical Kit can use on a player to remove poison and get coins
+  - Can purchase Pill in shop
+  - Pill can protects player one extra hit of life
 
 - Robot
   - Has no mood
   - Immune poison
   - Infinite stamina
-  - Use ability to see the darkness clearly
+  - Use ability to see the darkness clearly and attack others
 
 
 ## New Killers
 
 - Cleaner
-  - Only generate when 12 or more players are present (configurable)
+  - Limit on the number of people that can be generated
   - Initially equip with Sulfuric Acid Barrel
-  - Sulfuric Acid Barrel can dissolve a body (1 minute cooldown)
+  - Sulfuric Acid Barrel can dissolve a body
   - Use ability to clear field drops
 
 - Drugmaker
@@ -83,21 +86,26 @@
   - Can not purchase Grenade and Psycho Mode in shop
   - Price of Poison Vial and Scorpion reduced by half
   - Can purchase Poison Injector and Blowgun in shop
-  - Poison Injector can poison target (90 seconds cooldown)
-  - Blowgun can shoot and poison target (90 seconds cooldown)
+  - Poison Injector can poison target
+  - Blowgun can shoot and poison target
+
+- Hunter
+  - If holding knife when sprinting, hunter will speed up
+  - Hunting Knife replaces Knife in shop
+  - Hunting Knife will immediately cooldown when stoping holding
+  - Use ability to refresh Hunting Knife cooldown
 
 - Kidnapper
-  - Can not purchase Revolver in shop
   - Can buy Knockout Drug in shop
-  - Knockout Drug can daze target and let it foolow you for 15 seconds
+  - Knockout Drug can daze target and let it foolow you
   - Players that be dazed can not see or voice chat
 
 
 ## New Neutrals
 
 - Licensed Villain
-  - Only generates when 10 or more players are present (configurable)
-  - Requires killing all players to win (has own victory screen)
+  - Limit on the number of people that can be generated
+  - Requires killing all players to win
   - Game does not end when all civilians or killers are dead
   - Has 15 seconds of sprint time
   - Initially equip with Lockpick
@@ -116,15 +124,19 @@
   - Non-killer roles receive an additional 25 income after completing tasks
 
 - Violator
-  - Disabled by default (configurable)
+  - Disabled by default
   - Can jump when in game
 
 
 ## Config Settings
 
+- Plus functions are configurable
+
+- All roles ability are configurable
+
 - Generation conditions of roles are configurable
 
-- All roles' ability cost and cooldown are configurable
+- Most price of items in shop are configurable
 
 
 ## Requires

@@ -5,6 +5,7 @@ import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import org.BsXinQin.kinswathe.KinsWathe;
+import org.jetbrains.annotations.NotNull;
 
 public class ExtraModelComponent {
 
@@ -12,13 +13,10 @@ public class ExtraModelComponent {
         return Identifier.of(KinsWathe.MOD_ID, "item_cooldown");
     }
 
-    public static void registerCooldownModel(Item item) {
+    public static void registerCooldownModel(@NotNull Item item) {
         ModelPredicateProviderRegistry.register(item, getCooldownId(), (itemStack, world, entity, seed) -> {
-                    if (MinecraftClient.getInstance().player != null) {
-                        return MinecraftClient.getInstance().player.getItemCooldownManager().isCoolingDown(item) ? 1.0F : 0.0F;
-                    }
-                    return 0.0F;
-                }
-        );
+            if (MinecraftClient.getInstance().player == null) return 0.0F;
+            return MinecraftClient.getInstance().player.getItemCooldownManager().isCoolingDown(item) ? 1.0F : 0.0F;
+        });
     }
 }

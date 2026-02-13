@@ -8,7 +8,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import org.BsXinQin.kinswathe.KinsWathe;
+import org.BsXinQin.kinswathe.KinsWatheRoles;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,10 +30,10 @@ public class RobotMoodMixin {
     @Unique private static final Identifier ROBOT_MOOD = Identifier.of("wathe", "hud/mood_happy");
 
     @Inject(method = "renderKiller", at = @At("HEAD"), cancellable = true)
-    private static void RobotMood(@NotNull TextRenderer textRenderer, @NotNull DrawContext context, CallbackInfo ci) {
+    private static void getMoodHud(TextRenderer textRenderer, @NotNull DrawContext context, @NotNull CallbackInfo ci) {
         if (MinecraftClient.getInstance().player == null) return;
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
-        if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWathe.ROBOT)) {
+        if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWatheRoles.ROBOT)) {
             context.getMatrices().push();
             context.getMatrices().translate(0.0F, 3.0F * moodOffset, 0.0F);
             context.drawGuiTexture(ROBOT_MOOD, 5, 6, 14, 17);

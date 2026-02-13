@@ -31,38 +31,20 @@ public class CustomWinnerComponent implements AutoSyncedComponent {
     @Getter @Setter private int color = 0x000000;
     @Getter @Setter private List<ServerPlayerEntity> winners = new ArrayList<>();
 
-    public CustomWinnerComponent(World world) {
+    public CustomWinnerComponent(@NotNull World world) {
         this.world = world;
     }
-    public boolean hasCustomWinner() {
-        return this.winningTextId != null;
-    }
-    public void sync() {
-        CustomWinnerComponent.KEY.sync(this.world);
-    }
-    public void reset() {this.winningTextId = null;this.winners = new ArrayList<>();this.color = 0x000000;sync();}
+    public boolean hasCustomWinner() {return this.winningTextId != null;}
+    public void sync() {CustomWinnerComponent.KEY.sync(this.world);}
 
-    @Override
-    public void readFromNbt(NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
-        this.winningTextId = tag.contains("winning_text") ? tag.getString("winning_text") : null;
-        if (tag.contains("winners")) {
-            List<ServerPlayerEntity> loadedWinners = new ArrayList<>();
-            List<UUID> uuids = uuidListFromTag(tag, "winners");
-            if (world instanceof ServerWorld serverWorld) {
-                for (UUID uuid : uuids) {
-                    ServerPlayerEntity player = serverWorld.getServer().getPlayerManager().getPlayer(uuid);
-                    if (player != null) {
-                        loadedWinners.add(player);
-                    }
-                }
-            }
-            this.winners = new ArrayList<>(loadedWinners);} else {
-            this.winners = new ArrayList<>();
-        }
-        this.color = tag.contains("color") ? tag.getInt("color") : 0x000000;
+    public void reset() {
+        this.winningTextId = null;
+        this.winners = new ArrayList<>();
+        this.color = 0x000000;sync();
+        this.sync();
     }
 
-    private ArrayList<UUID> uuidListFromTag(NbtCompound tag, String listName) {
+    private ArrayList<UUID> uuidListFromTag(@NotNull NbtCompound tag, String listName) {
         ArrayList<UUID> result = new ArrayList<>();
         if (tag.contains(listName)) {
             NbtList list = tag.getList(listName, NbtElement.INT_ARRAY_TYPE);
@@ -89,5 +71,25 @@ public class CustomWinnerComponent implements AutoSyncedComponent {
         }
         tag.put("winners", winnersList);
         tag.putInt("color", this.color);
+    }
+
+    @Override
+    public void readFromNbt(@NotNull NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
+        this.winningTextId = tag.contains("winning_text") ? tag.getString("winning_text") : null;
+        if (tag.contains("winners")) {
+            List<ServerPlayerEntity> loadedWinners = new ArrayList<>();
+            List<UUID> uuids = uuidListFromTag(tag, "winners");
+            if (world instanceof ServerWorld serverWorld) {
+                for (UUID uuid : uuids) {
+                    ServerPlayerEntity player = serverWorld.getServer().getPlayerManager().getPlayer(uuid);
+                    if (player != null) {
+                        loadedWinners.add(player);
+                    }
+                }
+            }
+            this.winners = new ArrayList<>(loadedWinners);} else {
+            this.winners = new ArrayList<>();
+        }
+        this.color = tag.contains("color") ? tag.getInt("color") : 0x000000;
     }
 }

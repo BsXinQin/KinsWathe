@@ -6,13 +6,13 @@ import dev.doctor4t.wathe.game.GameFunctions;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.BsXinQin.kinswathe.KinsWathe;
+import org.BsXinQin.kinswathe.KinsWatheRoles;
 import org.jetbrains.annotations.NotNull;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistry;
@@ -25,77 +25,70 @@ import java.util.UUID;
 public class KidnapperComponent implements AutoSyncedComponent, ServerTickingComponent {
 
     public static final ComponentKey<KidnapperComponent> KEY = ComponentRegistry.getOrCreate(Identifier.of(KinsWathe.MOD_ID, "kidnapper"), KidnapperComponent.class);
-    private final PlayerEntity player;
+
+    @NotNull private final PlayerEntity player;
     public UUID controllerUUID = null;
     public int controlTicks = 0;
     private int lastSecond = 0;
 
     public KidnapperComponent(@NotNull PlayerEntity player) {this.player = player;}
-    public void sync() {KEY.sync(this.player);}
 
     @Override
     public void serverTick() {
         if (this.controlTicks > 0) {
             if (this.controllerUUID != null) {
-                ServerWorld serverWorld = (ServerWorld) this.player.getWorld();
-                PlayerEntity controller = serverWorld.getPlayerByUuid(this.controllerUUID);
+                PlayerEntity controller = this.player.getWorld().getPlayerByUuid(this.controllerUUID);
                 if (controller == null || (controller != null && !GameWorldComponent.KEY.get(this.player.getWorld()).isRunning() || !GameFunctions.isPlayerAliveAndSurvival(controller) || !GameFunctions.isPlayerAliveAndSurvival(this.player) || controller.isSneaking())) {
-                    releaseControl();
+                    this.releaseControl();
                     return;
                 }
-            }
+            } else this.reset();
             this.controlTicks--;
-            int currentSecond = this.controlTicks / 20;
+            int currentSecond = this.controlTicks / 20 + 1;
             if (currentSecond != lastSecond && currentSecond >= 0) {
-                notifyControllerRemainingTime(currentSecond);
+                this.notifyControllerRemainingTime(currentSecond);
                 lastSecond = currentSecond;
             }
-            teleportToController();
+            this.teleportToController();
             if (controlTicks == 0) {
-                releaseControl();
+                this.releaseControl();
             }
             this.sync();
         }
     }
 
-    public void startControl(PlayerEntity controller) {
+    public void startControl(@NotNull PlayerEntity controller) {
         this.controllerUUID = controller.getUuid();
-        this.controlTicks = GameConstants.getInTicks(0, 15);
-        this.lastSecond = this.controlTicks / 20;
-        this.sync();
-    }
-
-    public void releaseControl() {
-        if (this.controllerUUID != null) {
-            ServerWorld serverWorld = (ServerWorld) this.player.getWorld();
-            PlayerEntity controller = serverWorld.getPlayerByUuid(this.controllerUUID);
-            if (controller != null && GameWorldComponent.KEY.get(controller.getWorld()).isRunning() && GameFunctions.isPlayerAliveAndSurvival(controller)) {
-                controller.sendMessage(Text.translatable("tip.kinswathe.kidnapper.release").withColor(KinsWathe.KIDNAPPER.color()), true);
-                controller.playSoundToPlayer(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.0f);
-            }
-        }
-        this.controllerUUID = null;
-        this.controlTicks = 0;
-        this.lastSecond = 0;
+        this.controlTicks = GameConstants.getInTicks(0,20);
+        this.lastSecond = this.controlTicks / 20 + 1;
         this.sync();
     }
 
     private void teleportToController() {
         if (this.controllerUUID == null) return;
-        ServerWorld serverWorld = (ServerWorld) this.player.getWorld();
-        PlayerEntity controller = serverWorld.getPlayerByUuid(this.controllerUUID);
-        if (controller != null && this.player instanceof ServerPlayerEntity serverPlayer) {
-            serverPlayer.teleport(serverWorld, controller.getX(), controller.getY(), controller.getZ(), Set.of(), controller.getYaw(), controller.getPitch());
+        PlayerEntity controller = this.player.getWorld().getPlayerByUuid(this.controllerUUID);
+        if (controller != null) {
+            this.player.teleport((ServerWorld) this.player.getWorld(), controller.getX(), controller.getY(), controller.getZ(), Set.of(), controller.getYaw(), controller.getPitch());
         }
     }
 
     private void notifyControllerRemainingTime(int remainingSeconds) {
         if (this.controllerUUID == null) return;
-        ServerWorld serverWorld = (ServerWorld) this.player.getWorld();
-        PlayerEntity controller = serverWorld.getPlayerByUuid(this.controllerUUID);
+        PlayerEntity controller = this.player.getWorld().getPlayerByUuid(this.controllerUUID);
         if (controller != null && GameWorldComponent.KEY.get(controller.getWorld()).isRunning() && GameFunctions.isPlayerAliveAndSurvival(controller) && remainingSeconds > 0) {
-            controller.sendMessage(Text.translatable("tip.kinswathe.kidnapper.timeleft", remainingSeconds).withColor(KinsWathe.KIDNAPPER.color()), true);
+            controller.sendMessage(Text.translatable("tip.kinswathe.kidnapper.timeleft", remainingSeconds).withColor(KinsWatheRoles.KIDNAPPER.color()), true);
         }
+    }
+
+    public void releaseControl() {
+        if (this.controllerUUID != null) {
+            PlayerEntity controller = this.player.getWorld().getPlayerByUuid(this.controllerUUID);
+            if (controller != null && GameWorldComponent.KEY.get(controller.getWorld()).isRunning() && GameFunctions.isPlayerAliveAndSurvival(controller)) {
+                controller.sendMessage(Text.translatable("tip.kinswathe.kidnapper.release").withColor(KinsWatheRoles.KIDNAPPER.color()), true);
+                controller.playSoundToPlayer(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.0f);
+            }
+        }
+        this.reset();
     }
 
     public void reset() {
@@ -103,6 +96,10 @@ public class KidnapperComponent implements AutoSyncedComponent, ServerTickingCom
         this.controlTicks = 0;
         this.lastSecond = 0;
         this.sync();
+    }
+
+    public void sync() {
+        KEY.sync(this.player);
     }
 
     @Override

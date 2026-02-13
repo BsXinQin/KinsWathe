@@ -4,8 +4,9 @@ import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.client.gui.screen.ingame.LimitedInventoryScreen;
 import dev.doctor4t.wathe.util.ShopEntry;
 import net.minecraft.client.network.ClientPlayerEntity;
-import org.BsXinQin.kinswathe.KinsWathe;
-import org.BsXinQin.kinswathe.KinsWatheConstants;
+import org.BsXinQin.kinswathe.KinsWatheRoles;
+import org.BsXinQin.kinswathe.KinsWatheShops;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,13 +18,13 @@ import java.util.List;
 @Mixin(LimitedInventoryScreen.class)
 public abstract class DrugmakerShopMixin {
 
-    @Shadow @Final public ClientPlayerEntity player;
+    @Shadow @Final @NotNull public ClientPlayerEntity player;
 
     @ModifyVariable(method = "init", at = @At(value = "STORE"), name = "entries")
-    private List<ShopEntry> getDrugmakerShop(List<ShopEntry> entries) {
+    private List<ShopEntry> getShop(@NotNull List<ShopEntry> entries) {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
-        if (gameWorld.isRole(this.player, KinsWathe.DRUGMAKER)) {
-            entries = KinsWatheConstants.DrugmakerShop;
+        if (gameWorld.isRole(this.player, KinsWatheRoles.DRUGMAKER)) {
+            entries = KinsWatheShops.getDrugmakerShop(this.player.getWorld());
         }
         return entries;
     }

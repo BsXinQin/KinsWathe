@@ -6,6 +6,7 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.util.Identifier;
 import org.BsXinQin.kinswathe.KinsWathe;
+import org.jetbrains.annotations.NotNull;
 
 public record AbilityC2SPacket() implements CustomPayload {
 
@@ -17,5 +18,5 @@ public record AbilityC2SPacket() implements CustomPayload {
     public static AbilityC2SPacket read(PacketByteBuf buf) {
         return new AbilityC2SPacket();
     }
-    public Id<? extends CustomPayload> getId() {return ID;}
+    public @NotNull Id<? extends CustomPayload> getId() {return ID;}
 }

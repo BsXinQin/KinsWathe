@@ -1,7 +1,6 @@
 package org.BsXinQin.kinswathe.items;
 
 import dev.doctor4t.wathe.entity.PlayerBodyEntity;
-import dev.doctor4t.wathe.game.GameConstants;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -10,6 +9,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import org.BsXinQin.kinswathe.KinsWatheItems;
 import org.jetbrains.annotations.NotNull;
 
 public class SulfuricAcidBarrelItem extends Item {
@@ -19,14 +19,10 @@ public class SulfuricAcidBarrelItem extends Item {
     @Override
     public ActionResult useOnEntity(ItemStack stack, @NotNull PlayerEntity player, @NotNull LivingEntity entity, Hand hand) {
         if (player.getItemCooldownManager().isCoolingDown(this)) return ActionResult.FAIL;
-        if (entity instanceof PlayerBodyEntity body) {
-            body.discard();
-            if (!player.getWorld().isClient) {
-                player.getWorld().playSound(null, body.getX(), body.getY() + .1f, body.getZ(), SoundEvents.ITEM_BUCKET_EMPTY_LAVA, SoundCategory.PLAYERS, 0.5f, 0.5f);
-            }
-            if (!player.isCreative()) {
-                player.getItemCooldownManager().set(this, GameConstants.ITEM_COOLDOWNS.get(this));
-            }
+        if (!player.getWorld().isClient && entity instanceof @NotNull PlayerBodyEntity playerBody) {
+            KinsWatheItems.setItemAfterUsing(player, this, null);
+            playerBody.discard();
+            player.getWorld().playSound(null, playerBody.getX(), playerBody.getY() + .1f, playerBody.getZ(), SoundEvents.ITEM_BUCKET_EMPTY_LAVA, SoundCategory.PLAYERS, 1.0f, 0.5f);
             return ActionResult.SUCCESS;
         }
         return ActionResult.PASS;
