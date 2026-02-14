@@ -6,6 +6,7 @@ import net.minecraft.server.world.ServerWorld;
 import org.BsXinQin.kinswathe.component.CustomWinnerComponent;
 import org.BsXinQin.kinswathe.component.GameSafeComponent;
 import org.BsXinQin.kinswathe.roles.cook.CookComponent;
+import org.BsXinQin.kinswathe.roles.dreamer.DreamerComponent;
 import org.BsXinQin.kinswathe.roles.hunter.HunterComponent;
 import org.BsXinQin.kinswathe.roles.kidnapper.KidnapperComponent;
 import org.BsXinQin.kinswathe.roles.physician.PhysicianComponent;
@@ -29,6 +30,7 @@ public class GameFnctionsResetMixin {
     private static void resetPlayer(@NotNull ServerPlayerEntity player, CallbackInfo ci) {
         GameSafeComponent.KEY.get(player).reset();
         CookComponent.KEY.get(player).reset();
+        DreamerComponent.KEY.get(player).reset();
         HunterComponent.KEY.get(player).reset();
         KidnapperComponent.KEY.get(player).reset();
         RobotComponent.KEY.get(player).reset();

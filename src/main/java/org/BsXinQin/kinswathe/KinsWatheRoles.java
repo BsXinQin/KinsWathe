@@ -14,6 +14,7 @@ import org.BsXinQin.kinswathe.roles.bellringer.BellringerAbility;
 import org.BsXinQin.kinswathe.roles.cleaner.CleanerAbility;
 import org.BsXinQin.kinswathe.roles.cook.CookComponent;
 import org.BsXinQin.kinswathe.roles.detective.DetectiveAbility;
+import org.BsXinQin.kinswathe.roles.dreamer.DreamerComponent;
 import org.BsXinQin.kinswathe.roles.hunter.HunterAbility;
 import org.BsXinQin.kinswathe.roles.hunter.HunterComponent;
 import org.BsXinQin.kinswathe.roles.judge.JudgeAbility;
@@ -81,6 +82,16 @@ public class KinsWatheRoles {
             WatheRoles.CIVILIAN.getMaxSprintTime(),
             false
     ));
+//    //梦者
+//    public static Role DREAMER = registerRole(new Role(
+//            Identifier.of(KinsWathe.MOD_ID, "dreamer"),
+//            0xE5CCFF,
+//            true,
+//            false,
+//            Role.MoodType.FAKE,
+//            -1,
+//            true
+//    ));
     //制毒师
     public static Role DRUGMAKER = registerRole(new Role(
             Identifier.of(KinsWathe.MOD_ID, "drugmaker"),
@@ -211,6 +222,7 @@ public class KinsWatheRoles {
         roles.add(CLEANER);
         roles.add(COOK);
         roles.add(DETECTIVE);
+//        roles.add(DREAMER);
         roles.add(DRUGMAKER);
         roles.add(JUDGE);
         roles.add(KIDNAPPER);
@@ -238,6 +250,7 @@ public class KinsWatheRoles {
         roles.add(WatheRoles.KILLER);
         roles.add(COOK);
         roles.add(CLEANER);
+//        roles.add(DREAMER);
         roles.add(DRUGMAKER);
         roles.add(JUDGE);
         roles.add(KIDNAPPER);
@@ -255,13 +268,19 @@ public class KinsWatheRoles {
     }
 
     /// 新增阵营
-    //新增中立阵营
+    //新增阵营
     public static final ArrayList<Role> NEUTRAL_ROLES = new ArrayList<>();
+//    public static final ArrayList<Role> KILLER_NEUTRAL_ROLES = new ArrayList<>();
     //新增中立身份
     public static void addNeutralRoles() {
         NEUTRAL_ROLES.add(LICENSED_VILLAIN);
         Harpymodloader.setRoleMaximum(LICENSED_VILLAIN, 1);
     }
+//    //新增杀手方中立身份
+//    public static void addKillerNeutralRoles() {
+//        KILLER_NEUTRAL_ROLES.add(DREAMER);
+//        Harpymodloader.setRoleMaximum(DREAMER, 1);
+//    }
 
     /// 限制身份生成人数
     public static void limitRolesGeneratePlayers() {
@@ -284,17 +303,21 @@ public class KinsWatheRoles {
         ModdedRoleAssigned.EVENT.register((player, role)->{
             AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(player);
             ability.cooldown = KinsWatheConfig.HANDLER.instance().StartingCooldown * 20;
-            //医师初始物品
-            if (role.equals(PHYSICIAN)) {
-                player.giveItemStack(KinsWatheItems.MEDICAL_KIT.getDefaultStack());
+            //清道夫初始物品
+            if (role.equals(CLEANER)) {
+                player.giveItemStack(KinsWatheItems.SULFURIC_ACID_BARREL.getDefaultStack());
             }
+//            //梦者初始物品
+//            if (role.equals(DREAMER)) {
+//                player.giveItemStack(KinsWatheItems.DREAM_IMPRINT.getDefaultStack());
+//            }
             //黑警初始物品
             if (role.equals(LICENSED_VILLAIN)) {
                 player.giveItemStack(WatheItems.LOCKPICK.getDefaultStack());
             }
-            //清道夫初始物品
-            if (role.equals(CLEANER)) {
-                player.giveItemStack(KinsWatheItems.SULFURIC_ACID_BARREL.getDefaultStack());
+            //医师初始物品
+            if (role.equals(PHYSICIAN)) {
+                player.giveItemStack(KinsWatheItems.MEDICAL_KIT.getDefaultStack());
             }
         });
     }
@@ -328,6 +351,7 @@ public class KinsWatheRoles {
     public static void resetRolesEvents() {
         ResetPlayerEvent.EVENT.register(player -> {
             CookComponent.KEY.get(player).reset();
+            DreamerComponent.KEY.get(player).reset();
             HunterComponent.KEY.get(player).reset();
             KidnapperComponent.KEY.get(player).reset();
             RobotComponent.KEY.get(player).reset();

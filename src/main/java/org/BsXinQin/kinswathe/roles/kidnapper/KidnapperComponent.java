@@ -105,16 +105,14 @@ public class KidnapperComponent implements AutoSyncedComponent, ServerTickingCom
     @Override
     public void writeToNbt(@NotNull NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
         tag.putInt("controlTicks", this.controlTicks);
-        if (this.controllerUUID != null) {
-            tag.putUuid("controllerUUID", this.controllerUUID);
-        }
+        tag.putInt("lastSecond", this.lastSecond);
+        if (this.controllerUUID != null) tag.putUuid("controllerUUID", this.controllerUUID);
     }
 
     @Override
     public void readFromNbt(@NotNull NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
-        this.controlTicks = tag.getInt("controlTicks");
-        if (tag.contains("controllerUUID")) {
-            this.controllerUUID = tag.getUuid("controllerUUID");
-        }
+        this.controlTicks = tag.contains("controlTicks") ? tag.getInt("controlTicks") : 0;
+        this.lastSecond = tag.contains("lastSecond") ? tag.getInt("lastSecond") : 0;
+        this.controllerUUID = tag.contains("controllerUUID") ? tag.getUuid("controllerUUID") : null;
     }
 }

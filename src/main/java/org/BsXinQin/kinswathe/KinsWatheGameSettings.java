@@ -60,6 +60,7 @@ public class KinsWatheGameSettings {
 
     /// 设置游戏安全时间
     public static void setGameSafeTime(@NotNull MinecraftServer server) {
+        if (!KinsWatheConfig.HANDLER.instance().EnableGameSafeTime) return;
         for (ServerPlayerEntity serverPlayer : server.getPlayerManager().getPlayerList()) {
             if (serverPlayer == null) return;
             serverPlayer.getItemCooldownManager().set(WatheItems.KNIFE, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));

@@ -63,6 +63,9 @@
   "item.kinswathe.blowgun": "Blowgun",
   "item.kinswathe.blowgun.tooltip": "Point, right-click and shoot\nTarget that be shooted will be poisoned\n1 minute cooldown",
 
+  "item.kinswathe.dream_imprint": "Dream Imprint",
+  "item.kinswathe.dream_imprint.tooltip": "Use on a player to protect one extra hit of life\nPlayer will teleport to Dreamer if it dies\nSingle use",
+
   "item.kinswathe.hunting_knife": "Hunting Knife",
   "item.kinswathe.hunting_knife.tooltip": "Right-click, hold for a second and get close to your victim\nIf stop holding, four times holding-time cooldown\nAfter a kill, cannot be used for 45 seconds\nAttack to knock back / push a player (no cooldown)",
 

@@ -63,6 +63,9 @@
   "item.kinswathe.blowgun": "吹矢",
   "item.kinswathe.blowgun.tooltip": "瞄准、右键点击并射击\n被射中的目标将会中毒\n冷却 1 分钟",
 
+  "item.kinswathe.dream_imprint": "梦之印记",
+  "item.kinswathe.dream_imprint.tooltip": "用于玩家，使其额外承受一次伤害\n玩家受到伤害后传送到梦者身边\n一次性物品",
+
   "item.kinswathe.hunting_knife": "猎刀",
   "item.kinswathe.hunting_knife.tooltip": "右键蓄力一秒，靠近目标即可发动暗杀\n如果停止蓄力，冷却四倍蓄力时间\n击杀后冷却 45 秒\n攻击可击退玩家（无冷却）",
 

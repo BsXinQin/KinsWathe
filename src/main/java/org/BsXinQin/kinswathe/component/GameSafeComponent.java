@@ -26,8 +26,8 @@ public class GameSafeComponent implements AutoSyncedComponent, ServerTickingComp
 
     @Override
     public void serverTick() {
+        this.preventDeath();
         if (this.isGameSafe && this.safeTicks <= KinsWatheConfig.HANDLER.instance().StartingCooldown * 20) {
-            this.preventDeath();
             if (this.safeTicks == KinsWatheConfig.HANDLER.instance().StartingCooldown * 20) {
                 this.isGameSafe = false;
             }
@@ -44,7 +44,12 @@ public class GameSafeComponent implements AutoSyncedComponent, ServerTickingComp
 
     public void preventDeath() {
         AllowPlayerDeath.EVENT.register(((player, killer, identifier) -> {
-            return identifier == GameConstants.DeathReasons.FELL_OUT_OF_TRAIN;
+            if (identifier == GameConstants.DeathReasons.FELL_OUT_OF_TRAIN) return true;
+            GameSafeComponent playerSafe = GameSafeComponent.KEY.get(player);
+            if (playerSafe.isGameSafe) {
+                return false;
+            }
+            return true;
         }));
     }
 

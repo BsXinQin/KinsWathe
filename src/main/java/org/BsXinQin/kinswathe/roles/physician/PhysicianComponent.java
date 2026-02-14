@@ -1,6 +1,7 @@
 package org.BsXinQin.kinswathe.roles.physician;
 
 import dev.doctor4t.wathe.api.event.AllowPlayerDeath;
+import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.index.WatheSounds;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -19,7 +20,7 @@ public class PhysicianComponent implements AutoSyncedComponent, ServerTickingCom
     public static final ComponentKey<PhysicianComponent> KEY = ComponentRegistry.getOrCreate(Identifier.of(KinsWathe.MOD_ID, "physician"), PhysicianComponent.class);
 
     @NotNull private final PlayerEntity player;
-    public int armor = 0;
+    public int physicianArmor = 0;
 
     public PhysicianComponent(@NotNull PlayerEntity player) {this.player = player;}
 
@@ -29,15 +30,17 @@ public class PhysicianComponent implements AutoSyncedComponent, ServerTickingCom
     }
 
     public void giveArmor() {
-        this.armor = 1;
+        this.physicianArmor = 1;
         this.sync();
     }
 
     public void preventDeath() {
         AllowPlayerDeath.EVENT.register(((player, killer, identifier) -> {
-            if (this.armor > 0) {
+            if (identifier == GameConstants.DeathReasons.FELL_OUT_OF_TRAIN) return true;
+            PhysicianComponent playerArmor = PhysicianComponent.KEY.get(player);
+            if (playerArmor.physicianArmor > 0) {
                 player.getWorld().playSound(player, player.getBlockPos(), WatheSounds.ITEM_PSYCHO_ARMOUR, SoundCategory.PLAYERS, 5.0F, 1.0F);
-                this.armor--;
+                playerArmor.reset();
                 return false;
             }
             return true;
@@ -45,7 +48,7 @@ public class PhysicianComponent implements AutoSyncedComponent, ServerTickingCom
     }
 
     public void reset() {
-        this.armor = 0;
+        this.physicianArmor = 0;
     }
 
     public void sync() {
@@ -54,11 +57,11 @@ public class PhysicianComponent implements AutoSyncedComponent, ServerTickingCom
 
     @Override
     public void writeToNbt(@NotNull NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
-        tag.putInt("armor", this.armor);
+        tag.putInt("physicianArmor", this.physicianArmor);
     }
 
     @Override
     public void readFromNbt(@NotNull NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
-        this.armor = tag.contains("armor") ? tag.getInt("armor") : 0;
+        this.physicianArmor = tag.contains("physicianArmor") ? tag.getInt("physicianArmor") : 0;
     }
 }

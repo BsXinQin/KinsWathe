@@ -25,11 +25,7 @@ public class RobotComponent implements AutoSyncedComponent, ServerTickingCompone
 
     @Override
     public void serverTick() {
-        if (this.robotTicks > 0) {
-            this.durationRobotAbility();
-            --this.robotTicks;
-            this.sync();
-        }
+        this.durationRobotAbility();
     }
 
     public void setRobotTicks(int ticks) {
@@ -40,7 +36,8 @@ public class RobotComponent implements AutoSyncedComponent, ServerTickingCompone
     public void durationRobotAbility() {
         AllowPlayerPunching.EVENT.register(((attacker, victim) -> {
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(attacker.getWorld());
-            return gameWorld.isRole(attacker, KinsWatheRoles.ROBOT) && this.robotTicks > 0;
+            RobotComponent playerRobot = RobotComponent.KEY.get(attacker);
+            return gameWorld.isRole(attacker, KinsWatheRoles.ROBOT) && playerRobot.robotTicks > 0;
         }));
     }
 

@@ -6,6 +6,7 @@ import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
 import org.BsXinQin.kinswathe.component.CustomWinnerComponent;
 import org.BsXinQin.kinswathe.component.GameSafeComponent;
 import org.BsXinQin.kinswathe.roles.cook.CookComponent;
+import org.BsXinQin.kinswathe.roles.dreamer.DreamerComponent;
 import org.BsXinQin.kinswathe.roles.hunter.HunterComponent;
 import org.BsXinQin.kinswathe.roles.kidnapper.KidnapperComponent;
 import org.BsXinQin.kinswathe.roles.physician.PhysicianComponent;
@@ -24,6 +25,7 @@ public class KinsWatheComponents implements EntityComponentInitializer, WorldCom
         registry.beginRegistration(PlayerEntity.class, GameSafeComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(GameSafeComponent::new);
         registry.beginRegistration(PlayerEntity.class, AbilityPlayerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(AbilityPlayerComponent::new);
         registry.beginRegistration(PlayerEntity.class, CookComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(CookComponent::new);
+        registry.beginRegistration(PlayerEntity.class, DreamerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(DreamerComponent::new);
         registry.beginRegistration(PlayerEntity.class, HunterComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(HunterComponent::new);
         registry.beginRegistration(PlayerEntity.class, KidnapperComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(KidnapperComponent::new);
         registry.beginRegistration(PlayerEntity.class, RobotComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(RobotComponent::new);
