@@ -16,7 +16,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import org.BsXinQin.kinswathe.KinsWatheRoles;
-import org.BsXinQin.kinswathe.client.KinsWatheClient;
+import org.BsXinQin.kinswathe.client.KinsWatheInitializeClient;
 import org.BsXinQin.kinswathe.component.AbilityPlayerComponent;
 import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
 import org.jetbrains.annotations.NotNull;
@@ -42,7 +42,7 @@ public class DetectiveTargetHudMixin {
             context.getMatrices().push();
             context.getMatrices().translate((float) context.getScaledWindowWidth() / 2.0F, (float) context.getScaledWindowHeight() / 2.0F + 6.0F, 0.0F);
             context.getMatrices().scale(0.6F, 0.6F, 1.0F);
-            Text targetInfo = Text.translatable("hud.kinswathe.detective.target", KinsWatheClient.abilityBind.getBoundKeyLocalizedText()).withColor(KinsWatheRoles.DETECTIVE.color());
+            Text targetInfo = Text.translatable("hud.kinswathe.detective.target", KinsWatheInitializeClient.abilityBind.getBoundKeyLocalizedText()).withColor(KinsWatheRoles.DETECTIVE.color());
             context.drawTextWithShadow(renderer, targetInfo, -renderer.getWidth(targetInfo) / 2, 32, KinsWatheRoles.DETECTIVE.color());
             context.getMatrices().pop();
         }

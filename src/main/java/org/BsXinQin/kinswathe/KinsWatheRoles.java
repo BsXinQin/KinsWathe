@@ -3,6 +3,7 @@ package org.BsXinQin.kinswathe;
 import dev.doctor4t.wathe.api.Role;
 import dev.doctor4t.wathe.api.WatheRoles;
 import dev.doctor4t.wathe.index.WatheItems;
+import lombok.SneakyThrows;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
@@ -26,8 +27,8 @@ import org.agmas.harpymodloader.events.ModdedRoleAssigned;
 import org.agmas.harpymodloader.events.ResetPlayerEvent;
 import org.agmas.harpymodloader.modifiers.HMLModifiers;
 import org.agmas.harpymodloader.modifiers.Modifier;
-import org.agmas.noellesroles.Noellesroles;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -194,6 +195,14 @@ public class KinsWatheRoles {
         return modifier;
     }
 
+    /// 引入NoellesRoles角色
+    @SneakyThrows
+    public static Role noellesrolesRoles(String role) {
+        Class<?> roleClass = Class.forName("org.agmas.noellesroles.Noellesroles");
+        Field roleField = roleClass.getField(role);
+        return (Role) roleField.get(null);
+    }
+
     /// 添加有收入的身份
     public static List<Role> rolesHaveIncome() {
         List<Role> roles = new ArrayList<>();
@@ -208,17 +217,17 @@ public class KinsWatheRoles {
         roles.add(LICENSED_VILLAIN);
         roles.add(PHYSICIAN);
         if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
-            roles.add(Noellesroles.MIMIC);
-            roles.add(Noellesroles.JESTER);
-            roles.add(Noellesroles.PHANTOM);
-            roles.add(Noellesroles.SWAPPER);
-            roles.add(Noellesroles.TRAPPER);
-            roles.add(Noellesroles.RECALLER);
-            roles.add(Noellesroles.BARTENDER);
-            roles.add(Noellesroles.MORPHLING);
-            roles.add(Noellesroles.NOISEMAKER);
-            roles.add(Noellesroles.EXECUTIONER);
-            roles.add(Noellesroles.THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES);
+            roles.add(noellesrolesRoles("MIMIC"));
+            roles.add(noellesrolesRoles("JESTER"));
+            roles.add(noellesrolesRoles("PHANTOM"));
+            roles.add(noellesrolesRoles("SWAPPER"));
+            roles.add(noellesrolesRoles("TRAPPER"));
+            roles.add(noellesrolesRoles("RECALLER"));
+            roles.add(noellesrolesRoles("BARTENDER"));
+            roles.add(noellesrolesRoles("MORPHLING"));
+            roles.add(noellesrolesRoles("NOISEMAKER"));
+            roles.add(noellesrolesRoles("EXECUTIONER"));
+            roles.add(noellesrolesRoles("THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES"));
         }
         return List.copyOf(roles);
     }
@@ -233,14 +242,14 @@ public class KinsWatheRoles {
         roles.add(JUDGE);
         roles.add(KIDNAPPER);
         if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
-            roles.add(Noellesroles.MIMIC);
-            roles.add(Noellesroles.JESTER);
-            roles.add(Noellesroles.PHANTOM);
-            roles.add(Noellesroles.SWAPPER);
-            roles.add(Noellesroles.MORPHLING);
-            roles.add(Noellesroles.NOISEMAKER);
-            roles.add(Noellesroles.EXECUTIONER);
-            roles.add(Noellesroles.THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES);
+            roles.add(noellesrolesRoles("MIMIC"));
+            roles.add(noellesrolesRoles("JESTER"));
+            roles.add(noellesrolesRoles("PHANTOM"));
+            roles.add(noellesrolesRoles("SWAPPER"));
+            roles.add(noellesrolesRoles("MORPHLING"));
+            roles.add(noellesrolesRoles("NOISEMAKER"));
+            roles.add(noellesrolesRoles("EXECUTIONER"));
+            roles.add(noellesrolesRoles("THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES"));
         }
         return List.copyOf(roles);
     }

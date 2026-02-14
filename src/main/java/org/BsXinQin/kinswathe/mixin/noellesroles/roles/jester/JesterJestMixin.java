@@ -9,12 +9,13 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.BsXinQin.kinswathe.KinsWatheRoles;
-import org.agmas.noellesroles.Noellesroles;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import static org.BsXinQin.kinswathe.KinsWatheRoles.noellesrolesRoles;
 
 @Mixin(GameFunctions.class)
 public abstract class JesterJestMixin {
@@ -25,7 +26,7 @@ public abstract class JesterJestMixin {
         if (killer != null) {
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(victim.getWorld());
             Role killerRole = gameWorld.getRole(killer);
-            if (gameWorld.isRole(victim, Noellesroles.JESTER) && KinsWatheRoles.NEUTRAL_ROLES.contains(killerRole)) {
+            if (gameWorld.isRole(victim, noellesrolesRoles("JESTER")) && KinsWatheRoles.NEUTRAL_ROLES.contains(killerRole)) {
                 PlayerPsychoComponent playerPsycho = PlayerPsychoComponent.KEY.get(victim);
                 if (playerPsycho.getPsychoTicks() <= 0) {
                     playerPsycho.startPsycho();

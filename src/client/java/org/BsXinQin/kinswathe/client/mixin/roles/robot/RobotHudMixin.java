@@ -9,7 +9,7 @@ import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.text.Text;
 import org.BsXinQin.kinswathe.KinsWatheRoles;
-import org.BsXinQin.kinswathe.client.KinsWatheClient;
+import org.BsXinQin.kinswathe.client.KinsWatheInitializeClient;
 import org.BsXinQin.kinswathe.component.AbilityPlayerComponent;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,7 +31,7 @@ public abstract class RobotHudMixin {
         if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWatheRoles.ROBOT) && WatheClient.isPlayerAliveAndInSurvival()) {
             int drawY = context.getScaledWindowHeight();
 
-            Text line = Text.translatable("tip.kinswathe.ability.can_use", KinsWatheClient.abilityBind.getBoundKeyLocalizedText());
+            Text line = Text.translatable("tip.kinswathe.ability.can_use", KinsWatheInitializeClient.abilityBind.getBoundKeyLocalizedText());
 
             if (ability.cooldown > 0) {
                 line = Text.translatable("tip.kinswathe.cooldown", ability.cooldown / 20);

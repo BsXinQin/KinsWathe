@@ -10,7 +10,7 @@ import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.text.Text;
 import org.BsXinQin.kinswathe.KinsWatheRoles;
-import org.BsXinQin.kinswathe.client.KinsWatheClient;
+import org.BsXinQin.kinswathe.client.KinsWatheInitializeClient;
 import org.BsXinQin.kinswathe.component.AbilityPlayerComponent;
 import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +34,7 @@ public abstract class DetectiveHudMixin {
         if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWatheRoles.DETECTIVE) && WatheClient.isPlayerAliveAndInSurvival()) {
             int drawY = context.getScaledWindowHeight();
 
-            Text line = Text.translatable("tip.kinswathe.ability.can_use", KinsWatheClient.abilityBind.getBoundKeyLocalizedText());
+            Text line = Text.translatable("tip.kinswathe.ability.can_use", KinsWatheInitializeClient.abilityBind.getBoundKeyLocalizedText());
 
             if (playerShop.balance < ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).DetectiveAbilityPrice) {
                 line = Text.translatable("tip.kinswathe.ability.not_enough_money", ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).DetectiveAbilityPrice);

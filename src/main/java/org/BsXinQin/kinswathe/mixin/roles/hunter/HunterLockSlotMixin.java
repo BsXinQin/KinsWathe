@@ -2,6 +2,7 @@ package org.BsXinQin.kinswathe.mixin.roles.hunter;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import dev.doctor4t.wathe.game.GameFunctions;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
@@ -22,7 +23,7 @@ public class HunterLockSlotMixin {
     private void lockHunterSlot(double scrollAmount, @NotNull Operation<Void> original) {
         int lockSlot = this.player.getInventory().selectedSlot;
         original.call(scrollAmount);
-        if (this.player.isUsingItem()) {
+        if (this.player.isUsingItem() && GameFunctions.isPlayerAliveAndSurvival(this.player)) {
             ItemStack stack = this.player.getActiveItem();
             Item item = stack.getItem();
             if (item instanceof @NotNull HuntingKnifeItem knife && knife.getUseAction(stack) == UseAction.SPEAR && (this.player.getInventory().getStack(lockSlot).isOf(knife)) && (!this.player.getInventory().getStack(this.player.getInventory().selectedSlot).isOf(knife))) {

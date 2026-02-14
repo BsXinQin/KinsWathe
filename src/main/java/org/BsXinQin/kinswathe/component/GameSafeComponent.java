@@ -1,5 +1,7 @@
 package org.BsXinQin.kinswathe.component;
 
+import dev.doctor4t.wathe.api.event.AllowPlayerDeath;
+import dev.doctor4t.wathe.game.GameConstants;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
@@ -25,6 +27,7 @@ public class GameSafeComponent implements AutoSyncedComponent, ServerTickingComp
     @Override
     public void serverTick() {
         if (this.isGameSafe && this.safeTicks <= KinsWatheConfig.HANDLER.instance().StartingCooldown * 20) {
+            this.preventDeath();
             if (this.safeTicks == KinsWatheConfig.HANDLER.instance().StartingCooldown * 20) {
                 this.isGameSafe = false;
             }
@@ -37,6 +40,12 @@ public class GameSafeComponent implements AutoSyncedComponent, ServerTickingComp
         this.reset();
         this.isGameSafe = true;
         this.sync();
+    }
+
+    public void preventDeath() {
+        AllowPlayerDeath.EVENT.register(((player, killer, identifier) -> {
+            return identifier == GameConstants.DeathReasons.FELL_OUT_OF_TRAIN;
+        }));
     }
 
     public void reset() {

@@ -7,14 +7,15 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.Registries;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.agmas.noellesroles.ModItems;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -35,7 +36,7 @@ public abstract class DelusionVialApplyMixin {
         if (world.isClient || GameFunctions.isPlayerSpectatingOrCreative(player)) return;
         BlockEntity platter = world.getBlockEntity(pos);
         if (platter instanceof @NotNull BeveragePlateBlockEntity blockEntity) {
-            if (player.getStackInHand(Hand.MAIN_HAND).isOf(ModItems.DELUSION_VIAL) && blockEntity.getPoisoner() == null) {
+            if (player.getStackInHand(Hand.MAIN_HAND).isOf(Registries.ITEM.get(Identifier.of("noellesroles", "delusion_vial"))) && blockEntity.getPoisoner() == null) {
                 blockEntity.setPoisoner(DELUSION_MARKER.toString());
                 player.getStackInHand(Hand.MAIN_HAND).decrement(1);
                 player.playSoundToPlayer(SoundEvents.BLOCK_BREWING_STAND_BREW, SoundCategory.BLOCKS, 0.5F, 1.0F);

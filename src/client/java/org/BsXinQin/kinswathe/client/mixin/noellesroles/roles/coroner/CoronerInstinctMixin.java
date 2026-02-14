@@ -8,12 +8,13 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
-import org.agmas.noellesroles.Noellesroles;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import static org.BsXinQin.kinswathe.KinsWatheRoles.noellesrolesRoles;
 
 @Mixin(WatheClient.class)
 public abstract class CoronerInstinctMixin {
@@ -25,7 +26,7 @@ public abstract class CoronerInstinctMixin {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
         if (target instanceof @NotNull PlayerBodyEntity) {
             PlayerMoodComponent playerMood = PlayerMoodComponent.KEY.get(MinecraftClient.getInstance().player);
-            if (gameWorld.isRole(MinecraftClient.getInstance().player, Noellesroles.CORONER) && WatheClient.isPlayerAliveAndInSurvival() && !playerMood.isLowerThanMid()) {
+            if (gameWorld.isRole(MinecraftClient.getInstance().player, noellesrolesRoles("CORONER")) && WatheClient.isPlayerAliveAndInSurvival() && !playerMood.isLowerThanMid()) {
                 cir.setReturnValue(0x606060);
             }
         }

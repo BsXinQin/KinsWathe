@@ -35,7 +35,7 @@
 
 - Clear field drops and player effects and bodies when game ends
 
-- Add safe time when game starts, players can't use weapon or open shop gui
+- Add safe time when game starts, players can't damage or die in duration
 
 
 ## New Civillians

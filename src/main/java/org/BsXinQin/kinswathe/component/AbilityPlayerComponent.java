@@ -1,5 +1,6 @@
 package org.BsXinQin.kinswathe.component;
 
+import lombok.SneakyThrows;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -12,6 +13,9 @@ import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 import org.ladysnake.cca.api.v3.component.tick.ClientTickingComponent;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class AbilityPlayerComponent implements AutoSyncedComponent, ServerTickingComponent, ClientTickingComponent {
 
@@ -38,11 +42,18 @@ public class AbilityPlayerComponent implements AutoSyncedComponent, ServerTickin
         this.sync();
     }
 
+    @SneakyThrows
     public void setNoellesRolesAbilityCooldown(@NotNull PlayerEntity player, int ticks) {
         if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
-            org.agmas.noellesroles.AbilityPlayerComponent noellesrolesAbility = org.agmas.noellesroles.AbilityPlayerComponent.KEY.get(player);
-            noellesrolesAbility.cooldown = ticks * 20;
-            noellesrolesAbility.sync();
+            Class<?> abilityClass = Class.forName("org.agmas.noellesroles.AbilityPlayerComponent");
+            Field keyField = abilityClass.getField("KEY");
+            Object componentKey = keyField.get(null);
+            Method getMethod = componentKey.getClass().getMethod("get", Object.class);
+            Object playerAbility = getMethod.invoke(componentKey, player);
+            Field cooldownField = abilityClass.getField("cooldown");
+            cooldownField.setInt(playerAbility, ticks * 20);
+            Method syncMethod = abilityClass.getMethod("sync");
+            syncMethod.invoke(playerAbility);
         }
     }
 
