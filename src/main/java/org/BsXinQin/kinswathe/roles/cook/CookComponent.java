@@ -1,5 +1,6 @@
 package org.BsXinQin.kinswathe.roles.cook;
 
+import dev.doctor4t.wathe.cca.GameWorldComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
@@ -24,12 +25,19 @@ public class CookComponent implements AutoSyncedComponent, ServerTickingComponen
     @Override
     public void serverTick() {
         if (this.eatTicks > 0) {
-            --this.eatTicks;
+            this.notInGameReset();
+            -- this.eatTicks;
             this.sync();
         }
         if (this.panStunTicks > 0) {
-            --this.panStunTicks;
+            -- this.panStunTicks;
             this.sync();
+        }
+    }
+
+    public void notInGameReset() {
+        if (GameWorldComponent.KEY.get(this.player.getWorld()).getRole(this.player) == null) {
+            this.reset();
         }
     }
 

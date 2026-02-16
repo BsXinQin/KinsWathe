@@ -29,7 +29,7 @@ public abstract class HunterSprintMixin extends LivingEntity {
             ItemStack stack = player.getActiveItem();
             Item item = stack.getItem();
             if (item.getUseAction(stack) == UseAction.SPEAR && player.isSprinting()) {
-                player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 1, 0, false, false, false));
+                player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 2, 0, false, false, false));
                 return 0.15f;
             }
         }

@@ -1,5 +1,6 @@
 package org.BsXinQin.kinswathe;
 
+import dev.doctor4t.wathe.api.event.AllowPlayerDeath;
 import dev.doctor4t.wathe.api.event.GameEvents;
 import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.index.WatheItems;
@@ -27,16 +28,12 @@ public class KinsWatheGameSettings {
         GameEvents.ON_GAME_START.register((gameMode) -> {GAME_START = true;});
         ServerTickEvents.START_SERVER_TICK.register(server -> {
             if (GAME_START) {
-                //指令
-                server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "kill @e[type=wathe:player_body]");
-                server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "kill @e[type=item]");
-                server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "effect clear @a");
-                if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
-                    server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "kill @e[type=noellesroles:cube]");
-                }
+                //切换物品栏
                 for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
                     player.getInventory().selectedSlot = 8;
                 }
+                //指令
+                setCommands(server);
                 //游戏安全时间
                 setGameSafeTime(server);
                 GAME_START = false;
@@ -47,15 +44,20 @@ public class KinsWatheGameSettings {
         ServerTickEvents.START_SERVER_TICK.register(server -> {
             if (GAME_STOP) {
                 //指令
-                server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "kill @e[type=wathe:player_body]");
-                server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "kill @e[type=item]");
-                server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "effect clear @a");
-                if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
-                    server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "kill @e[type=noellesroles:cube]");
-                }
+                setCommands(server);
                 GAME_STOP = false;
             }
         });
+    }
+
+    /// 设置指令
+    public static void setCommands(@NotNull MinecraftServer server) {
+        server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "kill @e[type=wathe:player_body]");
+        server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "kill @e[type=item]");
+        server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "effect clear @a");
+        if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
+            server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "kill @e[type=noellesroles:cube]");
+        }
     }
 
     /// 设置游戏安全时间
@@ -91,8 +93,19 @@ public class KinsWatheGameSettings {
         PayloadTypeRegistry.playC2S().register(AbilityC2SPacket.ID, AbilityC2SPacket.CODEC);
     }
 
-    /// 重置游戏事件
-    public static void resetGameEvents() {
+    /// 注册游戏事件
+    public static void registerEvents() {
+        //死亡事件
+        AllowPlayerDeath.EVENT.register(((player, killer, identifier) -> {
+            if (identifier == GameConstants.DeathReasons.FELL_OUT_OF_TRAIN) return true;
+            GameSafeComponent playerSafe = GameSafeComponent.KEY.get(player);
+            if (playerSafe.isGameSafe) return false;
+            return true;
+        }));
+    }
+
+    /// 重置事件
+    public static void resetEvents() {
         ResetPlayerEvent.EVENT.register(player -> {
             GameSafeComponent.KEY.get(player).reset();
             AbilityPlayerComponent.KEY.get(player).reset();
@@ -107,7 +120,9 @@ public class KinsWatheGameSettings {
         initializeConfig();
         //注册网络数据包
         registerPackets();
-        //重置游戏事件
-        resetGameEvents();
+        //注册游戏事件
+        registerEvents();
+        //重置事件
+        resetEvents();
     }
 }

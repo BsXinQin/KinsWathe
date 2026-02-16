@@ -1,7 +1,6 @@
 package org.BsXinQin.kinswathe.roles.physician;
 
-import dev.doctor4t.wathe.api.event.AllowPlayerDeath;
-import dev.doctor4t.wathe.game.GameConstants;
+import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.index.WatheSounds;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -26,7 +25,15 @@ public class PhysicianComponent implements AutoSyncedComponent, ServerTickingCom
 
     @Override
     public void serverTick() {
-        this.preventDeath();
+        if (this.physicianArmor > 0) {
+            this.notInGameReset();
+        }
+    }
+
+    public void notInGameReset() {
+        if (GameWorldComponent.KEY.get(this.player.getWorld()).getRole(this.player) == null) {
+            this.reset();
+        }
     }
 
     public void giveArmor() {
@@ -34,17 +41,8 @@ public class PhysicianComponent implements AutoSyncedComponent, ServerTickingCom
         this.sync();
     }
 
-    public void preventDeath() {
-        AllowPlayerDeath.EVENT.register(((player, killer, identifier) -> {
-            if (identifier == GameConstants.DeathReasons.FELL_OUT_OF_TRAIN) return true;
-            PhysicianComponent playerArmor = PhysicianComponent.KEY.get(player);
-            if (playerArmor.physicianArmor > 0) {
-                player.getWorld().playSound(player, player.getBlockPos(), WatheSounds.ITEM_PSYCHO_ARMOUR, SoundCategory.PLAYERS, 5.0F, 1.0F);
-                playerArmor.reset();
-                return false;
-            }
-            return true;
-        }));
+    public void armorSound() {
+        this.player.getWorld().playSound(null, this.player.getBlockPos(), WatheSounds.ITEM_PSYCHO_ARMOUR, SoundCategory.PLAYERS, 5.0F, 1.0F);
     }
 
     public void reset() {

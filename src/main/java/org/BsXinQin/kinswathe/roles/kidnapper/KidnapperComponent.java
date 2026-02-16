@@ -29,42 +29,47 @@ public class KidnapperComponent implements AutoSyncedComponent, ServerTickingCom
     @NotNull private final PlayerEntity player;
     public UUID controllerUUID = null;
     public int controlTicks = 0;
-    private int lastSecond = 0;
 
     public KidnapperComponent(@NotNull PlayerEntity player) {this.player = player;}
 
     @Override
     public void serverTick() {
         if (this.controlTicks > 0) {
-            if (this.controllerUUID != null) {
-                PlayerEntity controller = this.player.getWorld().getPlayerByUuid(this.controllerUUID);
-                if (controller == null || (controller != null && !GameWorldComponent.KEY.get(this.player.getWorld()).isRunning() || !GameFunctions.isPlayerAliveAndSurvival(controller) || !GameFunctions.isPlayerAliveAndSurvival(this.player) || controller.isSneaking())) {
-                    this.releaseControl();
-                    return;
-                }
-            } else this.reset();
-            this.controlTicks--;
-            int currentSecond = this.controlTicks / 20 + 1;
-            if (currentSecond != lastSecond && currentSecond >= 0) {
-                this.notifyControllerRemainingTime(currentSecond);
-                lastSecond = currentSecond;
-            }
+            this.notInGameReset();
+            this.connectWithController();
             this.teleportToController();
-            if (controlTicks == 0) {
-                this.releaseControl();
-            }
+            this.notifyControllerRemainingTime();
+            -- this.controlTicks;
             this.sync();
+        }
+    }
+
+    public void notInGameReset() {
+        if (GameWorldComponent.KEY.get(this.player.getWorld()).getRole(this.player) == null) {
+            this.reset();
         }
     }
 
     public void startControl(@NotNull PlayerEntity controller) {
         this.controllerUUID = controller.getUuid();
         this.controlTicks = GameConstants.getInTicks(0,20);
-        this.lastSecond = this.controlTicks / 20 + 1;
         this.sync();
     }
 
-    private void teleportToController() {
+    public void connectWithController() {
+        if (this.controllerUUID == null) return;
+        PlayerEntity controller = this.player.getWorld().getPlayerByUuid(this.controllerUUID);
+        if (controller == null) {
+            this.reset();
+            return;
+        }
+        if (GameFunctions.isPlayerSpectatingOrCreative(controller) || GameFunctions.isPlayerSpectatingOrCreative(this.player) || controller.isSneaking()) {
+            this.releaseControlTip();
+            this.reset();
+        }
+    }
+
+    public void teleportToController() {
         if (this.controllerUUID == null) return;
         PlayerEntity controller = this.player.getWorld().getPlayerByUuid(this.controllerUUID);
         if (controller != null) {
@@ -72,29 +77,27 @@ public class KidnapperComponent implements AutoSyncedComponent, ServerTickingCom
         }
     }
 
-    private void notifyControllerRemainingTime(int remainingSeconds) {
+    public void notifyControllerRemainingTime() {
         if (this.controllerUUID == null) return;
         PlayerEntity controller = this.player.getWorld().getPlayerByUuid(this.controllerUUID);
-        if (controller != null && GameWorldComponent.KEY.get(controller.getWorld()).isRunning() && GameFunctions.isPlayerAliveAndSurvival(controller) && remainingSeconds > 0) {
-            controller.sendMessage(Text.translatable("tip.kinswathe.kidnapper.timeleft", remainingSeconds).withColor(KinsWatheRoles.KIDNAPPER.color()), true);
+        if (controller != null && this.controlTicks / 20 >= 0) {
+            controller.sendMessage(Text.translatable("tip.kinswathe.kidnapper.timeleft", this.controlTicks / 20).withColor(KinsWatheRoles.KIDNAPPER.color()), true);
+            if (this.controlTicks == 1) releaseControlTip();
         }
     }
 
-    public void releaseControl() {
-        if (this.controllerUUID != null) {
-            PlayerEntity controller = this.player.getWorld().getPlayerByUuid(this.controllerUUID);
-            if (controller != null && GameWorldComponent.KEY.get(controller.getWorld()).isRunning() && GameFunctions.isPlayerAliveAndSurvival(controller)) {
-                controller.sendMessage(Text.translatable("tip.kinswathe.kidnapper.release").withColor(KinsWatheRoles.KIDNAPPER.color()), true);
-                controller.playSoundToPlayer(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.0f);
-            }
+    public void releaseControlTip() {
+        if (this.controllerUUID == null) return;
+        PlayerEntity controller = this.player.getWorld().getPlayerByUuid(this.controllerUUID);
+        if (controller != null) {
+            controller.sendMessage(Text.translatable("tip.kinswathe.kidnapper.release").withColor(KinsWatheRoles.KIDNAPPER.color()), true);
+            controller.playSoundToPlayer(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.0f);
         }
-        this.reset();
     }
 
     public void reset() {
         this.controllerUUID = null;
         this.controlTicks = 0;
-        this.lastSecond = 0;
         this.sync();
     }
 
@@ -105,14 +108,12 @@ public class KidnapperComponent implements AutoSyncedComponent, ServerTickingCom
     @Override
     public void writeToNbt(@NotNull NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
         tag.putInt("controlTicks", this.controlTicks);
-        tag.putInt("lastSecond", this.lastSecond);
         if (this.controllerUUID != null) tag.putUuid("controllerUUID", this.controllerUUID);
     }
 
     @Override
     public void readFromNbt(@NotNull NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
         this.controlTicks = tag.contains("controlTicks") ? tag.getInt("controlTicks") : 0;
-        this.lastSecond = tag.contains("lastSecond") ? tag.getInt("lastSecond") : 0;
         this.controllerUUID = tag.contains("controllerUUID") ? tag.getUuid("controllerUUID") : null;
     }
 }

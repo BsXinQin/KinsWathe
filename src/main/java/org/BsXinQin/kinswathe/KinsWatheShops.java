@@ -2,6 +2,9 @@ package org.BsXinQin.kinswathe;
 
 import dev.doctor4t.wathe.index.WatheItems;
 import dev.doctor4t.wathe.util.ShopEntry;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.world.World;
 import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
@@ -63,5 +66,18 @@ public class KinsWatheShops {
             entries.add(new ShopEntry(WatheItems.BLACKOUT.getDefaultStack(), 200, ShopEntry.Type.TOOL));
             entries.add(new ShopEntry(WatheItems.NOTE.getDefaultStack(), 10, ShopEntry.Type.TOOL));
         });
+    }
+    //杀手方中立商店
+    public static List<ShopEntry> getKillerNeutralRolesShop(@NotNull World world) {
+        if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
+            return Util.make(new ArrayList<>(), (entries) -> {
+                entries.add(new ShopEntry(WatheItems.LOCKPICK.getDefaultStack(), 50, ShopEntry.Type.TOOL));
+                entries.add(new ShopEntry(Registries.ITEM.get(Identifier.of("noellesroles", "delusion_vial")).getDefaultStack(), 30, ShopEntry.Type.POISON));
+                entries.add(new ShopEntry(WatheItems.FIRECRACKER.getDefaultStack(), 5, ShopEntry.Type.TOOL));
+                entries.add(new ShopEntry(WatheItems.NOTE.getDefaultStack(), 5, ShopEntry.Type.TOOL));
+
+            });
+        }
+        return null;
     }
 }

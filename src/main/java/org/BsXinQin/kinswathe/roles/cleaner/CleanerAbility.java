@@ -23,7 +23,7 @@ public class CleanerAbility {
             playerShop.sync();
             player.getServer().getCommandManager().executeWithPrefix(player.getServer().getCommandSource().withSilent(), "kill @e[type=item]");
             player.playSoundToPlayer(SoundEvents.ENTITY_ENDER_DRAGON_FLAP, SoundCategory.PLAYERS, 1.0f, 1.0f);
-            ability.setAbilityCooldown(player, KinsWatheConfig.HANDLER.instance().CleanerAbilityCooldown);
+            ability.setAbilityCooldown(KinsWatheConfig.HANDLER.instance().CleanerAbilityCooldown);
         }
     }
 }

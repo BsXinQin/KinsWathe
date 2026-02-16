@@ -103,6 +103,15 @@
 
 ## New Neutrals
 
+- Dreamer
+  - Generates successfully when Nolle's Roles was loaded
+  - Killer side neutral role
+  - Initially equip with Dream Imprint
+  - Dream Imprint can imprint target and protects it one extra hit of life
+  - When imprinted target is damaged, it will teleport to user
+  - Turn into a killer based on the civilians who taking Delusion Vial
+  - The number of civilians taking Delusion Vial is one-fourth of the total number of players
+
 - Licensed Villain
   - Limit on the number of people that can be generated
   - Requires killing all players to win

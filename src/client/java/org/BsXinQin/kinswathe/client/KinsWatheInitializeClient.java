@@ -69,7 +69,7 @@ public class KinsWatheInitializeClient {
         ItemTooltipCallback.EVENT.register(((itemStack, tooltipContext, tooltipType, list) -> {
             //添加KinsWathe物品描述
             ItemTipComponent.addItemtip(KinsWatheItems.BLOWGUN, itemStack, list);
-//            ItemTipComponent.addItemtip(KinsWatheItems.DREAM_IMPRINT, itemStack, list);
+            ItemTipComponent.addItemtip(KinsWatheItems.DREAM_IMPRINT, itemStack, list);
             ItemTipComponent.addItemtip(KinsWatheItems.HUNTING_KNIFE, itemStack, list);
             ItemTipComponent.addItemtip(KinsWatheItems.KNOCKOUT_DRUG, itemStack, list);
             ItemTipComponent.addItemtip(KinsWatheItems.MEDICAL_KIT, itemStack, list);

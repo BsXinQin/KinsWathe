@@ -28,8 +28,7 @@ public abstract class KidnapperControlledMixin {
                 context.fill(0, 0, width, height, 0xFF000000);
                 Text warningText = Text.translatable("tip.kinswathe.kidnapper.warning");
                 context.drawCenteredTextWithShadow(MinecraftClient.getInstance().textRenderer, warningText, width / 2, height / 2 - 10, KinsWatheRoles.KIDNAPPER.color());
-                int remainingSeconds = playerControlled.controlTicks / 20;
-                Text countdownText = Text.translatable("tip.kinswathe.kidnapper.timeleft", remainingSeconds);
+                Text countdownText = Text.translatable("tip.kinswathe.kidnapper.timeleft", playerControlled.controlTicks / 20);
                 context.drawCenteredTextWithShadow(MinecraftClient.getInstance().textRenderer, countdownText, width / 2, height / 2 + 10, KinsWatheRoles.KIDNAPPER.color());
             }
         }

@@ -18,11 +18,9 @@ public class RobotAbility {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
         AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(player);
         if (gameWorld.isRole(player, KinsWatheRoles.ROBOT) && GameFunctions.isPlayerAliveAndSurvival(player) && ability.cooldown <= 0) {
-            RobotComponent playerRobot = RobotComponent.KEY.get(player);
-            playerRobot.setRobotTicks(KinsWatheConfig.HANDLER.instance().RobotAbilityDuration * 20);
             player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, KinsWatheConfig.HANDLER.instance().RobotAbilityDuration * 20, 0, true, true, false));
             player.getWorld().playSound(null, player.getBlockPos(), SoundEvents.ENTITY_IRON_GOLEM_HURT, SoundCategory.PLAYERS, 1.0f, 1.0f);
-            ability.setAbilityCooldown(player, KinsWatheConfig.HANDLER.instance().RobotAbilityCooldown);
+            ability.setAbilityCooldown(KinsWatheConfig.HANDLER.instance().RobotAbilityCooldown);
         }
     }
 }

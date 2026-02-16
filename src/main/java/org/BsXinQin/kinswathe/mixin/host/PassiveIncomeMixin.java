@@ -17,6 +17,7 @@ public abstract class PassiveIncomeMixin {
     @WrapOperation(method = "tickServerGameLoop", at = @At(value = "INVOKE", target = "Ldev/doctor4t/wathe/cca/GameWorldComponent;canUseKillerFeatures(Lnet/minecraft/entity/player/PlayerEntity;)Z"))
     public boolean setPassiveIncome(@NotNull GameWorldComponent gameWorld, @NotNull PlayerEntity player, @NotNull Operation<Boolean> original) {
         if (gameWorld.isRole(player, KinsWatheRoles.COOK) ||
+            gameWorld.isRole(player, KinsWatheRoles.DREAMER) ||
             gameWorld.isRole(player, KinsWatheRoles.JUDGE)) return true;
         return original.call(gameWorld,player);
     }

@@ -1,7 +1,6 @@
 package org.BsXinQin.kinswathe.component;
 
-import dev.doctor4t.wathe.api.event.AllowPlayerDeath;
-import dev.doctor4t.wathe.game.GameConstants;
+import dev.doctor4t.wathe.cca.GameWorldComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
@@ -26,8 +25,8 @@ public class GameSafeComponent implements AutoSyncedComponent, ServerTickingComp
 
     @Override
     public void serverTick() {
-        this.preventDeath();
         if (this.isGameSafe && this.safeTicks <= KinsWatheConfig.HANDLER.instance().StartingCooldown * 20) {
+            this.notInGameReset();
             if (this.safeTicks == KinsWatheConfig.HANDLER.instance().StartingCooldown * 20) {
                 this.isGameSafe = false;
             }
@@ -36,21 +35,15 @@ public class GameSafeComponent implements AutoSyncedComponent, ServerTickingComp
         }
     }
 
-    public void startGameSafe() {
-        this.reset();
-        this.isGameSafe = true;
-        this.sync();
+    public void notInGameReset() {
+        if (GameWorldComponent.KEY.get(this.player.getWorld()).getRole(this.player) == null) {
+            this.reset();
+        }
     }
 
-    public void preventDeath() {
-        AllowPlayerDeath.EVENT.register(((player, killer, identifier) -> {
-            if (identifier == GameConstants.DeathReasons.FELL_OUT_OF_TRAIN) return true;
-            GameSafeComponent playerSafe = GameSafeComponent.KEY.get(player);
-            if (playerSafe.isGameSafe) {
-                return false;
-            }
-            return true;
-        }));
+    public void startGameSafe() {
+        this.isGameSafe = true;
+        this.sync();
     }
 
     public void reset() {
@@ -72,6 +65,6 @@ public class GameSafeComponent implements AutoSyncedComponent, ServerTickingComp
     @Override
     public void readFromNbt(@NotNull NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
         this.safeTicks = tag.contains("safeTicks") ? tag.getInt("safeTicks") : 0;
-        this.isGameSafe = tag.contains("isGameSafe") ? tag.getBoolean("isGameSafe") : null;
+        this.isGameSafe = tag.contains("isGameSafe") && tag.getBoolean("isGameSafe");
     }
 }

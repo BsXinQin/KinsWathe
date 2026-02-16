@@ -7,10 +7,10 @@ import org.BsXinQin.kinswathe.component.CustomWinnerComponent;
 import org.BsXinQin.kinswathe.component.GameSafeComponent;
 import org.BsXinQin.kinswathe.roles.cook.CookComponent;
 import org.BsXinQin.kinswathe.roles.dreamer.DreamerComponent;
+import org.BsXinQin.kinswathe.roles.dreamer.DreamerKillerComponent;
 import org.BsXinQin.kinswathe.roles.hunter.HunterComponent;
 import org.BsXinQin.kinswathe.roles.kidnapper.KidnapperComponent;
 import org.BsXinQin.kinswathe.roles.physician.PhysicianComponent;
-import org.BsXinQin.kinswathe.roles.robot.RobotComponent;
 import org.jetbrains.annotations.NotNull;
 import org.ladysnake.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import org.ladysnake.cca.api.v3.entity.EntityComponentInitializer;
@@ -26,9 +26,9 @@ public class KinsWatheComponents implements EntityComponentInitializer, WorldCom
         registry.beginRegistration(PlayerEntity.class, AbilityPlayerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(AbilityPlayerComponent::new);
         registry.beginRegistration(PlayerEntity.class, CookComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(CookComponent::new);
         registry.beginRegistration(PlayerEntity.class, DreamerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(DreamerComponent::new);
+        registry.beginRegistration(PlayerEntity.class, DreamerKillerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(DreamerKillerComponent::new);
         registry.beginRegistration(PlayerEntity.class, HunterComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(HunterComponent::new);
         registry.beginRegistration(PlayerEntity.class, KidnapperComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(KidnapperComponent::new);
-        registry.beginRegistration(PlayerEntity.class, RobotComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(RobotComponent::new);
         registry.beginRegistration(PlayerEntity.class, PhysicianComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(PhysicianComponent::new);
     }
 

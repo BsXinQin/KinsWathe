@@ -35,8 +35,8 @@ public abstract class PhysicianShopMixin extends LimitedHandledScreen<PlayerScre
             List<ShopEntry> entries = new ArrayList<>();
             entries.add(new ShopEntry(KinsWatheItems.PILL.getDefaultStack(), ConfigWorldComponent.KEY.get(this.player.getWorld()).PhysicianPillPrice, ShopEntry.Type.POISON));
             int apart = 36;
-            int x = width / 2 - (entries.size()) * apart / 2 + 9;
-            int shouldBeY = (height - 32) / 2;
+            int x = this.width / 2 - (entries.size()) * apart / 2 + 9;
+            int shouldBeY = (this.height - 32) / 2;
             int y = shouldBeY - 46;
             for(int i = 0; i < entries.size(); ++i) {
                 addDrawableChild(new LimitedInventoryScreen.StoreItemWidget((LimitedInventoryScreen) (Object)this, x + apart * i, y, (ShopEntry)entries.get(i), i));

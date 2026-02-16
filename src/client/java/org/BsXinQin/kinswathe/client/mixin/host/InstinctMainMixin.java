@@ -1,7 +1,6 @@
 package org.BsXinQin.kinswathe.client.mixin.host;
 
 import dev.doctor4t.wathe.api.Role;
-import dev.doctor4t.wathe.api.WatheRoles;
 import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.client.WatheClient;
 import dev.doctor4t.wathe.game.GameFunctions;
@@ -28,7 +27,9 @@ public abstract class InstinctMainMixin {
                 if (role != null) {
                     if (WatheClient.isKiller() && WatheClient.isPlayerAliveAndInSurvival()) {
                         if (KinsWatheRoles.NEUTRAL_ROLES.contains(role)) {
-                            cir.setReturnValue(WatheRoles.CIVILIAN.color());
+                            cir.setReturnValue(0x4EDD35);
+                        } else if (KinsWatheRoles.KILLER_NEUTRAL_ROLES.contains(role)) {
+                            cir.setReturnValue(role.color());
                         }
                     }
                 }

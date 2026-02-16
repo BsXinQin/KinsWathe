@@ -22,6 +22,13 @@
   "tip.kinswathe.detective.notinnocent": "%s 不是平民",
   "hud.kinswathe.detective.target": "按下 %s 键调查该目标身份",
 
+  "announcement.role.kinswathe.dreamer": "梦者",
+  "announcement.goals.kinswathe.dreamer": "让你的世界变得不可思议！",
+  "tip.kinswathe.dreamer.imprint": "%s 与你烙下了印记",
+  "tip.kinswathe.dreamer.disconnect": "烙印之人似乎与你而去了...",
+  "tip.kinswathe.dreamer.counts": "已食用幻觉试剂的人数 %s/%s",
+  "tip.kinswathe.dreamer.fake_poisoned": "有人陷入了幻觉",
+
   "announcement.role.kinswathe.drugmaker": "制毒师",
   "announcement.goals.kinswathe.drugmaker": "用毒药征服所有人！",
   "tip.kinswathe.drugmaker.poison_failed": "它似乎无法中毒...",
@@ -64,7 +71,7 @@
   "item.kinswathe.blowgun.tooltip": "瞄准、右键点击并射击\n被射中的目标将会中毒\n冷却 1 分钟",
 
   "item.kinswathe.dream_imprint": "梦之印记",
-  "item.kinswathe.dream_imprint.tooltip": "用于玩家，使其额外承受一次伤害\n玩家受到伤害后传送到梦者身边\n一次性物品",
+  "item.kinswathe.dream_imprint.tooltip": "用于玩家，使其额外承受一次伤害\n对方受到伤害后传送到使用者身边\n一次性物品",
 
   "item.kinswathe.hunting_knife": "猎刀",
   "item.kinswathe.hunting_knife.tooltip": "右键蓄力一秒，靠近目标即可发动暗杀\n如果停止蓄力，冷却四倍蓄力时间\n击杀后冷却 45 秒\n攻击可击退玩家（无冷却）",

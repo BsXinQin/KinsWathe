@@ -26,32 +26,38 @@ public class AbilityPlayerComponent implements AutoSyncedComponent, ServerTickin
     public AbilityPlayerComponent(@NotNull PlayerEntity player) {
         this.player = player;
     }
-    public void sync() {KEY.sync(this.player);}
-    public void clientTick() {}
 
+    @Override
     public void serverTick() {
         if (this.cooldown > 0) {
-            --this.cooldown;this.sync();
+            -- this.cooldown;
+            this.sync();
         }
     }
 
-    public void setAbilityCooldown(@NotNull PlayerEntity player, int ticks) {
-        AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(player);
-        setNoellesRolesAbilityCooldown(player, ticks);
-        ability.cooldown = ticks * 20;
+    @Override
+    public void clientTick() {}
+
+    public void setAbilityCooldown(int ticks) {
+        setNoellesRolesAbilityCooldown(ticks);
+        this.cooldown = ticks * 20;
         this.sync();
     }
 
     @SneakyThrows
-    public void setNoellesRolesAbilityCooldown(@NotNull PlayerEntity player, int ticks) {
+    public void setNoellesRolesAbilityCooldown(int ticks) {
         if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
             Class<?> abilityClass = Class.forName("org.agmas.noellesroles.AbilityPlayerComponent");
             Field keyField = abilityClass.getField("KEY");
             Object componentKey = keyField.get(null);
             Method getMethod = componentKey.getClass().getMethod("get", Object.class);
-            Object playerAbility = getMethod.invoke(componentKey, player);
+            Object playerAbility = getMethod.invoke(componentKey, this.player);
             Field cooldownField = abilityClass.getField("cooldown");
-            cooldownField.setInt(playerAbility, ticks * 20);
+            if (ticks >= 120) {
+                cooldownField.setInt(playerAbility, ticks * 20);
+            } else {
+                cooldownField.setInt(playerAbility, 2400);
+            }
             Method syncMethod = abilityClass.getMethod("sync");
             syncMethod.invoke(playerAbility);
         }
@@ -62,11 +68,17 @@ public class AbilityPlayerComponent implements AutoSyncedComponent, ServerTickin
         this.sync();
     }
 
+    public void sync() {
+        KEY.sync(this.player);
+    }
+
+    @Override
     public void writeToNbt(@NotNull NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
         tag.putInt("cooldown", this.cooldown);
 
     }
 
+    @Override
     public void readFromNbt(@NotNull NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
         this.cooldown = tag.contains("cooldown") ? tag.getInt("cooldown") : 0;
     }

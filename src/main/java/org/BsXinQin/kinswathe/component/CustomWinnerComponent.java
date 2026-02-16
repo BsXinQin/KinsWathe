@@ -34,17 +34,8 @@ public class CustomWinnerComponent implements AutoSyncedComponent {
     public CustomWinnerComponent(@NotNull World world) {
         this.world = world;
     }
-    public boolean hasCustomWinner() {return this.winningTextId != null;}
-    public void sync() {CustomWinnerComponent.KEY.sync(this.world);}
 
-    public void reset() {
-        this.winningTextId = null;
-        this.winners = new ArrayList<>();
-        this.color = 0x000000;sync();
-        this.sync();
-    }
-
-    private ArrayList<UUID> uuidListFromTag(@NotNull NbtCompound tag, String listName) {
+    public ArrayList<UUID> uuidListFromTag(@NotNull NbtCompound tag, String listName) {
         ArrayList<UUID> result = new ArrayList<>();
         if (tag.contains(listName)) {
             NbtList list = tag.getList(listName, NbtElement.INT_ARRAY_TYPE);
@@ -56,6 +47,19 @@ public class CustomWinnerComponent implements AutoSyncedComponent {
             }
         }
         return result;
+    }
+
+    public boolean hasCustomWinner() {
+        return this.winningTextId != null;
+    }
+
+    public void sync() {CustomWinnerComponent.KEY.sync(this.world);}
+
+    public void reset() {
+        this.winningTextId = null;
+        this.winners = new ArrayList<>();
+        this.color = 0x000000;sync();
+        this.sync();
     }
 
     @Override

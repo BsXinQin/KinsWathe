@@ -35,7 +35,7 @@ public class JudgeAbility {
             lightning.refreshPositionAfterTeleport(targetPlayer.getX(), targetPlayer.getY(), targetPlayer.getZ());
             lightning.setCosmetic(true);
             targetPlayer.getWorld().spawnEntity(lightning);
-            ability.setAbilityCooldown(player, KinsWatheConfig.HANDLER.instance().JudgeAbilityCooldown);
+            ability.setAbilityCooldown(KinsWatheConfig.HANDLER.instance().JudgeAbilityCooldown);
         }
     }
 }

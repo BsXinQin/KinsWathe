@@ -39,7 +39,7 @@ public class DetectiveAbility {
                     player.sendMessage(Text.translatable("tip.kinswathe.detective.notinnocent", targetPlayer.getName().getString()).withColor(WatheRoles.KILLER.color()), true);
                     player.playSoundToPlayer(SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.PLAYERS, 1.0f, 1.0f);
                 }
-                ability.setAbilityCooldown(player, KinsWatheConfig.HANDLER.instance().DetectiveAbilityCooldown);
+                ability.setAbilityCooldown(KinsWatheConfig.HANDLER.instance().DetectiveAbilityCooldown);
             }
         }
     }

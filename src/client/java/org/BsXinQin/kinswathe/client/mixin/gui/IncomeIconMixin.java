@@ -31,6 +31,7 @@ public abstract class IncomeIconMixin {
             if (GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.BELLRINGER) ||
                 GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.COOK) ||
                 GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.DETECTIVE) ||
+                GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.DREAMER) ||
                 GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.JUDGE) ||
                 GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.LICENSED_VILLAIN) ||
                 GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.PHYSICIAN)) {

@@ -24,7 +24,7 @@ public class HunterAbility {
             playerShop.sync();
             player.getItemCooldownManager().set(KinsWatheItems.HUNTING_KNIFE, 0);
             player.playSoundToPlayer(SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.PLAYERS, 1.0f, 1.0f);
-            ability.setAbilityCooldown(player, KinsWatheConfig.HANDLER.instance().HunterAbilityCooldown);
+            ability.setAbilityCooldown(KinsWatheConfig.HANDLER.instance().HunterAbilityCooldown);
         }
     }
 }
