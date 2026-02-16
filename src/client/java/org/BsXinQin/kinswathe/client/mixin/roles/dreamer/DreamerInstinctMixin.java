@@ -33,13 +33,24 @@ public abstract class DreamerInstinctMixin {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
         if (target instanceof @NotNull PlayerEntity targetPlayer) {
             if (GameFunctions.isPlayerAliveAndSurvival(targetPlayer)) {
+                if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWatheRoles.DREAMER) && WatheClient.isInstinctEnabled()) {
+                    cir.setReturnValue(KinsWatheRoles.DREAMER.color());
+                }
+            }
+        }
+    }
+
+    @Inject(method = "getInstinctHighlight", at = @At("HEAD"), cancellable = true)
+    private static void getDreamImprintHighlight(@NotNull Entity target, @NotNull CallbackInfoReturnable<Integer> cir) {
+        if (MinecraftClient.getInstance().player == null) return;
+        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
+        if (target instanceof @NotNull PlayerEntity targetPlayer) {
+            if (GameFunctions.isPlayerAliveAndSurvival(targetPlayer)) {
                 DreamerComponent targetDream = DreamerComponent.KEY.get(targetPlayer);
                 if (targetDream.dreamerUUID == null) return;
                 PlayerEntity dreamer = targetPlayer.getWorld().getPlayerByUuid(targetDream.dreamerUUID);
-                if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWatheRoles.DREAMER) && WatheClient.isInstinctEnabled()) {
-                    cir.setReturnValue(KinsWatheRoles.DREAMER.color());
-                } else if ((MinecraftClient.getInstance().player == dreamer && !WatheClient.isKiller() && WatheClient.isPlayerAliveAndInSurvival() && targetDream.dreamArmor > 0) ||
-                           (MinecraftClient.getInstance().player == dreamer && WatheClient.isKiller() && WatheClient.isPlayerAliveAndInSurvival() && !WatheClient.isInstinctEnabled() && targetDream.dreamArmor > 0)) {
+                if ((MinecraftClient.getInstance().player == dreamer && !WatheClient.isKiller() && WatheClient.isPlayerAliveAndInSurvival() && targetDream.dreamArmor > 0) ||
+                    (MinecraftClient.getInstance().player == dreamer && WatheClient.isKiller() && WatheClient.isPlayerAliveAndInSurvival() && !WatheClient.isInstinctEnabled() && targetDream.dreamArmor > 0)) {
                     cir.setReturnValue(KinsWatheRoles.DREAMER.color());
                 }
             }

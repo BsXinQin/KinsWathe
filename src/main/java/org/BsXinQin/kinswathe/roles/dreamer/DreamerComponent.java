@@ -65,7 +65,7 @@ public class DreamerComponent implements AutoSyncedComponent, ServerTickingCompo
     }
 
     public void teleportToDreamer() {
-        if (this.dreamerUUID == null) return;
+        if (this.dreamerUUID == null || this.player.getWorld().isClient) return;
         PlayerEntity dreamer = this.player.getWorld().getPlayerByUuid(this.dreamerUUID);
         if (GameFunctions.isPlayerAliveAndSurvival(dreamer) && GameFunctions.isPlayerAliveAndSurvival(this.player)) {
             ((ServerWorld) this.player.getWorld()).spawnParticles(ParticleTypes.PORTAL, this.player.getX(), this.player.getY(), this.player.getZ(), 75, 0.5, 1.5, 0.5, 0.1);

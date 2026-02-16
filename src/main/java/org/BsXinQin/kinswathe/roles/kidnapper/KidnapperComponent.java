@@ -70,7 +70,7 @@ public class KidnapperComponent implements AutoSyncedComponent, ServerTickingCom
     }
 
     public void teleportToController() {
-        if (this.controllerUUID == null) return;
+        if (this.controllerUUID == null || this.player.getWorld().isClient) return;
         PlayerEntity controller = this.player.getWorld().getPlayerByUuid(this.controllerUUID);
         if (controller != null) {
             this.player.teleport((ServerWorld) this.player.getWorld(), controller.getX(), controller.getY(), controller.getZ(), Set.of(), controller.getYaw(), controller.getPitch());

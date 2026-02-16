@@ -58,7 +58,7 @@ public class DreamerKillerComponent implements AutoSyncedComponent, ServerTickin
     }
 
     public void setDreamerRequired() {
-        if (!GameWorldComponent.KEY.get(this.player.getWorld()).isRunning() && this.dreamerRequired != this.player.getServer().getPlayerManager().getCurrentPlayerCount()) {
+        if (!GameWorldComponent.KEY.get(this.player.getWorld()).isRunning() && this.dreamerRequired != this.player.getServer().getPlayerManager().getCurrentPlayerCount() / 4) {
             this.dreamerRequired = this.player.getServer().getPlayerManager().getCurrentPlayerCount() / 4;
             this.sync();
         }
