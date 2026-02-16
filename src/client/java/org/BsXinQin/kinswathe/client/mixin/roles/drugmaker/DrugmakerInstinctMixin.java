@@ -29,6 +29,7 @@ public abstract class DrugmakerInstinctMixin {
         if (target instanceof @NotNull PlayerEntity targetPlayer) {
             if (GameFunctions.isPlayerAliveAndSurvival(targetPlayer)) {
                 PlayerPoisonComponent targetPoison = PlayerPoisonComponent.KEY.get(targetPlayer);
+                if (targetPoison.poisoner == null) return;
                 if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWatheRoles.DRUGMAKER) && WatheClient.isPlayerAliveAndInSurvival() && !WatheClient.isInstinctEnabled() && targetPoison.poisonTicks > 0 && !targetPoison.poisoner.equals(DELUSION_MARKER)) {
                     cir.setReturnValue(KinsWatheRoles.DRUGMAKER.color());
                 }

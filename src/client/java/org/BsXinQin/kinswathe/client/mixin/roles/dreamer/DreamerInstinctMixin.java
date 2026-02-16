@@ -34,6 +34,7 @@ public abstract class DreamerInstinctMixin {
         if (target instanceof @NotNull PlayerEntity targetPlayer) {
             if (GameFunctions.isPlayerAliveAndSurvival(targetPlayer)) {
                 DreamerComponent targetDream = DreamerComponent.KEY.get(targetPlayer);
+                if (targetDream.dreamerUUID == null) return;
                 PlayerEntity dreamer = targetPlayer.getWorld().getPlayerByUuid(targetDream.dreamerUUID);
                 if (gameWorld.isRole(MinecraftClient.getInstance().player, KinsWatheRoles.DREAMER) && WatheClient.isInstinctEnabled()) {
                     cir.setReturnValue(KinsWatheRoles.DREAMER.color());
