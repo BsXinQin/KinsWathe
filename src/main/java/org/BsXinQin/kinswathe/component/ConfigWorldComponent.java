@@ -29,7 +29,6 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
     public boolean EnableStartSafeTime = false;
     public boolean EnableBetterBlackout = true;
     public boolean EnableAutoPsychoInstinct = true;
-    public boolean EnableNeutralAnnouncement = true;
     //关于KinsWathe修改
     public int BellringerAbilityPrice = 200;
     public boolean BodymakerAbilityFakeRole = true;
@@ -66,7 +65,6 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         EnableStartSafeTime = KinsWatheConfig.HANDLER.instance().EnableStartSafeTime; tag.putBoolean("EnableStartSafeTime", this.EnableStartSafeTime);
         EnableBetterBlackout = KinsWatheConfig.HANDLER.instance().EnableBetterBlackout; tag.putBoolean("EnableBetterBlackout", this.EnableBetterBlackout);
         EnableAutoPsychoInstinct = KinsWatheConfig.HANDLER.instance().EnableAutoPsychoInstinct; tag.putBoolean("EnableAutoPsychoInstinct", this.EnableAutoPsychoInstinct);
-        EnableNeutralAnnouncement = KinsWatheConfig.HANDLER.instance().EnableNeutralAnnouncement; tag.putBoolean("EnableNeutralAnnouncement", this.EnableNeutralAnnouncement);
         //关于KinsWathe修改
         BellringerAbilityPrice = KinsWatheConfig.HANDLER.instance().BellringerAbilityPrice; tag.putInt("BellringerAbilityPrice", this.BellringerAbilityPrice);
         BodymakerAbilityFakeRole = KinsWatheConfig.HANDLER.instance().BodymakerAbilityFakeRole; tag.putBoolean("BodymakerAbilityFakeRole", this.BodymakerAbilityFakeRole);
@@ -103,7 +101,6 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         if (tag.contains("EnableStartSafeTime"))   this.EnableStartSafeTime = tag.getBoolean("EnableStartSafeTime");
         if (tag.contains("EnableBetterBlackout"))   this.EnableBetterBlackout = tag.getBoolean("EnableBetterBlackout");
         if (tag.contains("EnableAutoPsychoInstinct"))   this.EnableAutoPsychoInstinct = tag.getBoolean("EnableAutoPsychoInstinct");
-        if (tag.contains("EnableNeutralAnnouncement"))   this.EnableNeutralAnnouncement = tag.getBoolean("EnableNeutralAnnouncement");
         //关于KinsWathe修改
         if (tag.contains("BellringerAbilityPrice"))   this.BellringerAbilityPrice = tag.getInt("BellringerAbilityPrice");
         if (tag.contains("BodymakerAbilityFakeRole"))   this.BodymakerAbilityFakeRole = tag.getBoolean("BodymakerAbilityFakeRole");

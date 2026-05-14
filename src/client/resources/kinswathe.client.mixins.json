@@ -53,9 +53,7 @@
   "mixins": [
     "gui.IncomeIconMixin",
     "gui.ItemCrosshairMixin",
-    "host.EndTextRendererMixin",
     "host.KillerCohortHudMixin",
-    "host.KillerSidedTextMixin",
     "host.UnlockDistanceMixin",
     "noellesroles.roles.conductor.ConductorInstinctMixin",
     "noellesroles.roles.coroner.CoronerInstinctMixin",

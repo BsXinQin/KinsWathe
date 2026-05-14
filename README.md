@@ -43,8 +43,6 @@
 
 - Better modifications to Blackout and Psycho Mode
 
-- Neutral roles can announce separately when game ends
-
 - Unlock 32 render distance limit when ultraPerfMode is disabled 
 
 - Poisoned state will be automatically cleared upon death

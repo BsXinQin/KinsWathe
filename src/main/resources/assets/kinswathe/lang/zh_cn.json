@@ -7,8 +7,6 @@
   "tip.kinswathe.game_safe_time": "剩余安全时间：%s 秒",
   "tip.kinswathe.game_no_safe_time": "安全时间结束！",
 
-  "announcement.title.neutral": "中立",
-
   "announcement.role.kinswathe.bellringer": "敲钟人",
   "announcement.goals.kinswathe.bellringer": "查看时间，并修改时间。",
 
@@ -140,80 +138,5 @@
   "death_reason.wathe.bat_hit": "遭受钝器重击",
   "death_reason.wathe.grenade": "被手雷炸死",
   "death_reason.wathe.poison": "中毒而亡",
-  "death_reason.wathe.fell_out_of_train": "被列车碾死",
-
-
-  "guidebook.namespace.kinswathe": "模组: Kin's Wathe",
-
-  "guidebook.role.kinswathe:bellringer": "敲钟人",
-  "guidebook.role.title.kinswathe:bellringer": "时间掌控者",
-  "guidebook.role.description.kinswathe:bellringer": "敲钟人掌握着列车的时间奥秘，能够聆听到时光流逝的声音。\n\n敲钟人每时每刻都能知晓当前剩余的回合时间。每完成一项任务可获得 50 枚金币。\n\n每隔一段时间，敲钟人可以敲响时间之钟，使剩余时间减少 1 分钟。\n\n时间的流逝将严重打乱杀手们的节奏。",
-
-  "guidebook.role.kinswathe:bodymaker": "造尸怪",
-  "guidebook.role.title.kinswathe:bodymaker": "尸体捏造者",
-  "guidebook.role.description.kinswathe:bodymaker": "尸体很容易欺骗人，而造尸怪最擅长的就是伪造尸体！\n\n无论是死因还是身份，造尸怪都能够在自己的作品上随意捏造，想必这一定会让调查者陷入重重困惑。",
-
-  "guidebook.role.kinswathe:cleaner": "清道夫",
-  "guidebook.role.title.kinswathe:cleaner": "不留痕迹",
-  "guidebook.role.description.kinswathe:cleaner": "清道夫是杀手组织派来的清理专家。\n\n初始携带一个硫酸桶，可以用来溶解尸体，并获得金币报酬。\n\n清道夫可以使用技能清理地面上的所有掉落物。\n\n对于杀手们来说，清道夫是最可靠的合作伙伴——毕竟，没有尸体就没有证据。",
-
-  "guidebook.role.kinswathe:cook": "厨师",
-  "guidebook.role.title.kinswathe:cook": "颠勺大师",
-  "guidebook.role.description.kinswathe:cook": "列车上最受欢迎的人，毕竟谁不想在旅途中吃上一口热乎的呢？\n\n平底锅不仅能用来烹饪，危急时刻还能当做武器击晕敌人。甚至，它能够用来挡子弹！\n\n每当有乘客食用食物时，厨师能够短暂地看到他们的位置，毕竟没人能逃过厨师的注视。\n\n记住，厨师只是个普通人，别拿着平底锅去追杀手...",
-
-  "guidebook.role.kinswathe:detective": "侦探",
-  "guidebook.role.title.kinswathe:detective": "真相追寻者",
-  "guidebook.role.description.kinswathe:detective": "侦探乘坐这趟列车并非偶然，他收到了一封匿名信，信中暗示这趟旅程将发生命案。\n\n他可以使用洞察能力判断一名目标是否为无辜者。\n\n但是无法直接找出杀手——侦探的能力只能告诉他谁是无辜的，而剩下的，则需要他自己推理...",
-
-  "guidebook.role.kinswathe:dreamer": "梦者",
-  "guidebook.role.title.kinswathe:dreamer": "虚幻编织者",
-  "guidebook.role.description.kinswathe:dreamer": "梦者是一位为杀手组织服务的角色，他游走于现实与虚幻之间。\n\n初始携带梦之印记，可以对目标使用，使其额外承受一次攻击。\n\n当被印记标记的目标受到伤害时，会立即传送回梦者身边，并为梦者添加一次服用幻觉试剂的非杀手玩家数量的计数。\n\n需要服用幻觉试剂的非杀手玩家数量为总玩家数的四分之一，当有足够的非杀手玩家服用幻觉试剂后，梦者的身份转变为杀手。\n\n对梦者而言，现实只是一场可以被改写的梦。",
-
-  "guidebook.role.kinswathe:drugmaker": "制毒师",
-  "guidebook.role.title.kinswathe:drugmaker": "致命配方",
-  "guidebook.role.description.kinswathe:drugmaker": "制毒师是杀手中最擅长用毒的存在，他享受着猎物中毒后挣扎的每一秒，他只会在人数足够时被派去辅助杀手。\n\n制毒师能够看到真正中毒的玩家——毕竟那是他的杰作。每当有玩家中毒，他都能获得一笔金币作为回报。\n\n在商店中可以购买毒液注射器和吹矢，这是两种截然不同的下毒方式。\n\n对于制毒师来说，死亡只是一剂药方的事。",
-
-  "guidebook.role.kinswathe:hacker": "黑客",
-  "guidebook.role.title.kinswathe:hacker": "幕后协助者",
-  "guidebook.role.description.kinswathe:hacker": "黑客是杀手团队中的技术精英，他会在暗地里帮助杀手达成获胜目标。\n\n黑客为所有杀手都配备了手机，这可以方便他们远程交流。\n\n破解身份的技术也是一个黑客该具备的技能，他可以在对着一名玩家看足够久的时间后完成对其身份的破解，并发送到全体杀手同伙的手机上，然后获得报酬。\n\n当然，黑客也可以利用自己的技术帮助杀手关闭灯光、刷新武器冷却或技能冷却，甚至是清除他们身上的的药水效果！\n\n铭记黑客需要伪装，万万不可过早向平民暴露自己的身份...",
-
-  "guidebook.role.kinswathe:hunter": "追猎者",
-  "guidebook.role.title.kinswathe:hunter": "猎杀时刻",
-  "guidebook.role.description.kinswathe:hunter": "天生的追逐者，追猎者十分享受猎物被追的感觉！\n\n追猎者在冲刺时如果持刀蓄力，移动速度会大幅提升。商店中可以购买猎刀——拥有更持久的蓄力时间，但是停止蓄力时会立即冷却。\n\n追猎者可以使用能力瞬间刷新背包内所有刀的冷却时间，这令他有了恐怖的连杀能力。\n\n逃跑只会激起他更强烈的狩猎欲望！",
-
-  "guidebook.role.kinswathe:judge": "大法官",
-  "guidebook.role.title.kinswathe:judge": "正义的化身",
-  "guidebook.role.description.kinswathe:judge": "大法官登上这趟列车纯属休假，但骨子里的正义感使自己无法对罪恶视而不见。\n\n法官可以使用他的审判能力，使一名目标发出光芒。\n\n有人说被法官标记的人终将接受审判，但也有人担心法官的判决是否真的公正...",
-
-  "guidebook.role.kinswathe:kidnapper": "绑匪",
-  "guidebook.role.title.kinswathe:kidnapper": "黑暗交易",
-  "guidebook.role.description.kinswathe:kidnapper": "绑匪从不光明正大杀人，他更喜欢将猎物变成听话的傀儡。\n\n在商店中可以购买迷药，使用后可使目标陷入昏迷状态，并跟随绑匪移动。绑匪也会在登上列车前自带一个迷药，以备不时之需。\n\n如果绑匪亲自击杀昏迷中的目标将获得一笔额外的报酬。\n\n被迷药作用的目标将会黑屏，无法攻击或使用物品，也无法使用语音聊天——他们只能盲目地跟随，直到解除药效。不过，要是你有办法在这期间脱离足够远的距离，绑匪就拿你没办法了。\n\n没人知道绑匪把这些乘客带去了哪里，也没人想知道。",
-
-  "guidebook.role.kinswathe:licensed_villain": "执照恶棍",
-  "guidebook.role.title.kinswathe:licensed_villain": "持证上岗",
-  "guidebook.role.description.kinswathe:licensed_villain": "执照恶棍是持有官方认证的恶人执照的稀有角色，他仅会在人数足够时出现。\n\n执照恶棍的胜利条件与众不同——他必须杀死所有人。当所有平民阵营或所有杀手阵营死亡时，游戏并不会结束，只有他能亲手终结一切。\n\n执照恶棍拥有 15 秒的冲刺时间，上车的时候会自带一个开锁器，且每完成一项任务可获得金币。\n\n在商店中可以购买左轮手枪，并且他使用左轮手枪时不会有任何错误开火惩罚——毕竟是专业的。",
-
-  "guidebook.role.kinswathe:physician": "医师",
-  "guidebook.role.title.kinswathe:physician": "白衣天使",
-  "guidebook.role.description.kinswathe:physician": "列车上最值得信赖的人，发誓要救死扶伤！\n\n医师天生具备敏锐的嗅觉，能够看到被下毒的乘客——但是他似乎无法分辨出幻觉试剂。并且拥有 15 秒的冲刺时间，这足以在危急时刻赶到患者身边。当然，分析出尸体的死因也是医师必备的一项技能。\n\n初始携带一个医疗箱，可以使用医疗箱为一名玩家解毒，这一行为也将被视为完成一次任务，可以获得对应的报酬。\n\n在商店中可以购买药丸，服用后可使自己额外承受一次攻击。",
-
-  "guidebook.role.kinswathe:robot": "机器人",
-  "guidebook.role.title.kinswathe:robot": "机械造物",
-  "guidebook.role.description.kinswathe:robot": "机器人混入了这趟列车，没人知道它的目的是什么。\n\n作为机械构造体，它没有情绪，免疫毒药，不会被迷药迷晕，并且拥有无限的体力。\n\n每隔一段时间，机器人可以启动夜视模式，在黑暗中也能清晰视物。\n\n有人说它只是出了故障，也有人坚信它带着某种使命...",
-
-  "guidebook.role.kinswathe:technician": "技术员",
-  "guidebook.role.title.kinswathe:technician": "专业维护员",
-  "guidebook.role.description.kinswathe:technician": "技术员负责整架列车的维护工作。\n\n技术员每完成一项任务可获得 50 枚金币，能购买扳手来修复被堵住或撬开的门。\n\n同时，也可以购买捕捉装置来检查是否存在有嫌疑的乘客经过。\n\n在电力故障期间，技术员也可以快速恢复电力系统，给杀手们一个措手不及！",
-
-  "guidebook.role.kinswathe:magnate": "富豪",
-  "guidebook.role.title.kinswathe:magnate": "财富的宠儿",
-  "guidebook.role.description.kinswathe:magnate": "富豪是列车上最不缺钱的，他的口袋里永远装着花不完的金币。\n\n富豪的被动收入是其他角色的两倍。",
-
-  "guidebook.role.kinswathe:taskmaster": "任务大师",
-  "guidebook.role.title.kinswathe:taskmaster": "多劳多得",
-  "guidebook.role.description.kinswathe:taskmaster": "付出就有回报，任务大师的收入都变得与任务挂钩。\n\n如果任务大师是杀手阵营，则每完成一项任务可获得 50 枚金币。\n\n而如果是非杀手阵营，则每完成一项任务后，收入将额外增加 25 枚金币。",
-
-  "guidebook.role.kinswathe:violator": "违禁者",
-  "guidebook.role.title.kinswathe:violator": "规则破坏者",
-  "guidebook.role.description.kinswathe:violator": "违禁者打破了列车上最基础的规则——跳跃。"
+  "death_reason.wathe.fell_out_of_train": "被列车碾死"
 }

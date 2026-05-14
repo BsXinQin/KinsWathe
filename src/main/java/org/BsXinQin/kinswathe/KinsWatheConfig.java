@@ -32,9 +32,6 @@ public class KinsWatheConfig {
     @SerialEntry(comment = "Whether to enable instinct when in Psycho Mode.")
     public boolean EnableAutoPsychoInstinct = true;
 
-    @SerialEntry(comment = "Whether to enable neutral roles announcement when game ends.")
-    public boolean EnableNeutralAnnouncement = true;
-
     /// 关于Wathe修改
     @SerialEntry(comment = "\n\n[Wathe] Modify (default settings are original settings of Wathe):")
     public boolean EnableWatheModify = false;

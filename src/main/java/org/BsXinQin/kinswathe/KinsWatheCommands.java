@@ -72,16 +72,6 @@ public class KinsWatheCommands {
                                         KinsWatheConfig.HANDLER.save();
                                         context.getSource().sendFeedback(() -> Text.literal("[Kin's Wathe] EnableAutoPsychoInstinct: " + (value ? "true" : "false")), true);
                                         return Command.SINGLE_SUCCESS;
-                                    })))
-                    .then(literal("setEnableNeutralAnnouncement")
-                            .requires(source -> source.hasPermissionLevel(2))
-                            .then(argument("enable", BoolArgumentType.bool())
-                                    .executes(context -> {
-                                        boolean value = BoolArgumentType.getBool(context, "enable");
-                                        KinsWatheConfig.HANDLER.instance().EnableNeutralAnnouncement = value;
-                                        KinsWatheConfig.HANDLER.save();
-                                        context.getSource().sendFeedback(() -> Text.literal("[Kin's Wathe] EnableNeutralAnnouncement: " + (value ? "true" : "false")), true);
-                                        return Command.SINGLE_SUCCESS;
                                     }))));
         });
     }

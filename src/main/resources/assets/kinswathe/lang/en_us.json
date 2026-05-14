@@ -7,8 +7,6 @@
   "tip.kinswathe.game_safe_time": "Remaining safe time: %ss",
   "tip.kinswathe.game_no_safe_time": "Safe time has been exhausted!",
 
-  "announcement.title.neutral": "Neutrals",
-
   "announcement.role.kinswathe.bellringer": "Bellringer",
   "announcement.goals.kinswathe.bellringer": "Check time, and modify time.",
 
@@ -140,80 +138,4 @@
   "death_reason.wathe.bat_hit": "blunt force!",
   "death_reason.wathe.grenade": "an explosion!",
   "death_reason.wathe.poison": "poison!",
-  "death_reason.wathe.fell_out_of_train": "being ran over.",
-
-
-  "guidebook.namespace.kinswathe": "Mod: Kin's Wathe",
-
-  "guidebook.role.kinswathe:bellringer": "Bellringer",
-  "guidebook.role.title.kinswathe:bellringer": "Time Master",
-  "guidebook.role.description.kinswathe:bellringer": "The Bellringer holds the secrets of time aboard the train, able to know how much time remains.\n\nEvery so often, the Bellringer can ring the Time Bell, reducing the remaining time by 1 minute.\n\nThe passage of time will severely disrupt the killers' rhythm.",
-
-  "guidebook.role.kinswathe:bodymaker": "Bodymaker",
-  "guidebook.role.title.kinswathe:bodymaker": "Body Forger",
-  "guidebook.role.description.kinswathe:bodymaker": "Bodies are easy to deceive, and the Bodymaker specializes in forging them!\n\nWhether it's cause of death or identity, the Bodymaker can freely fabricate details on their creations, surely leaving investigators deeply perplexed.",
-
-  "guidebook.role.kinswathe:cleaner": "Cleaner",
-  "guidebook.role.title.kinswathe:cleaner": "Leaves No Trace",
-  "guidebook.role.description.kinswathe:cleaner": "The Cleaner is an cleanup expert sent by the killer organization.\n\nStarts with Sulfuric Acid Barrel, which can be used to dissolve bodies, and can get coins when dissolve a body.\n\nThe Cleaner can use their ability to clear all dropped items on the ground.\n\nFor killers, the Cleaner is the most reliable partner — after all, no body means no evidence.",
-
-  "guidebook.role.kinswathe:cook": "Cook",
-  "guidebook.role.title.kinswathe:cook": "Frying Pan Master",
-  "guidebook.role.description.kinswathe:cook": "The most popular person on the train — after all, who doesn't want a hot meal during the journey?\n\nPan isn't just for cooking; in critical moments, it can be used as weapon to stun enemies. It can even block bullets!\n\nWhenever a passenger eats food, the Cook can briefly see their location — after all, no one can escape the Cook's gaze.\n\nRemember, the Cook is just an ordinary person. Don't go chasing killers with Pan...",
-
-  "guidebook.role.kinswathe:detective": "Detective",
-  "guidebook.role.title.kinswathe:detective": "Truth Seeker",
-  "guidebook.role.description.kinswathe:detective": "The Detective's presence on this train is no coincidence — he received an anonymous letter hinting that a murder would occur during this journey.\n\nHe can use his Insight ability to determine if a target is innocent.\n\nBut he cannot directly identify the killer — his ability only tells him who is innocent. The rest, he must deduce himself...",
-
-  "guidebook.role.kinswathe:dreamer": "Dreamer",
-  "guidebook.role.title.kinswathe:dreamer": "Illusion Weaver",
-  "guidebook.role.description.kinswathe:dreamer": "The Dreamer serves the killer organization, walking between reality and illusion.\n\nStarts with Dream Imprint, which can be used on a target, allowing them to withstand one extra attack.\n\nWhen a marked target takes damage, they are instantly teleported back to the Dreamer, and the Dreamer gains one count toward the number of non-killer players who have taken the Illusion Reagent.\n\nThe number of non-killer players required to take the Illusion Reagent is one-quarter of the total players. When enough non-killer players have taken it, the Dreamer's identity transforms into a killer.\n\nTo the Dreamer, reality is merely a dream that can be rewritten.",
-
-  "guidebook.role.kinswathe:drugmaker": "Drugmaker",
-  "guidebook.role.title.kinswathe:drugmaker": "Lethal Formula",
-  "guidebook.role.description.kinswathe:drugmaker": "The Drugmaker is the killer most skilled with poisons, savoring every second of his prey's suffering after being poisoned. He is only deployed to assist killers when there are enough players.\n\nThe Drugmaker can see players who are genuinely poisoned — after all, they are his masterpieces. Whenever a player is poisoned, he receives a reward of coins.\n\nPoison Injector and Blowgun can be purchased at the shop — two distinctly different methods of poisoning.\n\nFor the Drugmaker, death is just a matter of prescription.",
-
-  "guidebook.role.kinswathe:hacker": "Hacker",
-  "guidebook.role.title.kinswathe:hacker": "Shadow Supporter",
-  "guidebook.role.description.kinswathe:hacker": "The Hacker is the technical elite of the killer team, working in the shadows to help killers achieve their winning goal.\n\nThe Hacker equips all killers with phones, enabling them to communicate remotely.\n\nCracking roles is also a skill a hacker should possess — after staring at a player long enough, they can crack their role and send it to all killers' phones, and get coins.\n\nOf course, the Hacker can also use their technology to help killers turn off lights, refresh weapon cooldowns or ability cooldowns, and even clear potion effects from them!\n\nRemember, the Hacker needs to stay undercover — never reveal their role to civilians too early...",
-
-  "guidebook.role.kinswathe:hunter": "Hunter",
-  "guidebook.role.title.kinswathe:hunter": "Hunting Time",
-  "guidebook.role.description.kinswathe:hunter": "A born chaser, the Hunter thoroughly enjoys the feeling of prey being pursued!\n\nWhen sprinting while holding a knife, the Hunter's movement speed is greatly increased. Hunting Knife will be added to the store — it has a longer holding time, but instantly cooldown when holding stops.\n\nThe Hunter can use his ability to instantly refresh the cooldown of all knives in his inventory, granting him terrifying chain-kill potential.\n\nRunning away only fuels his hunting desire!",
-
-  "guidebook.role.kinswathe:judge": "Judge",
-  "guidebook.role.title.kinswathe:judge": "Embodiment of Justice",
-  "guidebook.role.description.kinswathe:judge": "The Judge boarded this train purely for vacation, but his innate sense of justice prevents him from turning a blind eye to evil.\n\nThe Judge can use his Judgment ability to make a target emit light.\n\nSome say those marked by the Judge will eventually face trial, but others worry whether the Judge's verdicts are truly just...",
-
-  "guidebook.role.kinswathe:kidnapper": "Kidnapper",
-  "guidebook.role.title.kinswathe:kidnapper": "Dark Dealings",
-  "guidebook.role.description.kinswathe:kidnapper": "The Kidnapper doesn't kill openly; he prefers to turn his prey into obedient puppets.\n\nKnockout Drug can be purchased at the shop. Using it renders a target unconscious, causing them to follow the Kidnapper. The Kidnapper also boards the train with Knockout Drug, just in case.\n\nIf the Kidnapper personally kill the dazed target, he will receive an additional reward.\n\nA target affected by Knockout Drug will have a black screen, unable to attack, use items, or use voice chat — they can only follow blindly until the effect wears off. However, if you can get far enough away during this time, the Kidnapper won't be able to catch you.\n\nNo one knows where the Kidnapper takes these passengers, and no one wants to know.",
-
-  "guidebook.role.kinswathe:licensed_villain": "Licensed Villain",
-  "guidebook.role.title.kinswathe:licensed_villain": "Officially Certified",
-  "guidebook.role.description.kinswathe:licensed_villain": "The Licensed Villain is a rare character holding an officially certified villain license. He only appears when there are enough players.\n\nThe Licensed Villain's win condition is unique — he must kill everyone. When all civilians or all killers are eliminated, the game does not end. Only he can end it all with his own hands.\n\nThe Licensed Villain has 15 seconds of sprint time, boards with Lockpick, and receives coins for completing tasks.\n\nRevolver can be purchased at the shop, and he suffers no misfire penalty when using it — after all, he's a professional.",
-
-  "guidebook.role.kinswathe:physician": "Physician",
-  "guidebook.role.title.kinswathe:physician": "Angel in White",
-  "guidebook.role.description.kinswathe:physician": "The most trustworthy person on the train, sworn to heal the wounded and save the dying!\n\nThe Physician has a keen sense of smell, allowing them to see poisoned passengers — though they seem unable to distinguish the Illusion Reagent. They also have 15 seconds of sprint time, enough to reach patients in critical moments. Of course, analyzing the cause of death of bodies is also an essential skill for the Physician.\n\nStarts with Medical Kit, which can be used to detoxify a player. This action is also considered completing a task and rewards corresponding payment.\n\nPill can be purchased at the shop. Taking it allows the Physician to withstand one additional attack.",
-
-  "guidebook.role.kinswathe:robot": "Robot",
-  "guidebook.role.title.kinswathe:robot": "Mechanical Being",
-  "guidebook.role.description.kinswathe:robot": "The Robot has infiltrated this train; no one knows its purpose.\n\nAs a mechanical construct, it has no mood, is immune to poison, cannot be knocked out by Knockout Drug, and has unlimited stamina.\n\nEvery so often, the Robot can activate Night Vision mode, allowing it to see clearly in the dark.\n\nSome say it's just malfunctioning, while others believe it carries some kind of mission...",
-
-  "guidebook.role.kinswathe:technician": "Technician",
-  "guidebook.role.title.kinswathe:technician": "Professional Maintenance Worker",
-  "guidebook.role.description.kinswathe:technician": "The Technician is responsible for the maintenance of the entire train.\n\nEvery time the Technician completes a task, they receive 50 coins. They can purchase a Wrench to repair jammed or pried doors.\n\nAdditionally, they can purchase a Capture Device to check for suspicious passengers passing by.\n\nDuring the blackout, the Technician can quickly restore the power system, catching the killers off guard!",
-
-  "guidebook.role.kinswathe:magnate": "Magnate",
-  "guidebook.role.title.kinswathe:magnate": "Fortune's Favorite",
-  "guidebook.role.description.kinswathe:magnate": "The Magnate is the wealthiest person on the train, his pockets always full of endless coins.\n\nThe Magnate's passive income is twice that of other characters.",
-
-  "guidebook.role.kinswathe:taskmaster": "Taskmaster",
-  "guidebook.role.title.kinswathe:taskmaster": "More Work, More Pay",
-  "guidebook.role.description.kinswathe:taskmaster": "Hard work pays off — the Taskmaster's income is tied to tasks.\n\nIf the Taskmaster is on the killer team, completing a task rewards 50 coins.\n\nIf on the non-killer team, completing a task grants an additional 25 coins on top of the regular reward.",
-
-  "guidebook.role.kinswathe:violator": "Violator",
-  "guidebook.role.title.kinswathe:violator": "Rule Breaker",
-  "guidebook.role.description.kinswathe:violator": "The Violator has broken the most fundamental rule on the train — jumping."
-}
+  "death_reason.wathe.fell_out_of_train": "being ran over."}
